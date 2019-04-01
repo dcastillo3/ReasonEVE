@@ -1,19 +1,17 @@
 import React, {Component} from 'react'
-import {Landing, Music, Photos, Videos, Bio, Venues} from './sections';
-import ContactForm from '../contact-form';
+import {Home, Packs, Beats, Music, Bio, Contact} from './sections';
 
 class Main extends Component {
 
   render() {
     return (
       <div className="main flex-column">
-        <Landing />
+        <Home />
+        <Packs />
+        <Beats />
         <Music />
-        <Photos />
-        <Videos />
         <Bio />
-        <Venues />
-        <ContactForm />
+        <Contact />
       </div>
     )
   }

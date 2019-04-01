@@ -15,7 +15,6 @@ body {
     font-size: 16px;
 }
 
-
 a {
     color: #fff;
     text-decoration: none;
@@ -229,283 +228,48 @@ textarea {
 
 
 /* #region --------- Header --------- */
-.navbar {
-    margin-top: 20px;
-    height: 42px;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    z-index: 10;
-    flex-wrap: nowrap;
-}
-
-.social-media {
-    font-size: 18px;
-    justify-content: flex-end;
-}
-
-.logo {
-    width: 14vw;
-    height: 7vh;
-    background: url(./images/bismark-logo.png) no-repeat;
-    background-size: contain;
-    min-width: 260px;
-    min-height: 56px;
-    background-position-x: center;
-}
 
 
 /* #endregion --------- Header --------- */
 
 
 /* #region --------- Landing --------- */
-.main {
-    flex: auto;
-}
-
-.landing {
-    height: 61vh;
-}
-
-.landing-bg-layer {
-    background: url(./images/landing-bg-layer.jpg) no-repeat;
-    background-size: cover;
-}
-
-.landing-bismark-layer {
-    background: url(./images/landing-bismark-layer2.png) no-repeat;
-    background-size: cover;
-}
-
-.landing-video-layer-border {
-    align-self: flex-end;
-    margin: 4vw 4vw 0;
-    padding: 14px;
-}
 
 
 /* #endregion --------- Landing --------- */
 
 
+/* #region --------- Sample Packs --------- */
+
+
+/* #endregion --------- Sample Packs --------- */
+
+
+/* #region --------- Beats --------- */
+
+
+/* #endregion --------- Beats --------- */
+
+
+/* #region --------- Biography --------- */
+
+
+/* #endregion --------- Biography --------- */
+
+
 /* #region --------- Music --------- */
-.music-bg-layer {
-    background: url(./images/landing-bg-layer.jpg) no-repeat;
-    background-size: cover;
-}
-
-.music-laptop-layer {
-    background: url(./images/music-laptop-layer.png) no-repeat;
-    background-size: contain;
-    background-position: right;
-}
-
-.music-content {
-    width: 100%;
-    max-width: 1150px;
-    padding: 20px;
-}
-
-.music-content-row {
-    flex: 33.33%;
-}
-
-.track-container-row-1 {
-    flex: 25%;
-    position: relative;
-    top: 17px;
-    text-transform: uppercase;
-    font-size: 20px;
-}
-
-.track-container-row-2 {
-    flex: calc(75% - 60px);
-    margin-left: 60px;
-    font-size: 14px;
-    letter-spacing: 1px;
-}
-
-.music-content-row-border {
-    padding: 14px;
-    background: linear-gradient(0.25turn, #0e0e0e, #272727);
-}
-
-.music-mixes-container {
-    justify-content: flex-end;
-}
-
-.music-mix-track-container {
-    align-items: center;
-    z-index: 10;
-}
-
-.music-player {
-    padding: 14px;
-    position: absolute;
-    bottom: calc(12.5% - 28px);
-    left: 20px;
-    width: calc(75% - 28px);
-    height: calc(66.67% - 28px);
-}
-
-.music-mixes {
-    padding: 20px;
-    position: relative;
-    left: 89%;
-    bottom: 35%;
-    display: inline-block;
-}
 
 
 /* #endregion --------- Music --------- */
 
 
-/* #region --------- Photos --------- */
-.photo-items > div {
-    height: 225px;
-    width: 225px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    flex: calc(25% - 20px);
-    margin: 10px;
-}
-
-
-/* #endregion --------- Photos --------- */
-
-
-/* #region --------- Venues --------- */
-.carousel .slide {
-    background: transparent !important;
-}
-
-.venue-items > div {
-    flex: 1 0 25%;
-    height: 82px;
-    width: 200px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.venue-item-moschino {
-    background-size: 54%;
-}
-
-.venue-item-pianos {
-    background-size: 31%;
-}
-
-.venue-item-lately {
-    background-size: 55%;
-}
-
-.venue-item-handy {
-    background-size: 32%;
-}
-
-.venue-item-slate {
-    background-size: 57%;
-}
-
-.venue-item-space {
-    background-size: 33%;
-}
-
-.venue-item-playstation {
-    background-size: 65%;
-}
-
-.venue-item-webster {
-    background-size: 67%;
-}
-
-.venue-item-studio-151 {
-    background-size: 26%;
-}
-
-.venue-item-thai-rock {
-    background-size: 23%;
-}
-
-.venue-item-esquina {
-    background-size: 23%;
-}
-
-
-/* #endregion --------- Venues --------- */
-
-
 /* #region --------- Contact --------- */
-.contact-form-container > * {
-    flex: calc(50% - 80px);
-}
-
-.contact-form-text-container,
-.contact-form-text,
-.contact-form-text-icon {
-    align-self: flex-start;
-}
-
-.contact-form-text-icon {
-    font-size: 220px;
-}
-
-.contact-form > div > input,
-.contact-form > div > textarea {
-    width: calc(100% - 34px);
-}
-
-.contact-form-input {
-    flex: 50%;
-}
-
-.contact-form-textarea {
-    flex: 100%;
-}
 
 
 /* #endregion --------- Contact --------- */
 
 
 /* #region --------- Footer --------- */
-.footer {
-    border-top: 14px solid rgb(255, 190, 190);
-}
-
-.footer-columns {
-    width: 100%;
-    justify-content: space-between;
-    padding-bottom: 100px;
-}
-
-.footer-columns > div {
-    flex: calc(25% - 20px);
-    margin: 10px;
-}
-
-.footer-column-contact-logo {
-    width: 100px;
-    height: 77px;
-    background: url(./images/bismark-logo-small.png) no-repeat;
-    background-size: contain;
-    background-position: top center;
-}
-
-.footer-bottom-text-subtitle {
-    color: rgb(111, 255, 95);
-}
-
-.footer-social {
-    min-width: 20px;
-    align-self: center;
-}
-
-.footer-column-social-text {
-    margin-left: 10px;
-}
-
-.footer-bottom-text-title {
-    color: rgb(255, 108, 108);
-}
 
 
 /* #endregion --------- Footer --------- */

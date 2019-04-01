@@ -12,7 +12,7 @@ const Footer = () => (
           <div className="footer-column-container flex-column element-center">
             <div className="footer-column-contact-logo"></div>
             <div className="footer-column-copyright-a">
-              © 2018 DJ Bismark.
+              © 2019 ReasonEVE.
             </div>
 
             <div className="footer-column-copyright-b">
@@ -31,19 +31,19 @@ const Footer = () => (
 
         <div className="footer-column-social flex-column">
           <div className="footer-column-container flex-column element-center">
-            <a className="flex-row" href="https://soundcloud.com/bismarkbeats" target="_blank" rel="noopener noreferrer">
+            <a className="flex-row" href="https://soundcloud.com/ReasonEVE" target="_blank" rel="noopener noreferrer">
               <i className="footer-social fab fa-soundcloud"></i>
               <div className="footer-column-social-text">Soundcloud</div>
             </a>
-            <a className="flex-row" href="https://www.instagram.com/bismarkbeats" target="_blank" rel="noopener noreferrer"> 
+            <a className="flex-row" href="https://www.instagram.com/ReasonEVEMusic" target="_blank" rel="noopener noreferrer"> 
               <i className="footer-social fab fa-instagram"></i>
               <div className="footer-column-social-text">Instagram</div>
             </a>
-            <a className="flex-row" href="https://www.facebook.com/hyonam.heller" target="_blank" rel="noopener noreferrer"> 
+            <a className="flex-row" href="https://www.facebook.com/ReasonEVE" target="_blank" rel="noopener noreferrer"> 
               <i className="footer-social fab fa-facebook-square"></i>
               <div className="footer-column-social-text">Facebook</div>
             </a>
-            <a className="flex-row" href="https://www.youtube.com/watch?v=xZ9cgUGmzfY" target="_blank" rel="noopener noreferrer"> 
+            <a className="flex-row" href="https://www.youtube.com/user/dcastillo5" target="_blank" rel="noopener noreferrer"> 
               <i className="footer-social fab fa-youtube"></i>
               <div className="footer-column-social-text">YouTube</div>
             </a>
@@ -53,11 +53,10 @@ const Footer = () => (
         <div className="footer-column-menu flex-column">
           <div className="footer-column-container flex-column element-center">
             <ScrollLink activeClass="active" to="home" spy={true} smooth={true} duration={500} >Home</ScrollLink>
+            <ScrollLink activeClass="active" to="packs" spy={true} smooth={true} duration={500} >Packs</ScrollLink>
+            <ScrollLink activeClass="active" to="beats" spy={true} smooth={true} duration={500} >Beats</ScrollLink>
             <ScrollLink activeClass="active" to="music" spy={true} smooth={true} duration={500} >Music</ScrollLink>
-            <ScrollLink activeClass="active" to="photos" spy={true} smooth={true} duration={500} >Photos</ScrollLink>
-            <ScrollLink activeClass="active" to="videos" spy={true} smooth={true} duration={500} >Videos</ScrollLink>
             <ScrollLink activeClass="active" to="bio" spy={true} smooth={true} duration={500} >Bio</ScrollLink>
-            <ScrollLink activeClass="active" to="venues" spy={true} smooth={true} duration={500} >Venues</ScrollLink>
             <ScrollLink activeClass="active" to="contact" spy={true} smooth={true} duration={500} >Contact</ScrollLink>
           </div>
         </div>

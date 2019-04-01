@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class ContactForm extends Component {
+export class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,7 @@ export class ContactForm extends Component {
           
           <div className="contact-form-container flex-row flex-center large-padding narrow-content">
             <div className="contact-form-text-container flex-column flex-center">
-              <div className="contact-form-text title">Contact DJ Bismark.</div>
+              <div className="contact-form-text title">Contact ReasonEVE.</div>
               <div className="contact-form-text-icon fas fa-envelope"></div>
             </div>
 
@@ -73,4 +73,4 @@ export class ContactForm extends Component {
   }
 }
 
-export default ContactForm
+export default Contact
