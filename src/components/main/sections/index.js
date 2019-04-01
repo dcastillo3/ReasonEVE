@@ -1,7 +1,7 @@
-export {default as Landing} from './landing';
-export {default as Music} from './music/music';
-export {default as Photos} from './photos';
-export {default as Videos} from './videos';
+export {default as Home} from './home';
+export {default as Packs} from './packs';
+export {default as Beats} from './beats';
+export {default as Music} from './music';
 export {default as Bio} from './bio';
 export {default as Store} from './store';
-export {default as Venues} from './venues';
+export {default as Contact} from './contact';
