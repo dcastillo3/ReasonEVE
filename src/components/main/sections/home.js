@@ -1,0 +1,20 @@
+import React, { Component } from 'react';
+
+export class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
+
+  render() {
+
+    return (
+      <div id="home" className="home flex-column flex-center palette-three large-padding">
+        Home
+      </div>
+    )
+  }
+}
+
+export default Home;
