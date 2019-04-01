@@ -1,0 +1,61 @@
+{
+  "name": "reasoneve",
+  "author": "",
+  "license": "MIT",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">= 8.11.2"
+  },
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.3.2",
+    "@material-ui/icons": "^3.0.1",
+    "aws-sdk": "^2.382.0",
+    "axios": "^0.15.3",
+    "chalk": "^2.4.1",
+    "compression": "^1.7.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.1",
+    "nodemailer": "^5.0.0",
+    "path": "^0.12.7",
+    "prop-types": "^15.5.8",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-responsive-carousel": "^3.1.43",
+    "react-scripts": "2.1.2",
+    "react-scroll": "^1.7.10"
+  },
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "scripts": {
+    "start": "npm run build & node server/index.js",
+    "start-react": "react-scripts start",
+    "start-server": "npm run server",
+    "start-mac": "react-scripts start & nodemon server/index.js",
+    "deploy": "bash script/deploy",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "nodemon server/index.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcastillo3/ReasonEVE.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dcastillo3/ReasonEVE/issues"
+  },
+  "homepage": "https://github.com/dcastillo3/ReasonEVE#readme"
+}
