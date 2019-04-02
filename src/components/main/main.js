@@ -16,7 +16,7 @@ class Main extends Component {
           <Route exact path="/bio" component={Bio} />
           <Route exact path="/contact" component={Contact} />
 
-          {/* 404 Component */}
+          {/* 404 Component or Default Component */}
           <Route component={Home} />
         </Switch>
       </div>
