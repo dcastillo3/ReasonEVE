@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 
 const Footer = () => (
   <div className="footer flex-column flex-center palette-two">
@@ -7,7 +7,7 @@ const Footer = () => (
     <div className="footer-container flex-column flex-center narrow-content medium-padding">
 
       <div className="footer-columns flex-row">
-        
+
         <div className="footer-column-copyright flex-column">
           <div className="footer-column-container flex-column element-center">
             <div className="footer-column-contact-logo"></div>
@@ -35,29 +35,29 @@ const Footer = () => (
               <i className="footer-social fab fa-soundcloud"></i>
               <div className="footer-column-social-text">Soundcloud</div>
             </a>
-            <a className="flex-row" href="https://www.instagram.com/ReasonEVEMusic" target="_blank" rel="noopener noreferrer"> 
+            <a className="flex-row" href="https://www.instagram.com/ReasonEVEMusic" target="_blank" rel="noopener noreferrer">
               <i className="footer-social fab fa-instagram"></i>
               <div className="footer-column-social-text">Instagram</div>
             </a>
-            <a className="flex-row" href="https://www.facebook.com/ReasonEVE" target="_blank" rel="noopener noreferrer"> 
+            <a className="flex-row" href="https://www.facebook.com/ReasonEVE" target="_blank" rel="noopener noreferrer">
               <i className="footer-social fab fa-facebook-square"></i>
               <div className="footer-column-social-text">Facebook</div>
             </a>
-            <a className="flex-row" href="https://www.youtube.com/user/dcastillo5" target="_blank" rel="noopener noreferrer"> 
+            <a className="flex-row" href="https://www.youtube.com/user/dcastillo5" target="_blank" rel="noopener noreferrer">
               <i className="footer-social fab fa-youtube"></i>
               <div className="footer-column-social-text">YouTube</div>
             </a>
           </div>
         </div>
-        
+
         <div className="footer-column-menu flex-column">
           <div className="footer-column-container flex-column element-center">
-            <ScrollLink activeClass="active" to="home" spy={true} smooth={true} duration={500} >Home</ScrollLink>
-            <ScrollLink activeClass="active" to="packs" spy={true} smooth={true} duration={500} >Packs</ScrollLink>
-            <ScrollLink activeClass="active" to="beats" spy={true} smooth={true} duration={500} >Beats</ScrollLink>
-            <ScrollLink activeClass="active" to="music" spy={true} smooth={true} duration={500} >Music</ScrollLink>
-            <ScrollLink activeClass="active" to="bio" spy={true} smooth={true} duration={500} >Bio</ScrollLink>
-            <ScrollLink activeClass="active" to="contact" spy={true} smooth={true} duration={500} >Contact</ScrollLink>
+            <Link to="/">Home</Link>
+            <Link to="/packs">Packs</Link>
+            <Link to="/beats">Beats</Link>
+            <Link to="/music">Music</Link>
+            <Link to="/bio">Bio</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </div>
 

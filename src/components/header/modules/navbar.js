@@ -1,13 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Slide } from '@material-ui/core';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link } from 'react-router-dom';
 
-class Navbar extends Component { 
+class Navbar extends Component {
 
   render() {
 
     return (
-      <Slide direction="down" timeout={1000} in={true} style={{transitionDelay: 1000}}>
+      <Slide direction="down" timeout={1000} in={true} style={{ transitionDelay: 1000 }}>
         <div className="navbar flex-row flex-center palette-one-transparent flex-full-grid">
           <div className="social-media menu-items flex-row flex-center">
             <a href="https://soundcloud.com/ReasonEVE" target="_blank" rel="noopener noreferrer" className="fab fa-soundcloud"><div></div></a>
@@ -19,12 +19,12 @@ class Navbar extends Component {
           <div className="logo"></div>
 
           <div className="nav-links menu-items">
-            <ScrollLink activeClass="active" to="home" spy={true} smooth={true} duration={500} >Home</ScrollLink>
-            <ScrollLink activeClass="active" to="packs" spy={true} smooth={true} duration={500} >Packs</ScrollLink>
-            <ScrollLink activeClass="active" to="beats" spy={true} smooth={true} duration={500} >Beats</ScrollLink>
-            <ScrollLink activeClass="active" to="music" spy={true} smooth={true} duration={500} >Music</ScrollLink>
-            <ScrollLink activeClass="active" to="bio" spy={true} smooth={true} duration={500} >Bio</ScrollLink>
-            <ScrollLink activeClass="active" to="contact" spy={true} smooth={true} duration={500} >Contact</ScrollLink>
+            <Link to="/">Home</Link>
+            <Link to="/packs">Packs</Link>
+            <Link to="/beats">Beats</Link>
+            <Link to="/music">Music</Link>
+            <Link to="/bio">Bio</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </div>
       </Slide>
