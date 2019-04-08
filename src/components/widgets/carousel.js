@@ -4,6 +4,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Carousel = props => {
 
+    const { items } = props;
+
     return (
         <div id="carousel-widget" className="carousel-widget flex-column flex-center palette-three bottom-blue">
             <div className="carousel-content flex-column flex-center narrow-content large-padding">
@@ -17,7 +19,11 @@ const Carousel = props => {
                     interval={10000}
                     transitionTime={1500}
                 >
-                {/* Array of items */}
+                {items.map(item => {
+                    return (
+                        <div key="item" class="item">{item}</div>
+                    )
+                })}
                 </CarouselWidget>
 
             </div>
