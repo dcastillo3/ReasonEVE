@@ -13,7 +13,7 @@ export const partition = (array, size) => {
         
         //Force each array to size
         while(currPart.length !== partSize) {
-            currPart.push('');
+            currPart.push('coming soon');
         }
 
         partArr.push(currPart)
