@@ -9,7 +9,14 @@ export const partition = (array, size) => {
     let partSize = size || 4;
 
     for(let i = 0; i < array.length; i += partSize) {
-        partArr.push(array.slice(i, i + partSize))
+        const currPart = array.slice(i, i + partSize);
+        
+        //Force each array to size
+        while(currPart.length !== partSize) {
+            currPart.push('');
+        }
+
+        partArr.push(currPart)
     }
 
     return partArr;
