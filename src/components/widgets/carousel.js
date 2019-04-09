@@ -15,15 +15,25 @@ const Carousel = props => {
                     showIndicators={false}
                     showThumbs={false}
                     infiniteLoop={true}
-                    autoPlay={true}
+                    // autoPlay={true}
                     interval={10000}
-                    transitionTime={1500}
+                    centerMode
+                    emulateTouch
                 >
-                {items.map(item => {
-                    return (
-                        <div key="item" class="item">{item}</div>
-                    )
-                })}
+                    {items.map((itemArr, i) => {
+
+                        return (
+                            <div key={`items-${i}`} className="carousel-items flex-row flex-center">
+
+                                {itemArr.map((item, j) => {
+                                    return (
+                                        <div key={`item-${item}-${i}-${j}`} className={`carousel-item-${item}`}>{item}</div>
+                                    )
+                                })}
+
+                            </div>
+                        )
+                    })}
                 </CarouselWidget>
 
             </div>

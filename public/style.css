@@ -239,6 +239,24 @@ textarea {
 /* #endregion --------- Landing --------- */
 
 
+/* #region --------- Carousel --------- */
+.carousel .slide {
+    background: transparent !important;
+}
+
+.carousel-items {
+    justify-content: space-around;
+}
+
+.carousel .temp-box {
+    width: 200px;
+    height: 200px;
+    background: #000;
+    color: #fff;
+}
+
+/* #endregion --------- Carousel --------- */
+
 /* #region --------- Sample Packs --------- */
 
 
