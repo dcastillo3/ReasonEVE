@@ -1,0 +1,19 @@
+{
+  "name": "reasoneve",
+  "version": "1.0.0",
+  "description": "Artist Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcastillo3/ReasonEVE.git"
+  },
+  "author": "ReasonEVE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dcastillo3/ReasonEVE/issues"
+  },
+  "homepage": "https://github.com/dcastillo3/ReasonEVE#readme"
+}
