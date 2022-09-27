@@ -20,7 +20,8 @@
   "homepage": "https://github.com/dcastillo3/ReasonEVE#readme",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-material-music-player": "^1.1.9"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
