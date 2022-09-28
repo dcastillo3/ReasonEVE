@@ -14,7 +14,15 @@ module.exports = {
         },
     },
     devServer: {
-        port: 9000
+        port: 9000,
+        hot: true,
+        // open: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8000',
+                secure: false
+            }
+        }
     },
     module: {
         rules: [
