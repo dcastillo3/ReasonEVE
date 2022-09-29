@@ -13,7 +13,7 @@ router.get('/getTracks', (req, res) => {
         };
 
         if (tracks.length) {
-            const cdnBaseUrl = 'https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/tracks/';
+            const cdnBaseUrl = 'https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/tracks';
             const playlist = tracks.map((track, id) => ({
                 id,
                 coverArt: 'https://media.gettyimages.com/photos/line-subway-train-in-queens-with-manhattan-skyline-new-york-city-picture-id1189547726?s=612x612',
