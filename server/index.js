@@ -10,8 +10,6 @@ const port = 8000;
 
 server.use(morgan('dev'));
 
-server.use('/api/beats', express.static('beats'));
-
 server.use('/api', require('./api'));
 
 server.listen(port, function () {
