@@ -24,11 +24,15 @@
   "homepage": "https://github.com/dcastillo3/ReasonEVE#readme",
   "proxy": "http://localhost:8000",
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.7",
     "axios": "^0.27.2",
     "express": "^4.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-material-music-player": "^1.1.9"
+    "react-material-music-player": "^1.2.0-beta.4",
+    "react-router-dom": "^6.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
