@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Track, PlayerInterface } from 'react-material-music-player';
 import { AudioPlayer } from './components/audioPlayer';
+import {
+    createPlaylist,
+    playPlaylist
+} from './utils/reactUtils';
+import MainRoutes from './routes';
+import { Menu } from './components/menu';
 
 function App() {
     const [playlist, setPlaylist] = useState([]);
@@ -10,16 +15,9 @@ function App() {
 
         if(res?.data) {
             const tracks = res.data;
-            const newPlaylist = tracks.map(track => new Track(
-                track.id,
-                track.coverArt,
-                track.title,
-                track.artist,
-                track.url
-            ));
+            const initialPlaylist = createPlaylist(tracks);
             
-            // Set playlist
-            setPlaylist([newPlaylist]);
+            setPlaylist([initialPlaylist]);
         }
     };
 
@@ -29,16 +27,16 @@ function App() {
     }, []);
 
     useEffect(() => {
-        // // Load new playlist
+        // Play new playlist
         if(playlist?.length) {
-            PlayerInterface.play(...playlist);
-            console.log('added playlist to player');
+            playPlaylist(playlist);
         };
     }, [playlist]);
 
     return (
         <div>
-            <div>{playlist.length ? 'playlist loaded' : 'playlist not loaded'}</div>
+            <Menu />
+            <MainRoutes />
             <AudioPlayer />
         </div>
     );

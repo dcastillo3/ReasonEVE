@@ -6,6 +6,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         modules: [path.join(__dirname, 'src'), 'node_modules'],
@@ -22,7 +23,8 @@ module.exports = {
                 target: 'http://localhost:8000',
                 secure: false
             }
-        }
+        },
+        historyApiFallback: true,
     },
     module: {
         rules: [
@@ -48,7 +50,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: './src/index.html',
+            template: './public/index.html',
         }),
     ],
 };
