@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AudioPlayer } from './components/audioPlayer';
 import {
     createPlaylist,
-    playPlaylist
+    initializePlayer
 } from './utils/reactUtils';
 import MainRoutes from './routes';
 import { Menu } from './components/menu';
@@ -29,7 +29,7 @@ function App() {
     useEffect(() => {
         // Play new playlist
         if(playlist?.length) {
-            playPlaylist(playlist);
+            initializePlayer(playlist);
         };
     }, [playlist]);
 

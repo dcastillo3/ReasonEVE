@@ -32,6 +32,14 @@ function Menu() {
                         Checkout
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink
+                        to="/dashboard"
+                        className={checkActive}
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
             </ul>
         </div>
     );

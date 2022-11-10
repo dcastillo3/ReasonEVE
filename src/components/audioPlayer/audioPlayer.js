@@ -3,7 +3,7 @@ import MusicPlayer from 'react-material-music-player';
 
 function AudioPlayer() {
     return (
-        <div>
+        <div id="music-player">
             <MusicPlayer sx={{}} disableDrawer={false} />
         </div>
     );
