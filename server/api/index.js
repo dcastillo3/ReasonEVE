@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
+const stripe = require('stripe');
+
+// Connect key to stripe
+// const stripeKey = process.env.NODE_ENV !== 'production' ? process.env.STRIPE_TEST_KEY : process.env.STRIPE_KEY;
+const stripeKey = process.env.STRIPE_TEST_SECRET_KEY;
+const stripeInstance = stripe(stripeKey);
 
 // Read tracks directory and generate track data
 router.get('/getTracks', (req, res) => {
@@ -23,14 +29,39 @@ router.get('/getTracks', (req, res) => {
             }));
 
             res.send(playlist);
-        }
+        };
     });
 });
 
+// DC-NOTE: Stripe redirect checkout session, bare bones
+router.post('/create-checkout-session', async (req, res) => {
+    const origin = 'http://localhost:9000/checkout';
+
+    const session = await stripeInstance.checkout.sessions.create({
+        line_items: [
+            {
+                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                price: 'price_1M0f7HDfmT9zYk9OvyBvVDqF',
+                quantity: 1,
+            },
+            {
+                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                price: 'price_1M0aoUDfmT9zYk9OPVEyqDgF',
+                quantity: 1,
+            }
+        ],
+        mode: 'payment',
+        success_url: `${origin}?success=true`,
+        cancel_url: `${origin}?canceled=true`,
+    });
+
+    res.redirect(303, session.url);
+});
+
 router.use((req, res, next) => {
-    const error = new Error('Not Found')
-    error.status = 404
-    next(error)
-})
+    const error = new Error('Not Found');
+    error.status = 404;
+    next(error);
+});
 
 module.exports = router;

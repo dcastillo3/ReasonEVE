@@ -32,7 +32,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-material-music-player": "^1.2.0-beta.4",
-    "react-router-dom": "^6.4.1"
+    "react-router-dom": "^6.4.1",
+    "stripe": "^10.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
