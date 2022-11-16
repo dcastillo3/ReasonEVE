@@ -1,0 +1,73 @@
+.form-container {
+    display: flex;
+    background: #f3f3f3;
+    justify-content: center;
+}
+
+.form-container .input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    flex: 50%;
+}
+
+.form-container .upload-container {
+    margin-top: 5px;
+    background: #fff;
+    padding: 20px;
+    border: dashed 4px rgb(63, 63, 63);
+    cursor: pointer;
+}
+
+.form-container .upload-preview-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.form-container .upload-preview-item {
+    margin: 5px 0px;
+    background: #70ebff;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.form-container .file-rejection-container {
+    display: flex;
+    flex-direction: column;
+    background: #ff9d70;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+.form-container .file-rejection-item {
+    margin: 5px 0px;
+    padding: 5px 10px;    
+}
+
+.form-container .file-rejection-error-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container .file-rejection-error-item {
+    margin: 5px 0px;
+    padding: 5px 10px;
+}
+
+.form-container .upload-container:hover {
+    background: rgb(230, 230, 230);
+}
+
+.form-container .row-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-container label {
+    font-weight: 600;
+}
+
+.form-container .form-submit {
+    margin: 20px;
+}

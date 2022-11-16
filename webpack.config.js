@@ -14,6 +14,7 @@ module.exports = {
             react: path.join(__dirname, 'node_modules', 'react'),
         },
     },
+    devtool: 'eval-source-map',
     devServer: {
         port: 9000,
         hot: true,
