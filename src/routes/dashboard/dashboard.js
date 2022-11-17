@@ -8,11 +8,11 @@ function Dashboard() {
     const handleAddTrack = async formData => {
         try {
             const trackData = sanitizeFormData(formData);
-            let res = await axios.post('/api/addTrack', trackData);
+            let res = await axios.post('/api/tracks/addTrack', trackData);
 
             if(res?.data?.success) {
                 //Success action
-                console.log(res.data.message);
+                console.log(res.data);
             }
         } catch (err) {
             console.error(err.response);

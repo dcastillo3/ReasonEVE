@@ -28,7 +28,8 @@ const sanitizeFormData = formData => {
     return sanitizedFormData;
 };
 
-const checkIfValueIsFiles = (value) => Array.isArray(value) && value.length && value.every(item => item instanceof File);
+const checkIfValueIsFiles = (value) =>
+    Array.isArray(value) && value.length && value.every(item => item instanceof File);
 
 export {
     sanitizeFormData
