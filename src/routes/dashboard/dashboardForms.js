@@ -52,7 +52,7 @@ const addTrackForm = {
             id: 'mp3Price',
             labelName: 'MP3 Price',
             inputType: 'text',
-            defaultValue: '1.00',
+            defaultValue: '5.00',
             additionalProps: {},
             validations: {}
         },

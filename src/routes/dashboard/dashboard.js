@@ -10,13 +10,17 @@ function Dashboard() {
             const trackData = sanitizeFormData(formData);
             let res = await axios.post('/api/tracks/addTrack', trackData);
 
-            if(res?.data?.success) {
-                //Success action
+            if (!res?.data?.success) {
+                const { err = {} } = res.data;
+
+                console.error(err);
+            } else if (res?.data?.success) {
+                //success action
                 console.log(res.data);
-            }
+            };
         } catch (err) {
             console.error(err.response);
-        }
+        };
     };
 
     return (
