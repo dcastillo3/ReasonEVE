@@ -1,45 +1,15 @@
 const multer  = require('multer');
 const fs = require('fs');
 const path = require('path');
+const { storageConfigs } = require('../utils/consts');
 
-const storageConfigs = {
-    track: {
-        nameField: 'trackName',
-        folderPath: '../../tracks',
-        uploadFields: [
-            { 
-                name: 'track', 
-                maxCount: 1 
-            }, 
-            { 
-                name: 'coverArt', 
-                maxCount: 1 
-            }
-        ]
-    },
-    pack: {
-        nameField: 'packName',
-        folderPath: '../../packs',
-        uploadFields: [
-            { 
-                name: 'pack', 
-                maxCount: 1 
-            }, 
-            { 
-                name: 'coverArt', 
-                maxCount: 1 
-            }
-        ]
-    }
-};
-
-const storageClient = (product) => {
+const storageClient = (productType) => {
     try {
         const {
             nameField,
             folderPath,
             uploadFields
-        } = storageConfigs[product];
+        } = storageConfigs[productType];
 
         // /addTrack upload destination and fields to upload
         const storage = multer.diskStorage({
@@ -66,9 +36,9 @@ const storageClient = (product) => {
 
         return productUpload;
         
-    } catch (error) {
-        throw(error);
-    }
+    } catch (err) {
+        throw(err);
+    };
 };
 
 module.exports = storageClient;

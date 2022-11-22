@@ -12,10 +12,14 @@ function AudioPlayer() {
         try {
             let res = await axios.get('/api/tracks/getTracks');
 
-            if(res?.data?.length) {
-                const tracks = res.data;
+            if (!res?.data?.success) {
+                const { err = {} } = res.data;
+
+                console.error(err);
+            } else if (res?.data?.success) {
+                const tracks = res.data.data;
                 const initialPlaylist = createPlaylist(tracks);
-                
+
                 setPlaylist([initialPlaylist]);
             };
         } catch (err) {

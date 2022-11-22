@@ -2,7 +2,10 @@ const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
 const storageClient = require('../multer');
-const { createTrackProducts } = require('../utils');
+const { createProduct, writeProductData, formatProductData, formatResponseData } = require('../utils');
+
+// Set product type
+const productType = 'track';
 
 // Read tracks directory and generate track data
 router.get('/getTracks', (req, res) => {
@@ -42,27 +45,36 @@ router.get('/getTracks', (req, res) => {
             playlist.push(trackData);
         });
 
-        res.send(playlist);
-    } catch (error) {
-        throw (error);
+        const responseData = formatResponseData(playlist);
+
+        res.send(responseData);
+    } catch (err) {
+        const responseData = formatResponseData(null, err);
+
+        res.status(500).send(responseData);
+
+        throw (err);
     };
 });
 
 // Add to tracks directory
-router.post('/addTrack', storageClient('track'), async (req, res) => {
+router.post('/addTrack', storageClient(productType), async (req, res) => {
     try {
-        const trackProducts = await createTrackProducts(req.body);
+        //create stripe products
+        const trackProducts = await createProduct(req.body, productType);
+        const formattedTrackData = formatProductData(req.body, trackProducts, productType);
+        //write track data locally
+        const writtenData = await writeProductData(formattedTrackData, productType);
+        const responseData = formatResponseData(writtenData);
 
-        console.log(trackProducts)
+        res.send(responseData);
+    } catch (err) {
+        const responseData = formatResponseData(null, err);
 
-        res.send({
-            success: true,
-            trackProducts,
-            message: 'Track added successfully',
-        });
-    } catch (error) {
-        throw(error);
-    }
+        res.status(500).send(responseData);
+
+        throw(err);
+    };
 });
 
 module.exports = router;
