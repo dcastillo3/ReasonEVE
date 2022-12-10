@@ -8,7 +8,7 @@ function Dashboard() {
     const handleAddTrack = async formData => {
         try {
             const trackData = sanitizeFormData(formData);
-            let res = await axios.post('/api/tracks/addTrack', trackData);
+            let res = await axios.post('/api/tracks', trackData);
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;

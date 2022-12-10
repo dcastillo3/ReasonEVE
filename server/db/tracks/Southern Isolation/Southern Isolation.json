@@ -1,0 +1,23 @@
+{
+    "trackName": "Southern Isolation",
+    "artistName": "ReasonEVE",
+    "additionalArtistNames": "",
+    "mp3Price": "5.00",
+    "leasePrice": "20.00",
+    "exclusivePrice": "300.00",
+    "dateCreated": "2022-12-10T04:58:32.187Z",
+    "dateUpdated": "2022-12-10T04:58:32.187Z",
+    "active": true,
+    "purchases": {
+        "mp3": [],
+        "lease": [],
+        "exclusive": []
+    },
+    "productIds": {
+        "exclusive": "price_1MDL8xDfmT9zYk9OkZAuewzL",
+        "lease": "price_1MDL8xDfmT9zYk9OrO0aHrMe",
+        "mp3": "price_1MDL8wDfmT9zYk9OdWk3Vwa4"
+    },
+    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.mp3",
+    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.jpg"
+}

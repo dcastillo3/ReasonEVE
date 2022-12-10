@@ -1,7 +1,15 @@
+const path = require("path");
+
+
+const cdnBaseUrl = 'https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db';
+
 const storageConfigs = {
     track: {
         nameField: 'trackName',
-        folderPath: '../../tracks',
+        localPath: path.join(__dirname, '../db/tracks'),
+        cdnPath: `${cdnBaseUrl}/tracks`,
+        indexName: 'tracks',
+        dataFormat: '.json',
         uploadFields: [
             { 
                 name: 'track', 
@@ -15,7 +23,10 @@ const storageConfigs = {
     },
     pack: {
         nameField: 'packName',
-        folderPath: '../../packs',
+        localPath: path.join(__dirname, '../db/packs'),
+        cdnPath: `${cdnBaseUrl}/packs`,
+        indexName: 'packs',
+        dataFormat: '.json',
         uploadFields: [
             { 
                 name: 'pack', 
@@ -29,9 +40,6 @@ const storageConfigs = {
     }
 };
 
-const dataFormat = '.json';
-
 module.exports = {
-    storageConfigs,
-    dataFormat
+    storageConfigs
 };

@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { stripeClient } = require('../stripe');
+const { stripeClient } = require('../../stripe');
 
 // DC-NOTE: Stripe redirect checkout session, bare bones
 // DC-NOTE: Make origin url dynamic, match line items from request and get price ids
-router.post('/create-checkout-session', async (req, res) => {
+router.post('/', async (req, res) => {
     const origin = 'http://localhost:9000/checkout';
 
     const session = await stripeClient.checkout.sessions.create({

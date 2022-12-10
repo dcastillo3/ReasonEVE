@@ -10,7 +10,7 @@ function AudioPlayer() {
     const [playlist, setPlaylist] = useState([]);
     const getTracks = async () => {
         try {
-            let res = await axios.get('/api/tracks/getTracks');
+            let res = await axios.get('/api/player');
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;
