@@ -7,7 +7,7 @@ const storageClient = (productType) => {
     try {
         const {
             nameField,
-            folderPath,
+            localPath,
             uploadFields
         } = storageConfigs[productType];
 
@@ -15,7 +15,7 @@ const storageClient = (productType) => {
         const storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 const productName = req.body[nameField];
-                const newProductPath = path.join(__dirname, folderPath, productName);
+                const newProductPath = path.join(localPath, productName);
 
                 //Make new directory if doesn't exist
                 !fs.existsSync(newProductPath) && fs.mkdirSync(newProductPath);

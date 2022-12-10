@@ -1,10 +1,10 @@
 import { Track, PlayerInterface } from 'react-material-music-player';
 
 const createPlaylist = tracks => tracks.map(track => new Track(
-    track.id,
+    track.dateCreated,
     track.coverArt,
-    track.title,
-    track.artist,
+    track.trackName,
+    track.artistName,
     track.url
 ));
 
