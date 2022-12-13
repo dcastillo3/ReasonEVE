@@ -24,7 +24,7 @@ const getCurrTrackTitle = () => {
     const currTrackTitle = currTrackTitleElem.innerHTML;
 
     return currTrackTitle;
-}
+};
 
 export {
     createPlaylist,

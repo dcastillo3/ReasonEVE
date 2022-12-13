@@ -1,0 +1,16 @@
+.packs-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.pack-container {
+    padding: 10px;
+    margin: 20px;
+    background: rgb(189, 207, 235);
+    transition: ease-in-out .1s;
+}
+
+.pack-container:hover {
+    cursor: pointer;
+    box-shadow: inset 0 0 100px 100px rgb(255, 255, 255, 0.3);
+}

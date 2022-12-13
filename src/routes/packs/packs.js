@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import _ from 'lodash/core';
+import './packs.css';
 
 function Packs() {
     return (
-        <div>
+        <div className="packs-container">
             Packs
         </div>
     );

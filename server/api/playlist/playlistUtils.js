@@ -1,14 +1,14 @@
 const fs = require('fs');
-const playerIndex = require('../../db/player/player.json');
 const { getProductDataPath } = require('../../utils/productUtils');
 const { getFormattedDate } = require('../../utils/utils');
-const { indexFilePath } = require('./playerConsts');
+const { indexFilePath } = require('./playlistConsts');
+const playlistIndex = require('../../db/playlist/playlist.json');
 
 const getPlaylist = () => {
     const {
         spotlight,
         recentlyAdded
-    } = playerIndex;
+    } = playlistIndex;
     const playlistMap = {};
     //Initialize playlist with spotlight tracks
     const playlist = spotlight.map(({productName, productType}) => {
@@ -36,11 +36,11 @@ const getPlaylist = () => {
     return playlist;
 };
 
-const updatePlayerIndex = (productName, productType, playerIndexType) => {
+const updatePlaylistIndex = (productName, productType, playlistIndexType) => {
     const newIndexData = {
-        ...playerIndex,
-        [playerIndexType]: [
-            ...playerIndex[playerIndexType],
+        ...playlistIndex,
+        [playlistIndexType]: [
+            ...playlistIndex[playlistIndexType],
             {
                 productName,
                 productType
@@ -57,5 +57,5 @@ const updatePlayerIndex = (productName, productType, playerIndexType) => {
 
 module.exports = {
     getPlaylist,
-    updatePlayerIndex
+    updatePlaylistIndex
 };

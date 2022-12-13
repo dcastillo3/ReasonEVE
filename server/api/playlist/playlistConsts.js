@@ -1,6 +1,6 @@
 const path = require("path");
 
-const indexFilePath = path.join(__dirname, '../../db/player/player.json');
+const indexFilePath = path.join(__dirname, '../../db/playlist/playlist.json');
 
 const indexTypes = {
     spotlight: 'spotlight',

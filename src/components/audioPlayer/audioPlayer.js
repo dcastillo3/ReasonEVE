@@ -8,17 +8,17 @@ import {
 
 function AudioPlayer() {
     const [playlist, setPlaylist] = useState([]);
-    const getTracks = async () => {
+    const getPlaylist = async () => {
         try {
-            let res = await axios.get('/api/player');
+            let res = await axios.get('/api/playlist');
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;
 
                 console.error(err);
             } else if (res?.data?.success) {
-                const tracks = res.data.data;
-                const initialPlaylist = createPlaylist(tracks);
+                const { data = [] } = res.data;
+                const initialPlaylist = createPlaylist(data);
 
                 setPlaylist([initialPlaylist]);
             };
@@ -29,7 +29,7 @@ function AudioPlayer() {
 
     useEffect(() => {
         // Get tracks for music player
-        getTracks();
+        getPlaylist();
     }, []);
 
     useEffect(() => {
