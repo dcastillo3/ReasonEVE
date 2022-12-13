@@ -1,10 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import _ from 'lodash/core';
+import './tracks.css';
+import { TrackContext } from '../../app';
+import { Track } from '../../components/track';
 
 function Tracks() {
+    const tracks = useContext(TrackContext);
+    const renderTracks = !_.isEmpty(tracks) 
+        && tracks.map((track, idx) => <Track key={idx} track={track} />);
+
     return (
         <div>
-            Tracks
+            {renderTracks}
         </div>
     );
 };

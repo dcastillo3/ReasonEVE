@@ -6,8 +6,8 @@ router.use('/tracks', require('./tracks/tracks'));
 //Packs route
 router.use('/packs', require('./packs/packs'));
 
-//Player route
-router.use('/player', require('./player/player'));
+//Playlist route
+router.use('/playlist', require('./playlist/playlist'));
 
 //Checkout route
 router.use('/checkout', require('./checkout/checkout'));

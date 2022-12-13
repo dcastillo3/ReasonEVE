@@ -22,4 +22,4 @@ function MainRoutes() {
     );
 };
 
-export default MainRoutes;
+export default React.memo(MainRoutes);
