@@ -3,6 +3,7 @@ import _ from 'lodash/core';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import './track.css';
+import { Box } from '../styled';
 
 function Track({ track }) {
     const {
@@ -16,7 +17,7 @@ function Track({ track }) {
     } = track;
 
     return (
-        <div>{trackName}</div>
+        <Box>{trackName}</Box>
     );
 };
 
