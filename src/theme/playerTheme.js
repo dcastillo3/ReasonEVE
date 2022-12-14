@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { green, purple } from '@mui/material/colors';
 
-const themeComponents = {
+const playerComponents = {
     components: {
         // component name
         MuiPaper: {
@@ -15,7 +15,7 @@ const themeComponents = {
     }
 };
 
-const themePalettes = {
+const playerPalettes = {
     palette: {
         primary: {
             main: purple[500],
@@ -42,6 +42,6 @@ const themePalettes = {
     },
 };
 
-const theme = createTheme(themePalettes, themeComponents);
+const playerTheme = createTheme(playerPalettes, playerComponents);
 
-export default theme;
+export default playerTheme;
