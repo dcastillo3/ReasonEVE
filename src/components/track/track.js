@@ -2,8 +2,7 @@ import React from 'react';
 import _ from 'lodash/core';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import './track.css';
-import { Box } from '../styled';
+import { Card } from '../styled';
 
 function Track({ track }) {
     const {
@@ -17,7 +16,9 @@ function Track({ track }) {
     } = track;
 
     return (
-        <Box>{trackName}</Box>
+        <Card>
+            {trackName}
+        </Card>
     );
 };
 

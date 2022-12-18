@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Form } from '../../components/form';
 import { sanitizeFormData } from '../../utils/reactUtils';
 import { addTrackForm } from './dashboardForms';
+import { Box, Card, Button, Text, TextCaption, Title, TitleSmall, TitleMedium } from '../../components/styled';
 
 function Dashboard() {
     const handleAddTrack = async formData => {
@@ -24,7 +25,187 @@ function Dashboard() {
     };
 
     return (
-        <Form formParams={addTrackForm} handleSubmit={handleAddTrack} />
+        <>
+            <Form formParams={addTrackForm} handleSubmit={handleAddTrack} />
+
+            <Box>
+                <Text>
+                    Box Text
+                </Text>
+
+                <TextCaption>
+                    Box Text Caption
+                </TextCaption>
+
+                <Title>
+                    Box Title
+                </Title>
+                
+                <TitleMedium>
+                    Box TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Box TitleSmall
+                </TitleSmall>
+            </Box>
+
+            <Card hover>
+                <Text>
+                    Card Text
+                </Text>
+
+                <TextCaption>
+                    Card Text Caption
+                </TextCaption>
+
+                <Title>
+                    Card Title
+                </Title>
+                
+                <TitleMedium>
+                    Card TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Card TitleSmall
+                </TitleSmall>
+            </Card>
+
+            <Card variant="secondary">
+                <Text>
+                    Card Text
+                </Text>
+
+                <TextCaption>
+                    Card Text Caption
+                </TextCaption>
+
+                <Title>
+                    Card Title
+                </Title>
+                
+                <TitleMedium>
+                    Card TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Card TitleSmall
+                </TitleSmall>
+            </Card>
+
+            <Card variant="success">
+                <Text>
+                    Card Text
+                </Text>
+
+                <TextCaption>
+                    Card Text Caption
+                </TextCaption>
+
+                <Title>
+                    Card Title
+                </Title>
+                
+                <TitleMedium>
+                    Card TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Card TitleSmall
+                </TitleSmall>
+            </Card>
+
+            <Card variant="warning">
+                <Text>
+                    Card Text
+                </Text>
+
+                <TextCaption>
+                    Card Text Caption
+                </TextCaption>
+
+                <Title>
+                    Card Title
+                </Title>
+                
+                <TitleMedium>
+                    Card TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Card TitleSmall
+                </TitleSmall>
+            </Card>
+
+            <Card variant="error">
+                <Text>
+                    Card Text
+                </Text>
+
+                <TextCaption>
+                    Card Text Caption
+                </TextCaption>
+
+                <Title>
+                    Card Title
+                </Title>
+                
+                <TitleMedium>
+                    Card TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Card TitleSmall
+                </TitleSmall>
+            </Card>
+
+            <Card variant="info">
+                <Text>
+                    Card Text
+                </Text>
+
+                <TextCaption>
+                    Card Text Caption
+                </TextCaption>
+
+                <Title>
+                    Card Title
+                </Title>
+                
+                <TitleMedium>
+                    Card TitleMedium
+                </TitleMedium>
+
+                <TitleSmall>
+                    Card TitleSmall
+                </TitleSmall>
+            </Card>
+
+            <Button>
+                Button
+            </Button>
+
+            <Button variant="secondary">
+                Button
+            </Button>
+
+            <Button variant="success">
+                Button
+            </Button>
+
+            <Button variant="warning">
+                Button
+            </Button>
+
+            <Button variant="error">
+                Button
+            </Button>
+
+            <Button variant="info">
+                Button
+            </Button>
+        </>
     );
 };
 
