@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import _ from 'lodash/core';
-import './tracks.css';
 import { TrackContext } from '../../app';
 import { Track } from '../../components/track';
+import { Box } from '../../components/styled';
 
 function Tracks() {
     const tracks = useContext(TrackContext);
@@ -10,9 +10,9 @@ function Tracks() {
         && tracks.map((track, idx) => <Track key={idx} track={track} />);
 
     return (
-        <div>
+        <Box>
             {renderTracks}
-        </div>
+        </Box>
     );
 };
 

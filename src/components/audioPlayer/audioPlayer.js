@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import MusicPlayer from 'react-material-music-player';
 import {
     createPlaylist,
     initializePlayer
 } from './audioPlayerUtils';
+import { ThemeProvider } from "@mui/material/styles";
+import { ThemeContext } from 'styled-components';
 
 function AudioPlayer() {
+    const theme = useContext(ThemeContext);
     const [playlist, setPlaylist] = useState([]);
     const getPlaylist = async () => {
         try {
@@ -41,7 +44,9 @@ function AudioPlayer() {
 
     return (
         <div id="music-player">
-            <MusicPlayer sx={{}} disableDrawer={false} />
+            <ThemeProvider theme={theme}>
+                <MusicPlayer sx={{}} disableDrawer={false} />
+            </ThemeProvider>
         </div>
     );
 };

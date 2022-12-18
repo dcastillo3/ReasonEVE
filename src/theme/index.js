@@ -1,2 +1,2 @@
-export { default as playerTheme } from './playerTheme';
-export { default as GlobalTheme } from './globalTheme';
+export { default as theme } from './theme';
+export { default as GlobalStyle } from './globalStyle';

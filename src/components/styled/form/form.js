@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { buildStyles } from '../styledUtils';
 
 export const Form = styled.form`
-    ${props => props.position ? `position: ${props.position}` : ''}
+    /* Style overrides last */
+    ${buildStyles}
 `;
