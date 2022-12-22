@@ -1,17 +1,14 @@
 import styled from 'styled-components';
-import { buildStyles } from '../styledUtils';
+import { buildTypography } from '../styledUtils';
 
 export const Title = styled.h1`
-    /* Style overrides last */
-    ${buildStyles}
+    ${(props) => buildTypography(props, 'h1')}
 `;
 
 export const TitleMedium = styled.h2`
-    /* Style overrides last */
-    ${buildStyles}
+    ${(props) => buildTypography(props, 'h2')}
 `;
 
 export const TitleSmall = styled.h3`
-    /* Style overrides last */
-    ${buildStyles}
+    ${(props) => buildTypography(props, 'h3')}
 `;

@@ -1,62 +1,31 @@
-const buildPalette = ({theme, variant = 'primary', shade = 'main'}) => {
-    const bgColor = theme?.palette?.[variant]?.[shade];
-    const textColor = theme?.palette?.text?.[variant];
-    const transition = theme?.transitions?.easing?.sharp;
-    const cssProps = `
-        background: ${bgColor};
-        color: ${textColor};
-        transition: ${transition};
-    `;
-    
-    return cssProps;
-};
+import { defaultElement, defaultVariant } from "./styledConsts";
 
-const buildHoverPalette = ({theme, variant = 'primary', shade = 'light'}) => {
-    const bgHoverColor = theme?.palette?.[variant]?.[shade];
+const buildPalette = ({ theme, variant = defaultVariant }) => ({
+    background: theme.palette[variant].main,
+    color: theme.palette.text[variant],
+    transition: theme.transitions.easing.sharp
+});
+
+const buildHoverPalette = ({ theme, variant = defaultVariant }) => {
+    const bgHoverColor = theme.palette[variant].light;
     const cssProps = `
         &:hover {
             background: ${bgHoverColor};
             cursor: pointer;
         }
     `;
-    
+
     return cssProps;
 };
 
-//Camel to kebab case
-const getCSSPropName = prop => {
-    let propName = [].reduce.call(prop, (kebabStr, currLetter) => {
-        let newKebabStr;
-        const upperCaseLetter = currLetter.toUpperCase();
+const buildTypography = ({ theme }, element = defaultElement) => {
+    const typography = theme.typography[element];
 
-        if (currLetter === upperCaseLetter) {
-            const lowerCaseLetter = currLetter.toLowerCase();
-
-            newKebabStr = `${kebabStr}-${lowerCaseLetter}`;
-        } else newKebabStr = `${kebabStr}${currLetter}`;
-
-        return newKebabStr;
-    }, '');
-
-    return propName;
-};
-
-const buildStyles = ({sx = {}}) => {
-    let styles = '';
-
-    for (let prop in sx) {
-        let propValue = sx[prop];
-        let propName = getCSSPropName(prop);
-        let style = `${propName}: ${propValue};`;
-
-        styles += style;
-    };
-
-    return styles;
+    return typography;
 };
 
 export {
     buildPalette,
     buildHoverPalette,
-    buildStyles
+    buildTypography
 };
