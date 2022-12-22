@@ -1,47 +1,57 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Box, Grid, Text } from '../styled';
 
 function Menu() {
     const activeClassName = 'active';
     const checkActive = ({ isActive }) => isActive ? activeClassName : undefined;
 
     return (
-        <div>
-            <ul>
-                <li>
-                    <NavLink
-                        to="/tracks"
-                        className={checkActive}
-                    >
+        <Grid style={{justifyContent: 'space-evenly'}}>
+            <Box>
+                <NavLink
+                    to="/tracks"
+                    className={checkActive}
+                >
+                    <Text>
                         Tracks
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/packs"
-                        className={checkActive}
-                    >
+                    </Text>
+                </NavLink>
+            </Box>
+
+            <Box>
+                <NavLink
+                    to="/packs"
+                    className={checkActive}
+                >
+                    <Text>
                         Packs
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/checkout"
-                        className={checkActive}
-                    >
+                    </Text>
+                </NavLink>
+            </Box>
+
+            <Box>
+                <NavLink
+                    to="/checkout"
+                    className={checkActive}
+                >
+                    <Text>
                         Checkout
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/dashboard"
-                        className={checkActive}
-                    >
+                    </Text>
+                </NavLink>
+            </Box>
+
+            <Box>
+                <NavLink
+                    to="/dashboard"
+                    className={checkActive}
+                >
+                    <Text>
                         Dashboard
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
+                    </Text>
+                </NavLink>
+            </Box>
+        </Grid>
     );
 };
 

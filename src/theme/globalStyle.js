@@ -3,18 +3,36 @@ import { theme } from './';
 
 const GlobalStyle = createGlobalStyle`
     body {
-        margin: 0;
-        padding: 60px 0px;
+        padding: 0px 0px 60px 0px;
         background: ${theme.palette.background.main};
         color: ${theme.palette.text.background};
+        font-family: ${theme.typography.fontFamily};
+        letter-spacing: 0.2px;
+
+        /* Reset style */
+        margin: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+        /* Reset style */
+        margin: 0;
+    }
+
+    button {
+        /* Reset style */
+        outline: none;
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     a {
         color: ${theme.palette.text.background};
-    }
 
-    .active {
-        font-weight: 600;
+        /* Reset style */
+        text-decoration: none;
     }
 `;
 

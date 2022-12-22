@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material/styles';
+import "@fontsource/jost";
+import "@fontsource/roboto-condensed";
+import "@fontsource/oswald";
 
-const muiThemeComponents = {
+const theme = createTheme({
     components: {
         // component name
         MuiPaper: {
@@ -11,11 +14,7 @@ const muiThemeComponents = {
                 }
             },
         }
-    }
-};
-
-//TO-DO: Attach default, light, dark blacks
-const muiThemePalettes = {
+    },
     palette: {
         primary: {
             main: "#f54329"
@@ -45,9 +44,9 @@ const muiThemePalettes = {
         action: {
             active: "#fff",
             hover: "rgba(255, 255, 255, 0.08)",
-            hoverOpacity: 0.08,
+            hoverOpacity: '0.08',
             selected: "rgba(255, 255, 255, 0.16)",
-            selectedOpacity: 0.16
+            selectedOpacity: '0.16'
         },
         text: {
             disabled: "rgba(255, 255, 255, 0.5)",
@@ -61,8 +60,35 @@ const muiThemePalettes = {
             background: "#2d3240"
         },
     },
-};
+    typography: {
+        // Global font family
+        fontFamily: 'Jost',
+        body1: {
+            fontSize: '1.1rem'
+        },
+        caption: {
+            fontSize: '1rem'
+        },
+        button: {
+            fontWeight: '600',
+            letterSpacing: '2px'
+        },
+        h1: {
+            fontFamily: 'Oswald',
+            fontSize: '5rem',
+            fontWeight: '600'
+        },
+        h2: {
+            fontFamily: 'Roboto Condensed',
+            fontSize: '3rem',
+            fontWeight: '400'
+        },
+        h3: {
+            fontFamily: 'Roboto Condensed',
+            fontSize: '2rem',
+            fontWeight: '400'
+        }
+    }
+});
 
-const muiTheme = createTheme(muiThemePalettes, muiThemeComponents);
-
-export default muiTheme;
+export default theme;
