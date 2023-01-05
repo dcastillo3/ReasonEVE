@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
+import { Box, FlexBox, FlexBoxColumn, Input, Label, TextCaption } from '../styled';
 
 const buildFormFields = (formFields, formData, handleChangeField) => {
     const renderedFormFields = [];
@@ -19,9 +20,9 @@ const buildFormFields = (formFields, formData, handleChangeField) => {
         
         if(rowIsFull || lastFormField) {
             const formRow = (
-                <div key={idx} className="row-container">
+                <FlexBox itemsPerRow={fieldsPerRow} key={idx}>
                     {inputStack}
-                </div>
+                </FlexBox>
             );
 
             inputStack = [];
@@ -42,27 +43,17 @@ const getInput = (formField, formData, handleChangeField) => {
         additionalProps,
         validations
     } = formField;
-    const label = `${labelName}:`;
     const inputValue = formData[id];
 
     switch(inputType) {
         case 'text': {
             return (
-                <div key={id} className="input-container">
-                    <label>{label}</label>
-                    <input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
-                </div>
+                <FlexBoxColumn key={id} className="input-container">
+                    <Label>{labelName}</Label>
+                    <Input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
+                </FlexBoxColumn>
             )
         };
-
-        // case 'number': {
-        //     return (
-        //         <div key={id} className="input-container">
-        //             <label>{label}</label>
-        //             <input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
-        //         </div>
-        //     )
-        // };
         
         case 'upload': {
             //format data for handleChangeField
@@ -91,56 +82,56 @@ const getInput = (formField, formData, handleChangeField) => {
             const inputProps = getInputProps();
 
             const renderUploadContainer = (
-                <div className="upload-container" {...rootProps}>
-                    <input {...inputProps} {...additionalProps} />
-                    <div className="upload-message">
+                <Box className="upload-container" {...rootProps}>
+                    <Input {...inputProps} {...additionalProps} />
+                    <TextCaption className="upload-message">
                         {uploadMessage}
-                    </div>
-                </div>
+                    </TextCaption>
+                </Box>
             );
 
             const renderUploadItems = !_.isEmpty(inputValue) && inputValue.map(file => (
-                <div key={file.name} className="upload-preview-item">
+                <Box key={file.name} className="upload-preview-item">
                     {file.name}
-                </div>
+                </Box>
             ));
 
             const renderUploadPreview = !_.isEmpty(inputValue) && (
-                <div className="upload-preview-container">
+                <FlexBoxColumn className="upload-preview-container">
                     {renderUploadItems}
-                </div>
+                </FlexBoxColumn>
             );
 
             const renderUploadErrors = !_.isEmpty(fileRejections) && fileRejections.map(({ file, errors }) => {
                 const errorMessages = errors.map(e => (
-                    <div className="file-rejection-error-item" key={e.code}>
+                    <Box className="file-rejection-error-item" key={e.code}>
                         {e.message}
-                    </div>
+                    </Box>
                 ));
 
                 return (
-                    <div key={file.path} className="file-rejection-container">
-                        <div className="file-rejection-item">
+                    <FlexBoxColumn key={file.path} className="file-rejection-container">
+                        <Box className="file-rejection-item">
                             {file.path}
-                        </div>
+                        </Box>
 
-                        <div className="file-rejection-error-container">
+                        <FlexBoxColumn>
                             {errorMessages}
-                        </div>
-                    </div>
+                        </FlexBoxColumn>
+                    </FlexBoxColumn>
                 )
             }
             );
 
             return (
-                <div key={id} className="input-container">
-                    <label>{label}</label>
+                <FlexBoxColumn key={id} className="input-container">
+                    <Label>{labelName}</Label>
                     {renderUploadContainer}
 
                     {renderUploadPreview}
 
                     {renderUploadErrors}
-                </div>
+                </FlexBoxColumn>
             );
         };
     };

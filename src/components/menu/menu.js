@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Box, Grid, Text } from '../styled';
+import { Box, FlexBox, Text } from '../styled';
 
 function Menu() {
     const activeClassName = 'active';
     const checkActive = ({ isActive }) => isActive ? activeClassName : undefined;
 
     return (
-        <Grid style={{justifyContent: 'space-evenly'}}>
+        <FlexBox style={{justifyContent: 'space-evenly'}}>
             <Box>
                 <NavLink
                     to="/tracks"
@@ -51,7 +51,7 @@ function Menu() {
                     </Text>
                 </NavLink>
             </Box>
-        </Grid>
+        </FlexBox>
     );
 };
 

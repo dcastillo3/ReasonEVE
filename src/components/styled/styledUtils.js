@@ -24,8 +24,27 @@ const buildTypography = ({ theme }, element = defaultElement) => {
     return typography;
 };
 
+const buildFlexBox = ({itemsPerRow, wrap}) => {
+    let cssProps = ``;
+    
+    if(wrap) cssProps += 'flex-wrap: wrap';
+
+    if(itemsPerRow) {
+        const flexBoxWidth = Math.floor(100/itemsPerRow);
+
+        cssProps += `
+            > * {
+                flex: ${flexBoxWidth}%;
+            }
+        `;
+    }
+
+    return cssProps;
+};
+
 export {
     buildPalette,
     buildHoverPalette,
-    buildTypography
+    buildTypography,
+    buildFlexBox
 };

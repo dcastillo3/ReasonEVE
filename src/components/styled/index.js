@@ -1,7 +1,6 @@
-export { Form } from './form/form';
-export { Input } from './input/input';
+export { Form, Label, Input } from './form/form';
 export { Button } from './button/button';
-export { Grid, GridColumn } from './grid/grid';
+export { FlexBox, FlexBoxColumn } from './flexBox/flexBox';
 export { Box, Card } from './box/box';
-export { Text, TextCaption } from './text/text';
+export { Text, TextSmall, TextCaption } from './text/text';
 export { Title, TitleMedium, TitleSmall } from './title/title';

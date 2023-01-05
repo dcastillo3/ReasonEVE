@@ -69,6 +69,12 @@ const theme = createTheme({
         caption: {
             fontSize: '1rem'
         },
+        label: {
+            fontSize: '1rem',
+            fontFamily: 'Jost',
+            fontWeight: 400,
+            lineHeight: 1.66
+        },
         button: {
             fontWeight: '600',
             letterSpacing: '2px'
@@ -87,8 +93,10 @@ const theme = createTheme({
             fontFamily: 'Roboto Condensed',
             fontSize: '2rem',
             fontWeight: '400'
-        }
+        },
     }
 });
+
+console.log(theme)
 
 export default theme;

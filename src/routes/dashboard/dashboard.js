@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form } from '../../components/form';
 import { sanitizeFormData } from '../../utils/reactUtils';
 import { addTrackForm } from './dashboardForms';
-import { Box, Card, Button, Text, TextCaption, Title, TitleSmall, TitleMedium } from '../../components/styled';
+import { Box, Card, Button, Text, TextSmall, TextCaption, Title, TitleSmall, TitleMedium } from '../../components/styled';
 
 function Dashboard() {
     const handleAddTrack = async formData => {
@@ -33,6 +33,10 @@ function Dashboard() {
                     Box Text
                 </Text>
 
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
+
                 <TextCaption>
                     Box Text Caption
                 </TextCaption>
@@ -54,6 +58,10 @@ function Dashboard() {
                 <Text>
                     Card Text
                 </Text>
+
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
 
                 <TextCaption>
                     Card Text Caption
@@ -77,6 +85,10 @@ function Dashboard() {
                     Card Text
                 </Text>
 
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
+
                 <TextCaption>
                     Card Text Caption
                 </TextCaption>
@@ -98,6 +110,10 @@ function Dashboard() {
                 <Text>
                     Card Text
                 </Text>
+
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
 
                 <TextCaption>
                     Card Text Caption
@@ -121,6 +137,10 @@ function Dashboard() {
                     Card Text
                 </Text>
 
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
+
                 <TextCaption>
                     Card Text Caption
                 </TextCaption>
@@ -143,6 +163,10 @@ function Dashboard() {
                     Card Text
                 </Text>
 
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
+
                 <TextCaption>
                     Card Text Caption
                 </TextCaption>
@@ -164,6 +188,10 @@ function Dashboard() {
                 <Text>
                     Card Text
                 </Text>
+
+                <TextSmall>
+                    Box TextSmall
+                </TextSmall>
 
                 <TextCaption>
                     Card Text Caption
