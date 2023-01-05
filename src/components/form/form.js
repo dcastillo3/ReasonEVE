@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './form.css';
 import { buildFormFields } from './formUtils';
 import _ from 'lodash/core';
+import { FlexBox, Form as StyledForm, Button } from '../styled';
 
 function Form({formParams, handleSubmit}) {
     const inputData = formParams.inputs.reduce((prevVal, {id, defaultValue}) => ({...prevVal, [id]: defaultValue}), {});
@@ -29,12 +30,12 @@ function Form({formParams, handleSubmit}) {
         && buildFormFields(formFields, formData, handleChangeField);
 
     return (
-        <div className="form-container">
-            <form onSubmit={handleSubmitForm} className="add-track-form">
+        <FlexBox style={{justifyContent: 'center'}} className="form-container">
+            <StyledForm onSubmit={handleSubmitForm}>
                 {renderFormFields}
-                <button className="form-submit" type="submit">Add Track</button>
-            </form>
-        </div>
+                <Button type="submit">Add Track</Button>
+            </StyledForm>
+        </FlexBox>
     );
 };
 
