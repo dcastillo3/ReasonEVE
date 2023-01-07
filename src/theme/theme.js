@@ -36,10 +36,15 @@ const theme = createTheme({
         },
         background: {
             main: "#e1e3e9",
-            light: "#fff",
+            light: "#f3f3f3",
             medium: "#e1e3e9",
             dark: "#2d3240",
             paper: "#2d3240"
+        },
+        backgroundLight: {
+            main: "#f3f3f3",
+            light: "#fff",
+            dark: "#2d3240"
         },
         action: {
             active: "#fff",
@@ -57,7 +62,8 @@ const theme = createTheme({
             warning: "#fff",
             error: "#fff",
             info: "#294509",
-            background: "#2d3240"
+            background: "#2d3240",
+            backgroundLight: "#2d3240"
         },
     },
     typography: {
@@ -71,7 +77,6 @@ const theme = createTheme({
         },
         label: {
             fontSize: '1rem',
-            fontFamily: 'Jost',
             fontWeight: 400,
             lineHeight: 1.66
         },
@@ -94,9 +99,8 @@ const theme = createTheme({
             fontSize: '2rem',
             fontWeight: '400'
         },
-    }
+    },
+    spacing: 4
 });
-
-console.log(theme)
 
 export default theme;

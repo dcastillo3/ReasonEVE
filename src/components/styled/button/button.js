@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { buildHoverPalette, buildPalette, buildTypography } from '../styledUtils';
+import { buildHoverPalette, buildPalette, buildSpacing, buildTypography } from '../styledUtils';
 
 export const Button = styled.button`
     padding: 10px 32px;
@@ -8,5 +8,6 @@ export const Button = styled.button`
     /* Style overrides last */
     ${buildPalette}
     ${buildHoverPalette}
+    ${buildSpacing}
     ${(props) => buildTypography(props, 'button')}
 `;

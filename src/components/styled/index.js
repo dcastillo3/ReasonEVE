@@ -1,4 +1,4 @@
-export { Form, Label, Input } from './form/form';
+export { Form, Label, Input, DragAndDrop } from './form/form';
 export { Button } from './button/button';
 export { FlexBox, FlexBoxColumn } from './flexBox/flexBox';
 export { Box, Card } from './box/box';

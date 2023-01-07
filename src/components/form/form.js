@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import './form.css';
 import { buildFormFields } from './formUtils';
 import _ from 'lodash/core';
-import { FlexBox, Form as StyledForm, Button } from '../styled';
+import { FlexBox, Form as StyledForm, Button, Card } from '../styled';
 
 function Form({formParams, handleSubmit}) {
     const inputData = formParams.inputs.reduce((prevVal, {id, defaultValue}) => ({...prevVal, [id]: defaultValue}), {});
@@ -30,12 +29,14 @@ function Form({formParams, handleSubmit}) {
         && buildFormFields(formFields, formData, handleChangeField);
 
     return (
-        <FlexBox style={{justifyContent: 'center'}} className="form-container">
-            <StyledForm onSubmit={handleSubmitForm}>
-                {renderFormFields}
-                <Button type="submit">Add Track</Button>
-            </StyledForm>
-        </FlexBox>
+        <Card variant="backgroundLight">
+            <FlexBox style={{ justifyContent: 'center' }}>
+                <StyledForm onSubmit={handleSubmitForm}>
+                    {renderFormFields}
+                    <Button m={[5]} type="submit">Add Track</Button>
+                </StyledForm>
+            </FlexBox>
+        </Card>
     );
 };
 
