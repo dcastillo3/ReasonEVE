@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
-import { Box, FlexBox, FlexBoxColumn, Input, Label, TextCaption } from '../styled';
+import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall } from '../styled';
 
 const buildFormFields = (formFields, formData, handleChangeField) => {
     const renderedFormFields = [];
@@ -48,7 +48,7 @@ const getInput = (formField, formData, handleChangeField) => {
     switch(inputType) {
         case 'text': {
             return (
-                <FlexBoxColumn key={id} className="input-container">
+                <FlexBoxColumn m={[5]} key={id}>
                     <Label>{labelName}</Label>
                     <Input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
@@ -82,49 +82,55 @@ const getInput = (formField, formData, handleChangeField) => {
             const inputProps = getInputProps();
 
             const renderUploadContainer = (
-                <Box className="upload-container" {...rootProps}>
+                <DragAndDrop p={[5]} hover variant="backgroundLight" className="upload-container" {...rootProps}>
                     <Input {...inputProps} {...additionalProps} />
                     <TextCaption className="upload-message">
                         {uploadMessage}
                     </TextCaption>
-                </Box>
+                </DragAndDrop>
             );
 
             const renderUploadItems = !_.isEmpty(inputValue) && inputValue.map(file => (
-                <Box key={file.name} className="upload-preview-item">
+                <Box m={[1, 0]} p={[1, 2]} key={file.name}>
                     {file.name}
                 </Box>
             ));
 
             const renderUploadPreview = !_.isEmpty(inputValue) && (
-                <FlexBoxColumn className="upload-preview-container">
-                    {renderUploadItems}
-                </FlexBoxColumn>
+                <Card m={[2]} variant="success">
+                    <FlexBoxColumn>
+                        {renderUploadItems}
+                    </FlexBoxColumn>
+                </Card>
             );
 
             const renderUploadErrors = !_.isEmpty(fileRejections) && fileRejections.map(({ file, errors }) => {
                 const errorMessages = errors.map(e => (
-                    <Box className="file-rejection-error-item" key={e.code}>
-                        {e.message}
+                    <Box m={[1, 0]} p={[1, 2]} key={e.code}>
+                        <TextSmall>
+                            {e.message}
+                        </TextSmall>
                     </Box>
                 ));
 
                 return (
-                    <FlexBoxColumn key={file.path} className="file-rejection-container">
-                        <Box className="file-rejection-item">
-                            {file.path}
-                        </Box>
+                    <Card m={[2]} variant="warning">
+                        <FlexBoxColumn key={file.path}>
+                            <Box m={[1, 0]} p={[1, 2]}>
+                                {file.path}
+                            </Box>
 
-                        <FlexBoxColumn>
-                            {errorMessages}
+                            <FlexBoxColumn>
+                                {errorMessages}
+                            </FlexBoxColumn>
                         </FlexBoxColumn>
-                    </FlexBoxColumn>
+                    </Card>
                 )
             }
             );
 
             return (
-                <FlexBoxColumn key={id} className="input-container">
+                <FlexBoxColumn m={[5]} key={id}>
                     <Label>{labelName}</Label>
                     {renderUploadContainer}
 

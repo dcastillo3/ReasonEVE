@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { buildHoverPalette, buildPalette } from '../styledUtils';
+import { buildHoverPalette, buildPalette, buildSpacing } from '../styledUtils';
 
 export const Box = styled.div`
+    /* Style overrides last */
+    ${buildSpacing}
 `;
 
 export const Card = styled(Box)`

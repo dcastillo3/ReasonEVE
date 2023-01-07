@@ -27,7 +27,7 @@ const buildTypography = ({ theme }, element = defaultElement) => {
 const buildFlexBox = ({itemsPerRow, wrap}) => {
     let cssProps = ``;
     
-    if(wrap) cssProps += 'flex-wrap: wrap';
+    if(wrap) cssProps += 'flex-wrap: wrap;';
 
     if(itemsPerRow) {
         const flexBoxWidth = Math.floor(100/itemsPerRow);
@@ -42,9 +42,30 @@ const buildFlexBox = ({itemsPerRow, wrap}) => {
     return cssProps;
 };
 
+const buildSpacing = ({ theme, m, p}) => {
+    let cssProps = ``;
+
+    if(m?.length) {
+        const margins = m.map(margin => theme.spacing(margin));
+        const margin = margins.join(' ');
+
+        cssProps += `margin: ${margin};`;
+    }
+
+    if(p?.length) {
+        const paddings = p.map(padding => theme.spacing(padding));
+        const padding = paddings.join(' ');
+
+        cssProps += `padding: ${padding};`;
+    }
+
+    return cssProps;
+};
+
 export {
     buildPalette,
     buildHoverPalette,
     buildTypography,
-    buildFlexBox
+    buildFlexBox,
+    buildSpacing
 };
