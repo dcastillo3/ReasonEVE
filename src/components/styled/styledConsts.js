@@ -16,6 +16,15 @@ const defaultVariant = 'primary';
 
 const defaultElement = body1;
 
+//10 32
+const buttonSizes = {
+    small: [1, 3],
+    medium: [3, 8],
+    large: [5, 6]
+};
+
+const defaultButtonSize = 'medium';
+
 export {
     defaultVariant,
     defaultElement,
@@ -25,5 +34,7 @@ export {
     label,
     h1,
     h2,
-    h3
+    h3,
+    buttonSizes,
+    defaultButtonSize
 };

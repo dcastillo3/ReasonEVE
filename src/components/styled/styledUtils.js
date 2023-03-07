@@ -1,4 +1,4 @@
-import { defaultElement, defaultVariant } from "./styledConsts";
+import { defaultElement, defaultVariant, buttonSizes, defaultButtonSize } from "./styledConsts";
 
 const buildPalette = ({ theme, variant = defaultVariant }) => ({
     background: theme.palette[variant].main,
@@ -62,10 +62,20 @@ const buildSpacing = ({ theme, m, p}) => {
     return cssProps;
 };
 
+const buildButtonSize = ({ theme, size}) => {
+    const buttonSize = size ? buttonSizes[size] : buttonSizes[defaultButtonSize];
+    const paddings = buttonSize.map(padding => theme.spacing(padding));
+    const padding = paddings.join(' ');
+    const cssProps = `padding: ${padding};`;
+
+    return cssProps;
+};
+
 export {
     buildPalette,
     buildHoverPalette,
     buildTypography,
     buildFlexBox,
-    buildSpacing
+    buildSpacing,
+    buildButtonSize
 };
