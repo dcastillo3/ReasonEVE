@@ -16,7 +16,6 @@ const defaultVariant = 'primary';
 
 const defaultElement = body1;
 
-//10 32
 const buttonSizes = {
     small: [1, 3],
     medium: [3, 8],
@@ -24,6 +23,14 @@ const buttonSizes = {
 };
 
 const defaultButtonSize = 'medium';
+
+const arrowSizes = {
+    small: [4, 5],
+    medium: [5, 6],
+    large: [7, 8]
+};
+
+const defaultArrowSize = 'medium';
 
 export {
     defaultVariant,
@@ -36,5 +43,7 @@ export {
     h2,
     h3,
     buttonSizes,
-    defaultButtonSize
+    defaultButtonSize,
+    arrowSizes,
+    defaultArrowSize
 };

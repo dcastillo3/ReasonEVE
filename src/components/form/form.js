@@ -30,7 +30,7 @@ function Form({formParams, handleSubmit}) {
 
     return (
         <Card variant="backgroundLight">
-            <FlexBox style={{ justifyContent: 'center' }}>
+            <FlexBox center>
                 <StyledForm onSubmit={handleSubmitForm}>
                     {renderFormFields}
                     <Button m={[5]} type="submit">Add Track</Button>

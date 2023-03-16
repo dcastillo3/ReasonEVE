@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { buildHoverPalette, buildPalette, buildSpacing } from '../styledUtils';
+import { buildCardBorderRadius, buildHoverPalette, buildPalette, buildSpacing } from '../styledUtils';
 
 export const Box = styled.div`
     /* Style overrides last */
@@ -9,5 +9,6 @@ export const Box = styled.div`
 export const Card = styled(Box)`
     /* Style overrides last */
     ${buildPalette}
-    ${props => props.hover ? buildHoverPalette(props) : ''}
+    ${props => props.hover && buildHoverPalette(props)}
+    ${props => props.rounded && buildCardBorderRadius(props)}
 `;
