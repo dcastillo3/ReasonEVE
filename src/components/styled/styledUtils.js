@@ -1,4 +1,4 @@
-import { defaultElement, defaultVariant, buttonSizes, defaultButtonSize } from "./styledConsts";
+import { defaultElement, defaultVariant, buttonSizes, defaultButtonSize, arrowSizes, defaultArrowSize } from "./styledConsts";
 
 const buildPalette = ({ theme, variant = defaultVariant }) => ({
     background: theme.palette[variant].main,
@@ -18,16 +18,32 @@ const buildHoverPalette = ({ theme, variant = defaultVariant }) => {
     return cssProps;
 };
 
+const buildCardBorderRadius = ({ theme }) => {
+    const borderRadius = theme.spacing(1);
+    const cssProps = { 
+        borderRadius
+    };
+
+    return cssProps;
+};
+
 const buildTypography = ({ theme }, element = defaultElement) => {
     const typography = theme.typography[element];
 
     return typography;
 };
 
-const buildFlexBox = ({itemsPerRow, wrap}) => {
+const buildFlexBox = ({itemsPerRow, $wrap, center}) => {
     let cssProps = ``;
+
+    if(center) {
+        cssProps += `
+            justify-content: center;
+            align-items: center;
+        `;
+    };
     
-    if(wrap) cssProps += 'flex-wrap: wrap;';
+    if($wrap) cssProps += 'flex-wrap: wrap;';
 
     if(itemsPerRow) {
         const flexBoxWidth = Math.floor(100/itemsPerRow);
@@ -37,36 +53,86 @@ const buildFlexBox = ({itemsPerRow, wrap}) => {
                 flex: ${flexBoxWidth}%;
             }
         `;
-    }
+    };
 
     return cssProps;
 };
 
 const buildSpacing = ({ theme, m, p}) => {
-    let cssProps = ``;
+    let cssProps = {};
 
     if(m?.length) {
-        const margins = m.map(margin => theme.spacing(margin));
-        const margin = margins.join(' ');
+        const margin = theme.spacing(...m);
 
-        cssProps += `margin: ${margin};`;
-    }
+        cssProps.margin = margin;
+    };
 
     if(p?.length) {
-        const paddings = p.map(padding => theme.spacing(padding));
-        const padding = paddings.join(' ');
+        const padding = theme.spacing(...p);
 
-        cssProps += `padding: ${padding};`;
-    }
+        cssProps.padding = padding;
+    };
 
     return cssProps;
 };
 
-const buildButtonSize = ({ theme, size}) => {
+const buildButtonSize = ({ theme, size }) => {
     const buttonSize = size ? buttonSizes[size] : buttonSizes[defaultButtonSize];
-    const paddings = buttonSize.map(padding => theme.spacing(padding));
-    const padding = paddings.join(' ');
-    const cssProps = `padding: ${padding};`;
+    const buttonSpacing = buildSpacing({theme, m: null, p: buttonSize});
+
+    return buttonSpacing;
+};
+
+const buildArrow = ({ theme, variant, pointerDirection, size }) => {
+    const borders = size ? arrowSizes[size] : arrowSizes[defaultArrowSize];
+    const [pointerDegree, pointerSize] = borders.map(border => theme.spacing(border));
+    const arrowColor = theme.palette[variant].main;
+    const pointerDegreeCss = `${pointerDegree} solid transparent`;
+    const emptyDegreeCss = '0px solid transparent';
+    const pointerCss = `${pointerSize} solid ${arrowColor}`;
+    let cssProps = {};
+
+    switch (pointerDirection) {
+        case 'left': {
+            cssProps = {
+                borderTop: pointerDegreeCss,
+                borderBottom: emptyDegreeCss,
+                borderRight: pointerCss
+            };
+
+            break;
+        };
+
+        case 'right': {
+            cssProps = {
+                borderTop: pointerDegreeCss,
+                borderBottom: emptyDegreeCss,
+                borderLeft: pointerCss
+            };
+            
+            break;
+        };
+
+        case 'up': {
+            cssProps = {
+                borderLeft: pointerDegreeCss,
+                borderRight: emptyDegreeCss,
+                borderBottom: pointerCss
+            };
+            
+            break;
+        };
+
+        case 'down': {
+            cssProps = {
+                borderLeft: pointerDegreeCss,
+                borderRight: emptyDegreeCss,
+                borderTop: pointerCss
+            };
+            
+            break;
+        };
+    };
 
     return cssProps;
 };
@@ -77,5 +143,7 @@ export {
     buildTypography,
     buildFlexBox,
     buildSpacing,
-    buildButtonSize
+    buildButtonSize,
+    buildArrow,
+    buildCardBorderRadius
 };

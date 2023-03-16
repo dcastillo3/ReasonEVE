@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AudioPlayer } from './components/audioPlayer';
-import MainRoutes from './routes';
-import { Menu } from './components/menu';
+import { MainRoutes } from './routes';
+import { Header } from './components/header';
 
 export const TrackContext = React.createContext();
 
@@ -34,7 +34,7 @@ function App() {
     return (
         <div>
             <TrackContext.Provider value={tracks}>
-                <Menu />
+                <Header />
                 <MainRoutes />
                 <AudioPlayer />
             </TrackContext.Provider>

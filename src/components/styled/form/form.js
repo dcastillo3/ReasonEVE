@@ -11,10 +11,10 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-    
+    border: solid 1px ${({theme}) => theme.palette.info.main};
 `;
 
 export const DragAndDrop = styled(Card)`
-    border: dashed 1px rgb(54 54 54);
+    border: dashed 1px ${({theme}) => theme.palette.info.main};
     cursor: pointer;
 `;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MusicPlayer from 'react-material-music-player';
 import {
@@ -6,10 +6,11 @@ import {
     initializePlayer
 } from './audioPlayerUtils';
 import { ThemeProvider } from "@mui/material/styles";
-import { ThemeContext } from 'styled-components';
+import { Box } from '../styled';
+import { useTheme } from 'styled-components';
 
 function AudioPlayer() {
-    const theme = useContext(ThemeContext);
+    const theme = useTheme();
     const [playlist, setPlaylist] = useState([]);
     const getPlaylist = async () => {
         try {
@@ -43,11 +44,11 @@ function AudioPlayer() {
     }, [playlist]);
 
     return (
-        <div id="music-player">
+        <Box>
             <ThemeProvider theme={theme}>
                 <MusicPlayer sx={{}} disableDrawer={false} />
             </ThemeProvider>
-        </div>
+        </Box>
     );
 };
 

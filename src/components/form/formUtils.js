@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
 import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall } from '../styled';
+import { uploadMessage } from './formConsts';
 
 const buildFormFields = (formFields, formData, handleChangeField) => {
     const renderedFormFields = [];
@@ -52,7 +53,7 @@ const getInput = (formField, formData, handleChangeField) => {
                     <Label>{labelName}</Label>
                     <Input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
-            )
+            );
         };
         
         case 'upload': {
@@ -77,14 +78,13 @@ const getInput = (formField, formData, handleChangeField) => {
                 getRootProps,
                 getInputProps
             } = useDropzone(dropZoneParams);
-            const uploadMessage = 'Drag or click to select files';
             const rootProps = getRootProps();
             const inputProps = getInputProps();
 
             const renderUploadContainer = (
-                <DragAndDrop p={[5]} hover variant="backgroundLight" className="upload-container" {...rootProps}>
+                <DragAndDrop p={[5]} hover variant="backgroundLight" {...rootProps}>
                     <Input {...inputProps} {...additionalProps} />
-                    <TextCaption className="upload-message">
+                    <TextCaption>
                         {uploadMessage}
                     </TextCaption>
                 </DragAndDrop>
@@ -125,9 +125,8 @@ const getInput = (formField, formData, handleChangeField) => {
                             </FlexBoxColumn>
                         </FlexBoxColumn>
                     </Card>
-                )
-            }
-            );
+                );
+            });
 
             return (
                 <FlexBoxColumn m={[5]} key={id}>
@@ -152,7 +151,7 @@ const getValidationProps = validations => {
             validationProps.accept = {
                 [validation]: [],
                 ...validationProps.accept
-            }
+            };
         });
     };
 
@@ -161,10 +160,10 @@ const getValidationProps = validations => {
         const { maxFiles } = validations;
         
         validationProps = {maxFiles, ...validationProps}
-    }
+    };
 
     return validationProps;
-}
+};
 
 export {
     buildFormFields
