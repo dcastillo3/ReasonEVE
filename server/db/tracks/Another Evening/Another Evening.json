@@ -6,6 +6,7 @@
     "mp3Price": "5.00",
     "leasePrice": "20.00",
     "exclusivePrice": "300.00",
+    "productType": "track",
     "dateCreated": "2022-12-10T04:57:19.378Z",
     "dateUpdated": "2022-12-10T04:57:19.378Z",
     "active": true,
