@@ -3,7 +3,7 @@ import { Track, PlayerInterface } from 'react-material-music-player';
 const createPlaylist = tracks => tracks.map(track => new Track(
     track.dateCreated,
     track.coverArt,
-    track.trackName,
+    track.productName,
     track.artistName,
     track.url
 ));
