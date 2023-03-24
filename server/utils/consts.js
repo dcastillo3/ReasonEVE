@@ -5,7 +5,6 @@ const cdnBaseUrl = 'https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db';
 
 const storageConfigs = {
     track: {
-        nameField: 'trackName',
         localPath: path.join(__dirname, '../db/tracks'),
         cdnPath: `${cdnBaseUrl}/tracks`,
         indexName: 'tracks',
@@ -22,7 +21,6 @@ const storageConfigs = {
         ]
     },
     pack: {
-        nameField: 'packName',
         localPath: path.join(__dirname, '../db/packs'),
         cdnPath: `${cdnBaseUrl}/packs`,
         indexName: 'packs',

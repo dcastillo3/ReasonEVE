@@ -21,9 +21,9 @@ const sanitizeFormData = formData => {
 
             value.forEach(file => {
                 sanitizedFormData.append(field, file);
-            })
-        }
-    }
+            });
+        };
+    };
 
     return sanitizedFormData;
 };

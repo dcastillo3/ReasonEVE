@@ -3,10 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const { storageConfigs } = require('../utils/consts');
 
-const storageClient = (productType) => {
+const storageClient = productType => {
     try {
         const {
-            nameField,
             localPath,
             uploadFields
         } = storageConfigs[productType];
@@ -14,7 +13,7 @@ const storageClient = (productType) => {
         // /addTrack upload destination and fields to upload
         const storage = multer.diskStorage({
             destination: (req, file, cb) => {
-                const productName = req.body[nameField];
+                const { productName } = req.body;
                 const newProductPath = path.join(localPath, productName);
 
                 //Make new directory if doesn't exist
@@ -23,7 +22,7 @@ const storageClient = (productType) => {
                 cb(null, newProductPath);
             },
             filename: (req, file, cb) => {
-                const productName = req.body[nameField];
+                const { productName } = req.body;
                 const extension = path.extname(file.originalname);
                 const fileName = `${productName}${extension}`;
 

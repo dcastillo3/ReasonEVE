@@ -1,6 +1,6 @@
 // Set product type
-const productType = 'track';
+const track = 'track';
 
 module.exports = {
-    productType
+    track
 };

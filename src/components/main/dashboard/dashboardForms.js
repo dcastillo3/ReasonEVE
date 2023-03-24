@@ -1,6 +1,7 @@
 const addTrackForm = {
-    name: 'Add Track',
+    title: 'Add Your Next Track',
     buttonName: 'Add Track',
+    fieldsPerRow: 2,
     inputs: [
         {
             id: 'track',
@@ -25,7 +26,7 @@ const addTrackForm = {
             }
         },
         {
-            id: 'trackName',
+            id: 'productName',
             labelName: 'Track Name',
             inputType: 'text',
             defaultValue: '',
@@ -44,6 +45,14 @@ const addTrackForm = {
             id: 'additionalArtistNames',
             labelName: 'Additional Artist Name',
             inputType: 'text',
+            defaultValue: '',
+            additionalProps: {},
+            validations: {}
+        },
+        {
+            id: 'description',
+            labelName: 'Description',
+            inputType: 'textarea',
             defaultValue: '',
             additionalProps: {},
             validations: {}
@@ -69,6 +78,14 @@ const addTrackForm = {
             labelName: 'Exclusive Price',
             inputType: 'text',
             defaultValue: '300.00',
+            additionalProps: {},
+            validations: {}
+        },
+        {
+            id: 'productType',
+            labelName: 'Product Type',
+            inputType: 'hidden',
+            defaultValue: 'track',
             additionalProps: {},
             validations: {}
         }

@@ -6,8 +6,8 @@ const { storageConfigs } = require('./consts');
 const { getTrackProductParams, getTrackProductIds } = require('../api/tracks/tracksUtils');
 const { getFormattedDate } = require('./utils');
 
-const getProductParams = (productData, productType) => {
-    switch (productType) {
+const getProductParams = productData => {
+    switch (productData.productType) {
         case 'track': {
             let trackProductParams = getTrackProductParams(productData);
 
@@ -16,8 +16,8 @@ const getProductParams = (productData, productType) => {
     };
 };
 
-const createProduct = async (productData, productType) => {
-    let productParams = getProductParams(productData, productType);
+const createProduct = async productData => {
+    let productParams = getProductParams(productData);
     const products = [];
 
     for(let i = 0; i < productParams.length; i++) {
@@ -30,14 +30,14 @@ const createProduct = async (productData, productType) => {
     return products;
 };
 
-const buildProductLinks = (fileData, {trackName}, productType) => {
+const buildProductLinks = (fileData, {productName, productType}) => {
     const { cdnPath } = storageConfigs[productType];
-    const encodedTrackName = encodeURIComponent(trackName);
+    const encodedProductName = encodeURIComponent(productName);
     const productLinks = {};
 
     Object.entries(fileData).forEach(([fileKey, [{filename}]]) => {
         const fileExtension = path.extname(filename);
-        const filePath = `${cdnPath}/${encodedTrackName}/${encodedTrackName}${fileExtension}`;
+        const filePath = `${cdnPath}/${encodedProductName}/${encodedProductName}${fileExtension}`;
 
         if(fileKey === 'coverArt') productLinks.coverArt = filePath;
         else productLinks.url = filePath;
@@ -46,7 +46,8 @@ const buildProductLinks = (fileData, {trackName}, productType) => {
     return productLinks;
 };
 
-const formatProductData = (productData, fileData, products, productType) => {
+const formatProductData = (productData, fileData, products) => {
+    const { productType } = productData;
     const currDate = getFormattedDate();
     let formattedProductData = {
         ...productData,
@@ -61,7 +62,7 @@ const formatProductData = (productData, fileData, products, productType) => {
             const {
                 url,
                 coverArt
-            } = buildProductLinks(fileData, productData, productType);
+            } = buildProductLinks(fileData, productData);
             const trackProductData = {
                 purchases: {
                     mp3: [],
@@ -85,13 +86,6 @@ const formatProductData = (productData, fileData, products, productType) => {
     return formattedProductData;
 };
 
-const getProductName = (productData, productType) => {
-    const { nameField } = storageConfigs[productType];
-    const productName = productData[nameField];
-
-    return productName;
-};
-
 const updateProductIndexData = (productName, productType) => {
     const indexFilePath = getProductIndexPath(productType);
     const indexData = require(indexFilePath);
@@ -109,8 +103,8 @@ const updateProductIndexData = (productName, productType) => {
     fs.writeFileSync(indexFilePath, fileData);
 };
 
-const writeProductData = async (productData, productType) => {
-    const productName = getProductName(productData, productType);
+const writeProductData = async productData => {
+    const { productName, productType } = productData;
     const filePath = getProductDataPath(productName, productType);
     const fileData = JSON.stringify(productData, null, 4);
 
@@ -160,7 +154,6 @@ module.exports = {
     createProduct,
     formatProductData,
     writeProductData,
-    getProductName,
     updateProductIndexData,
     getProductDataPath,
     getProductData
