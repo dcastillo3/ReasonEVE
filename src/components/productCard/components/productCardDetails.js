@@ -1,13 +1,14 @@
 import React from 'react';
-import { FlexBoxColumn, Text, TextCaption, TitleSmall } from '../../styled';
+import { FlexBoxColumn, TextCaption, TitleSmall } from '../../styled';
+import { formatArtistNames } from '../productCardUtils';
 
-function ProductCardDetails({ artistName, additionalArtistNames, trackName, productDescription }) {
+function ProductCardDetails({ artistName, additionalArtistNames, productName }) {
+    const artists = formatArtistNames(artistName, additionalArtistNames);
 
     return (
         <FlexBoxColumn m={[0, 0, 4, 0]}>
-            <TitleSmall>{trackName}</TitleSmall>
-            <TextCaption>{artistName} {additionalArtistNames ? `, ${additionalArtistNames}` : ''}</TextCaption>
-            <Text>{productDescription}</Text>
+            <TitleSmall>{productName}</TitleSmall>
+            <TextCaption>{artists}</TextCaption>
         </FlexBoxColumn>
     );
 };

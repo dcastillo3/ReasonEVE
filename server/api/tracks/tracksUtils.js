@@ -1,5 +1,5 @@
-const buildTrackName = ({trackName, artistName, additionalArtistNames}, type) =>
-    `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`} - ${trackName} | ${type}`;
+const buildTrackName = ({productName, artistName, additionalArtistNames}, type) =>
+    `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`} - ${productName} | ${type}`;
 
 const getTrackProductParams = productData => {
     const {

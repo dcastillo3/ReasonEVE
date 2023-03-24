@@ -82,22 +82,26 @@ const theme = createTheme({
         },
         button: {
             fontWeight: '600',
-            letterSpacing: '2px'
+            letterSpacing: '2px',
+            textTransform: 'uppercase'
         },
         h1: {
             fontFamily: 'Oswald',
             fontSize: '5rem',
-            fontWeight: '600'
+            fontWeight: '600',
+            textTransform: 'uppercase'
         },
         h2: {
             fontFamily: 'Roboto Condensed',
             fontSize: '3rem',
-            fontWeight: '400'
+            fontWeight: '400',
+            textTransform: 'uppercase'
         },
         h3: {
             fontFamily: 'Roboto Condensed',
             fontSize: '2rem',
-            fontWeight: '400'
+            fontWeight: '400',
+            textTransform: 'uppercase'
         },
     },
     spacing: 4

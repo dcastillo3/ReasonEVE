@@ -19,6 +19,10 @@ const formatPricesForCartMenu = (mp3Price, leasePrice, exclusivePrice) => {
     return formattedPrices;
 };
 
+const formatArtistNames = (artistName, additionalArtistNames) =>
+    `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`}`;
+
 export {
-    formatPricesForCartMenu
+    formatPricesForCartMenu,
+    formatArtistNames
 };

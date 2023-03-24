@@ -3,40 +3,59 @@ import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
 import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall } from '../styled';
 import { uploadMessage } from './formConsts';
+import { FormTextArea, HiddenFormFieldContainer } from './formStyledComponents';
 
-const buildFormFields = (formFields, formData, handleChangeField) => {
+const buildFormData = inputs =>
+    inputs.reduce((prevVal, { id, defaultValue }) => ({ ...prevVal, [id]: defaultValue }), {});
+
+const buildFormFields = (formFields, formData, handleChangeField, fieldsPerRow) => {
     const renderedFormFields = [];
-    const fieldsPerRow = 2;
+    let fieldsPerCurrRow = fieldsPerRow;
     let inputStack = [];
     let idx = 0;
+    const addFormRow = () => {
+        const formRow = (
+            <FlexBox itemsPerRow={fieldsPerRow} key={idx}>
+                {inputStack}
+            </FlexBox>
+        );
+
+        inputStack = [];
+        fieldsPerCurrRow = fieldsPerRow;
+        renderedFormFields.push(formRow);
+    };
 
     while (idx < formFields.length) {
         const formField = formFields[idx];
-        const input = getInput(formField, formData, handleChangeField);
+        const { inputType } = formField;
+
+        //Maintain fields per row display when a field is hidden
+        if(inputType === 'hidden') fieldsPerCurrRow += 1;
+        //Display textarea field as entire row
+        if(inputType === 'textarea') {
+            //If row has fields, push row
+            if(inputStack.length) addFormRow();
+            
+            //Add textarea field to own row
+            fieldsPerCurrRow = 1;
+        };
+        
+        const input = buildInput(formField, formData, handleChangeField);
 
         inputStack.push(input);
 
-        const rowIsFull = inputStack.length === fieldsPerRow;
-        const lastFormField = (idx === (renderedFormFields.length - 1));
+        const rowIsFull = inputStack.length === fieldsPerCurrRow;
+        const lastFormField = (idx === (formFields.length - 1));
         
-        if(rowIsFull || lastFormField) {
-            const formRow = (
-                <FlexBox itemsPerRow={fieldsPerRow} key={idx}>
-                    {inputStack}
-                </FlexBox>
-            );
-
-            inputStack = [];
-            renderedFormFields.push(formRow);
-        };
-
         idx += 1;
+
+        if(rowIsFull || lastFormField) addFormRow();
     };
 
     return renderedFormFields;
 };
 
-const getInput = (formField, formData, handleChangeField) => {
+const buildInput = (formField, formData, handleChangeField) => {
     const { 
         id, 
         labelName, 
@@ -49,10 +68,28 @@ const getInput = (formField, formData, handleChangeField) => {
     switch(inputType) {
         case 'text': {
             return (
-                <FlexBoxColumn m={[5]} key={id}>
+                <FlexBoxColumn m={[5]} key={id} $wrap={true}>
                     <Label>{labelName}</Label>
                     <Input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
+            );
+        };
+
+        case 'textarea': {
+            return (
+                <FlexBoxColumn m={[5]} key={id} $wrap={true}>
+                    <Label>{labelName}</Label>
+                    <FormTextArea onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
+                </FlexBoxColumn>
+            );
+        };
+
+        case 'hidden': {
+            return (
+                <HiddenFormFieldContainer m={[5]} key={id}>
+                    <Label>{labelName}</Label>
+                    <Input value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
+                </HiddenFormFieldContainer>
             );
         };
         
@@ -166,5 +203,6 @@ const getValidationProps = validations => {
 };
 
 export {
+    buildFormData,
     buildFormFields
 };

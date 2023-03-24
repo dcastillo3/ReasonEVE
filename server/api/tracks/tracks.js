@@ -5,18 +5,17 @@ const {
     writeProductData,
     formatProductData,
     getProductData,
-    updateProductIndexData,
-    getProductName
+    updateProductIndexData
 } = require('../../utils/productUtils');
 const { formatResponseData } = require('../../utils/utils');
-const { productType } = require('./tracksConsts');
+const { track } = require('./tracksConsts');
 const { updatePlaylistIndex } = require('../playlist/playlistUtils');
 const { indexTypes: {recentlyAdded} } = require('../playlist/playlistConsts');
 
 // Get tracks from index
 router.get('/', (req, res) => {
     try {
-        const tracks = getProductData(productType);
+        const tracks = getProductData(track);
         const responseData = formatResponseData(tracks);
 
         res.send(responseData);
@@ -30,15 +29,17 @@ router.get('/', (req, res) => {
 });
 
 // Add to tracks directory
-router.post('/', storageClient(productType), async (req, res) => {
+router.post('/', storageClient(track), async (req, res) => {
     try {
+        const { body: productData, files: fileData } = req;
+        const { productName, productType } = productData;
+
         //create stripe products
-        const trackProducts = await createProduct(req.body, productType);
-        const formattedTrackData = formatProductData(req.body, req.files, trackProducts, productType);
+        const trackProducts = await createProduct(productData);
+        const formattedTrackData = formatProductData(productData, fileData, trackProducts);
         //write track data locally
-        const writtenData = await writeProductData(formattedTrackData, productType);
+        const writtenData = await writeProductData(formattedTrackData);
         const responseData = formatResponseData(writtenData);
-        const productName = getProductName(req.body, productType);
 
         //write track index data locally
         updateProductIndexData(productName, productType);

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { buildFormFields } from './formUtils';
+import { buildFormData, buildFormFields } from './formUtils';
 import _ from 'lodash/core';
-import { FlexBox, Form as StyledForm, Button, Card } from '../styled';
+import { FlexBox, Form as StyledForm, Button, Card, FlexBoxColumn } from '../styled';
+import { Heading } from '../common';
 
-function Form({formParams, handleSubmit}) {
-    const inputData = formParams.inputs.reduce((prevVal, {id, defaultValue}) => ({...prevVal, [id]: defaultValue}), {});
-
-    const [formFields, setFormFields] = useState(formParams.inputs);
-    const [formData, setFormData] = useState(inputData);
+function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubmit}) {
+    const [formFields, setFormFields] = useState(inputs);
+    const [formData, setFormData] = useState(buildFormData(inputs));
 
     const handleChangeField = e => {
         const { name, value } = e.target;
@@ -26,15 +25,23 @@ function Form({formParams, handleSubmit}) {
     };
 
     const renderFormFields = (!_.isEmpty(formFields) && !_.isEmpty(formData))
-        && buildFormFields(formFields, formData, handleChangeField);
+        && buildFormFields(formFields, formData, handleChangeField, fieldsPerRow);
 
     return (
         <Card variant="backgroundLight">
             <FlexBox center>
-                <StyledForm onSubmit={handleSubmitForm}>
-                    {renderFormFields}
-                    <Button m={[5]} type="submit">Add Track</Button>
-                </StyledForm>
+                <FlexBoxColumn>
+                    <FlexBox m={[5]}>
+                        <Heading variant={'success'} heading={title} />
+                    </FlexBox>
+
+                    <FlexBox>
+                        <StyledForm onSubmit={handleSubmitForm}>
+                            {renderFormFields}
+                            <Button m={[5]} type="submit">{buttonName}</Button>
+                        </StyledForm>
+                    </FlexBox>
+                </FlexBoxColumn>
             </FlexBox>
         </Card>
     );
