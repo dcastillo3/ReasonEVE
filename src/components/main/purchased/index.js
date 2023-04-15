@@ -1,0 +1,1 @@
+export { default as Purchased } from './purchased';

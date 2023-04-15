@@ -1,6 +1,6 @@
 import React from 'react';
+import { formatArtistNames } from '../../../utils/helpers';
 import { FlexBoxColumn, TextCaption, TitleSmall } from '../../styled';
-import { formatArtistNames } from '../productCardUtils';
 
 function ProductCardDetails({ artistName, additionalArtistNames, productName }) {
     const artists = formatArtistNames(artistName, additionalArtistNames);

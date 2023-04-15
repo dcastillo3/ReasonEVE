@@ -1,25 +1,34 @@
 {
     "productName": "Southern Isolation",
+    "productType": "track",
     "artistName": "ReasonEVE",
     "additionalArtistNames": "",
     "description": "",
-    "mp3Price": "5.00",
-    "leasePrice": "20.00",
-    "exclusivePrice": "300.00",
-    "productType": "track",
-    "dateCreated": "2022-12-10T04:58:32.187Z",
-    "dateUpdated": "2022-12-10T04:58:32.187Z",
-    "active": true,
+    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.mp3",
+    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.jpg",
+    "productPricing": [
+        {
+            "id": "price_1MDL8wDfmT9zYk9OdWk3Vwa4",
+            "purchaseType": "mp3",
+            "price": "5.00"
+        },
+        {
+            "id": "price_1MDL8xDfmT9zYk9OrO0aHrMe",
+            "purchaseType": "lease",
+            "price": "20.00"
+        },
+        {
+            "id": "price_1MDL8xDfmT9zYk9OkZAuewzL",
+            "purchaseType": "exclusive",
+            "price": "300.00"
+        }
+    ],
     "purchases": {
         "mp3": [],
         "lease": [],
         "exclusive": []
     },
-    "productIds": {
-        "exclusive": "price_1MDL8xDfmT9zYk9OkZAuewzL",
-        "lease": "price_1MDL8xDfmT9zYk9OrO0aHrMe",
-        "mp3": "price_1MDL8wDfmT9zYk9OdWk3Vwa4"
-    },
-    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.mp3",
-    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.jpg"
+    "dateCreated": "2022-12-10T04:58:32.187Z",
+    "dateUpdated": "2022-12-10T04:58:32.187Z",
+    "active": true
 }

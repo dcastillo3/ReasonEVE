@@ -6,7 +6,7 @@ import { Heading } from '../common';
 
 function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubmit}) {
     const [formFields, setFormFields] = useState(inputs);
-    const [formData, setFormData] = useState(buildFormData(inputs));
+    const [formData, setFormData] = useState(() => buildFormData(inputs));
 
     const handleChangeField = e => {
         const { name, value } = e.target;
@@ -38,7 +38,7 @@ function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubm
                     <FlexBox>
                         <StyledForm onSubmit={handleSubmitForm}>
                             {renderFormFields}
-                            <Button m={[5]} type="submit">{buttonName}</Button>
+                            <Button m={[5, 3]} type="submit">{buttonName}</Button>
                         </StyledForm>
                     </FlexBox>
                 </FlexBoxColumn>

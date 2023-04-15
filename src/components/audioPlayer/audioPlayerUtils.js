@@ -1,6 +1,6 @@
 import { Track, PlayerInterface } from 'react-material-music-player';
 
-const createPlaylist = tracks => tracks.map(track => new Track(
+const formatPlaylist = tracks => tracks.map(track => new Track(
     track.dateCreated,
     track.coverArt,
     track.productName,
@@ -9,13 +9,21 @@ const createPlaylist = tracks => tracks.map(track => new Track(
 ));
 
 const playPlaylist = playlist => {
-    PlayerInterface.setPlaylist(...playlist);
-    PlayerInterface.play(...playlist);
+    const formattedPlaylist = formatPlaylist(playlist);
+
+    PlayerInterface.setPlaylist(formattedPlaylist);
+    PlayerInterface.play(formattedPlaylist);
+};
+
+const setPlaylist = playlist => {
+    const formattedPlaylist = formatPlaylist(playlist);
+
+    PlayerInterface.setPlaylist(formattedPlaylist);
 };
 
 const initializePlayer = playlist => {
     PlayerInterface.setVolume(100);
-    playPlaylist(playlist);
+    setPlaylist(playlist);
 };
 
 const getCurrTrackTitle = () => {
@@ -27,8 +35,8 @@ const getCurrTrackTitle = () => {
 };
 
 export {
-    createPlaylist,
     playPlaylist,
+    setPlaylist,
     initializePlayer,
     getCurrTrackTitle
 };

@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
         res.status(500).send(responseData);
 
-        throw (err);
+        console.error(err);
     };
 });
 

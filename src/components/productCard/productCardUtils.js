@@ -1,28 +1,37 @@
+import { productCardButtonStatus } from "./productConsts";
+
 const formatPriceDisplay = price => `$${price}`;
 
-const formatPricesForCartMenu = (mp3Price, leasePrice, exclusivePrice) => {
-    const formattedPrices = [
-        { 
-            title: 'mp3', 
-            amount: formatPriceDisplay(mp3Price)
-        },
-        { 
-            title: 'lease', 
-            amount: formatPriceDisplay(leasePrice)
-        },
-        { 
-            title: 'exclusive', 
-            amount: formatPriceDisplay(exclusivePrice)
-        }
-    ];
+const formatCartItem = (productPricingItem, product) => ({
+    ...product,
+    selectedPricing: productPricingItem
+});
 
-    return formattedPrices;
+const getProductCardButtonText = (product, cart) => {
+    const { active } = product;
+
+    //Product is active
+    if (active) {     
+        const productInCart = cart.some(({ productName }) => productName === product.productName);
+        const productCardButtonText = productInCart
+            ? productCardButtonStatus.incart
+            : productCardButtonStatus.available;
+
+        return productCardButtonText;
+        //Exclusive product has been sold
+    } else return productCardButtonStatus.sold;
 };
 
-const formatArtistNames = (artistName, additionalArtistNames) =>
-    `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`}`;
+const getProductCardButtonVariant = (product, cart) => {
+    const productInCart = cart.some(({ productName }) => productName === product.productName);
+    const productCardButtonVariant = productInCart ? 'background' : 'primary';
+
+    return productCardButtonVariant;
+};
 
 export {
-    formatPricesForCartMenu,
-    formatArtistNames
+    formatPriceDisplay,
+    formatCartItem,
+    getProductCardButtonText,
+    getProductCardButtonVariant
 };

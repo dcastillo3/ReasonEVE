@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 const { createStripeProduct } = require('../stripe');
-const { storageConfigs } = require('./consts');
-const { getTrackProductParams, getTrackProductIds } = require('../api/tracks/tracksUtils');
+const { storageConfigs, sessionModes, errorMessages } = require('./consts');
+const { getTrackProductParams, buildTrackProductPricing, getInitialTrackData } = require('../api/tracks/tracksUtils');
 const { getFormattedDate } = require('./utils');
 
 const getProductParams = productData => {
@@ -46,11 +46,20 @@ const buildProductLinks = (fileData, {productName, productType}) => {
     return productLinks;
 };
 
+const buildInitialProductPurchases = productPricing => {
+    const purchases = {};
+
+    for(let productType in productPricing) {
+        purchases[productType] = [];
+    };
+
+    return purchases;
+};
+
 const formatProductData = (productData, fileData, products) => {
     const { productType } = productData;
     const currDate = getFormattedDate();
     let formattedProductData = {
-        ...productData,
         dateCreated: currDate,
         dateUpdated: currDate,
         active: true
@@ -58,25 +67,24 @@ const formatProductData = (productData, fileData, products) => {
 
     switch (productType) {
         case 'track': {
-            const productIds = getTrackProductIds(products, productData);
+            const initialTrackData = getInitialTrackData(productData);
+            const productPricing = buildTrackProductPricing(products, productData);
+            const purchases = buildInitialProductPurchases(productPricing);
             const {
                 url,
                 coverArt
             } = buildProductLinks(fileData, productData);
             const trackProductData = {
-                purchases: {
-                    mp3: [],
-                    lease: [],
-                    exclusive: []
-                },
-                productIds,
+                ...initialTrackData,
                 url,
-                coverArt
+                coverArt,
+                productPricing,
+                purchases
             };
 
             formattedProductData = {
-                ...formattedProductData,
-                ...trackProductData
+                ...trackProductData,
+                ...formattedProductData
             };
 
             break;
@@ -150,11 +158,48 @@ const getProductData = productType => {
     return productData;
 };
 
+// Customers can checkout 1 of each product per cart, at this time
+const formatLineItems = products => 
+    products.map(({selectedPricing: {id}}) => ({price: id, quantity: 1}));
+
+//Validate success and cancel url hosts
+const validateCheckoutReturnUrls = (successUrl, cancelUrl, host) => {
+    const successHost = successUrl.split('/')[2];
+    const cancelHost = cancelUrl.split('/')[2];
+    
+    if(successHost === host && cancelHost === host) {
+        const validCheckoutReturnUrls = {
+            success_url: successUrl,
+            cancel_url: cancelUrl
+        };
+    
+        return validCheckoutReturnUrls;
+    } else throw new Error(errorMessages.validateCheckoutReturnUrls);
+};
+
+const formatCheckoutSessionData = (products, successUrl, cancelUrl, host) => {
+    const line_items = formatLineItems(products);
+    const {
+        success_url,
+        cancel_url
+    } = validateCheckoutReturnUrls(successUrl, cancelUrl, host);
+    //Format data for stripe checkout session consumption
+    const formattedCheckoutSessionData = {
+        line_items,
+        mode: sessionModes.payment,
+        success_url,
+        cancel_url,
+    };
+
+    return formattedCheckoutSessionData;
+};
+
 module.exports = {
     createProduct,
     formatProductData,
     writeProductData,
     updateProductIndexData,
     getProductDataPath,
-    getProductData
+    getProductData,
+    formatCheckoutSessionData
 };

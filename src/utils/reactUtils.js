@@ -1,6 +1,7 @@
 import _ from 'lodash/core';
+import { initialStates, localStorageKeys } from './consts';
 
-const sanitizeFormData = formData => {
+const buildFormData = formData => {
     const sanitizedFormData = new FormData();
     const formDataFiles = {};
 
@@ -31,6 +32,27 @@ const sanitizeFormData = formData => {
 const checkIfValueIsFiles = (value) =>
     Array.isArray(value) && value.length && value.every(item => item instanceof File);
 
+const getStateFromLocalStorage = localStorageKey => {
+    const initialState = initialStates[localStorageKey];
+    const localStorageState = localStorage.getItem(localStorageKeys[localStorageKey]);
+    const state = localStorageState ? JSON.parse(localStorageState) : initialState;
+
+    return state;
+};
+
+const setLocalStorageState = (localStorageKey, state) => {
+    const localStorageState = JSON.stringify(state);
+
+    localStorage.setItem(localStorageKey, localStorageState);
+};
+
+const removeLocalStorageState = localStorageKey => {
+    localStorage.removeItem(localStorageKeys[localStorageKey])
+};
+
 export {
-    sanitizeFormData
+    buildFormData,
+    getStateFromLocalStorage,
+    setLocalStorageState,
+    removeLocalStorageState
 };

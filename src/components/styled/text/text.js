@@ -16,8 +16,8 @@ export const TextCaption = styled.p`
 
 export const Span = styled.span`
     display: inline-block;
-    ${({rotate}) => rotate === 'right' && 'rotate: 8deg;'}
-    ${({rotate}) => rotate === 'left' && 'rotate: -8deg;'}
+    ${({$rotate}) => $rotate === 'right' && 'rotate: 8deg;'}
+    ${({$rotate}) => $rotate === 'left' && 'rotate: -8deg;'}
 
     /* Style overrides last */
     ${buildPalette}

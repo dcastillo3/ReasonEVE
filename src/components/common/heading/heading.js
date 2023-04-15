@@ -1,19 +1,21 @@
 import React from 'react';
-import { Span, TitleMedium } from '../../styled';
+import { TitleMedium } from '../../styled';
 import { HeadingContainer } from './headingStyledComponents';
-import { formatHeading } from './headingUtils';
+import { buildStyledWord, formatHeading } from './headingUtils';
 
-function Heading({heading, variant}) {
+function Heading({heading, variant, headingStyle}) {
     const {
         headingFirstHalf,
         secondToLastWord,
         lastWord
     } = formatHeading(heading);
 
+    const renderStyledWord = buildStyledWord(headingStyle, variant, secondToLastWord);
+
     return (
-        <HeadingContainer m={[10, 1]} $wrap={true}>
+        <HeadingContainer m={[10, 0]} $wrap={true}>
             <TitleMedium>
-                {headingFirstHalf} <Span rotate={'right'} p={[1, 3]} variant={variant}>{secondToLastWord}</Span> {lastWord}
+                {headingFirstHalf} {renderStyledWord} {lastWord}
             </TitleMedium>
         </HeadingContainer>
     );

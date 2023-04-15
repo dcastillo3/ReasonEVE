@@ -68,7 +68,7 @@ const buildInput = (formField, formData, handleChangeField) => {
     switch(inputType) {
         case 'text': {
             return (
-                <FlexBoxColumn m={[5]} key={id} $wrap={true}>
+                <FlexBoxColumn m={[3]} key={id} $wrap={true}>
                     <Label>{labelName}</Label>
                     <Input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
@@ -77,7 +77,7 @@ const buildInput = (formField, formData, handleChangeField) => {
 
         case 'textarea': {
             return (
-                <FlexBoxColumn m={[5]} key={id} $wrap={true}>
+                <FlexBoxColumn m={[3]} key={id} $wrap={true}>
                     <Label>{labelName}</Label>
                     <FormTextArea onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
@@ -86,7 +86,7 @@ const buildInput = (formField, formData, handleChangeField) => {
 
         case 'hidden': {
             return (
-                <HiddenFormFieldContainer m={[5]} key={id}>
+                <HiddenFormFieldContainer m={[3]} key={id}>
                     <Label>{labelName}</Label>
                     <Input value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </HiddenFormFieldContainer>
@@ -166,7 +166,7 @@ const buildInput = (formField, formData, handleChangeField) => {
             });
 
             return (
-                <FlexBoxColumn m={[5]} key={id}>
+                <FlexBoxColumn m={[3]} key={id}>
                     <Label>{labelName}</Label>
                     {renderUploadContainer}
 

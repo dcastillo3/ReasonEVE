@@ -1,3 +1,5 @@
+const { trackPurchaseTypes } = require("./tracksConsts");
+
 const buildTrackName = ({productName, artistName, additionalArtistNames}, type) =>
     `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`} - ${productName} | ${type}`;
 
@@ -9,15 +11,15 @@ const getTrackProductParams = productData => {
     } = productData;
     let trackProductData = [
         {
-            name: buildTrackName(productData, 'mp3'),
+            name: buildTrackName(productData, trackPurchaseTypes.mp3),
             price: mp3Price
         },
         {
-            name: buildTrackName(productData, 'lease'),
+            name: buildTrackName(productData, trackPurchaseTypes.lease),
             price: leasePrice
         },
         {
-            name: buildTrackName(productData, 'exclusive'),
+            name: buildTrackName(productData, trackPurchaseTypes.exclusive),
             price: exclusivePrice
         }
     ];
@@ -35,7 +37,34 @@ const getTrackProductIds = products => products.reduce((prevValue, {name, defaul
     return trackId;
 }, {});
 
+const buildTrackProductPricing = (products, {mp3Price, leasePrice, exclusivePrice}) => {
+    const trackProductIds = getTrackProductIds(products);
+    //Sort productPricing as: mp3, lease, exclusive
+    const productPricing = [
+        {
+            id: trackProductIds.mp3,
+            purchaseType: trackPurchaseTypes.mp3,
+            price: mp3Price
+        },
+        {
+            id: trackProductIds.lease,
+            purchaseType: trackPurchaseTypes.lease,
+            price: leasePrice
+        },
+        {
+            id: trackProductIds.exclusive,
+            purchaseType: trackPurchaseTypes.exclusive,
+            price: exclusivePrice
+        }
+    ];
+
+    return productPricing;
+};
+
+const getInitialTrackData = ({mp3Price, leasePrice, exclusivePrice, ...InitialTrackData}) => InitialTrackData;
+
 module.exports = {
     getTrackProductParams,
-    getTrackProductIds
+    buildTrackProductPricing,
+    getInitialTrackData
 };

@@ -11,18 +11,31 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
+    padding: ${({theme}) => theme.spacing(2)};
+    border-radius: ${({theme}) => theme.spacing(1)};
     border: solid 1px ${({theme}) => theme.palette.info.main};
 
     ${(props) => buildTypography(props, body2)}
 `;
 
 export const Textarea = styled.textarea`
+    padding: ${({theme}) => theme.spacing(2)};
+    border-radius: ${({theme}) => theme.spacing(1)};
+    border: solid 1px ${({theme}) => theme.palette.info.main};
+
+    ${(props) => buildTypography(props, body2)}
+`;
+
+export const Select = styled.select`
+    padding: ${({theme}) => theme.spacing(2)};
+    border-radius: ${({theme}) => theme.spacing(1)};
     border: solid 1px ${({theme}) => theme.palette.info.main};
 
     ${(props) => buildTypography(props, body2)}
 `;
 
 export const DragAndDrop = styled(Card)`
+    border-radius: ${({theme}) => theme.spacing(1)};
     border: dashed 1px ${({theme}) => theme.palette.info.main};
     cursor: pointer;
 `;

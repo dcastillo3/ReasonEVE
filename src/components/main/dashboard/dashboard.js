@@ -1,15 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import { Form } from '../../form';
-import { sanitizeFormData } from '../../../utils/reactUtils';
+import { buildFormData } from '../../../utils/reactUtils';
 import { addTrackForm } from './dashboardForms';
 import { Box, Card, Button, Text, TextSmall, TextCaption, Title, TitleSmall, TitleMedium } from '../../styled';
+import { apis } from '../../../utils/consts';
 
 function Dashboard() {
-    const handleAddTrack = async formData => {
+    const handleAddTrack = async trackData => {
         try {
-            const trackData = sanitizeFormData(formData);
-            let res = await axios.post('/api/tracks', trackData);
+            const formData = buildFormData(trackData);
+            let res = await axios.post(apis.tracks, formData);
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;
