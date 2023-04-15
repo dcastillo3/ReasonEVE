@@ -12,6 +12,8 @@ const h2 = 'h2';
 
 const h3 = 'h3';
 
+const subtitle1 = 'subtitle1';
+
 const defaultVariant = 'primary';
 
 const defaultElement = body1;
@@ -42,6 +44,7 @@ export {
     h1,
     h2,
     h3,
+    subtitle1,
     buttonSizes,
     defaultButtonSize,
     arrowSizes,

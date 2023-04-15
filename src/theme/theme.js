@@ -72,6 +72,9 @@ const theme = createTheme({
         body1: {
             fontSize: '1.1rem'
         },
+        body2: {
+            fontSize: '0.875rem'
+        },
         caption: {
             fontSize: '1rem'
         },
@@ -84,6 +87,10 @@ const theme = createTheme({
             fontWeight: '600',
             letterSpacing: '2px',
             textTransform: 'uppercase'
+        },
+        subtitle1: {
+            fontSize: '1rem',
+            fontWeight: '600'
         },
         h1: {
             fontFamily: 'Oswald',

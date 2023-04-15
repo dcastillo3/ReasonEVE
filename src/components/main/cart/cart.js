@@ -1,59 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { Box } from "../../styled";
-import "./cart.css";
+import React, { useContext } from "react";
+import _ from "lodash";
+import { Heading } from "../../common";
+import { Box, FlexBoxColumn } from "../../styled";
+import { CartContext } from "../../../utils/context";
+import CartCheckoutButton from "./components/cartCheckoutButton";
+import CartLineItem from "./components/cartLineItem";
+import CartTotal from "./components/cartTotal";
+import CartEmpty from "./components/cartEmpty";
 
-// DC-NOTE: Example product page
-const ProductDisplay = () => (
-    <section>
-        <div className="product">
-            <img
-                src="https://i.imgur.com/EHyR2nP.png"
-                alt="The cover of Stubborn Attachments"
-            />
-            <div className="description">
-                <h3>Beat 1</h3>
-                <h5>$10.00</h5>
-            </div>
-        </div>
-        <form action="/api/checkout" method="POST">
-            <button type="submit">
-                Checkout
-            </button>
-        </form>
-    </section>
-);
+function Cart() {
+    const { cart, removeCartItem, updateCartItem, checkoutCart } = useContext(CartContext);
 
-const Message = ({ message }) => (
-    <section>
-        <p>{message}</p>
-    </section>
-);
+    const renderCartLineItems = !_.isEmpty(cart) && cart.map((cartItem, idx) => (
+        <CartLineItem key={idx} cartItem={cartItem} removeCartItem={removeCartItem} updateCartItem={updateCartItem} />
+    ));
 
-export default function Cart() {
-    const [message, setMessage] = useState("");
+    const stockedCart = (
+        <FlexBoxColumn>
+            {renderCartLineItems}
 
-    useEffect(() => {
-        // Check to see if this is a redirect back from Checkout
-        const query = new URLSearchParams(window.location.search);
+            <CartTotal cart={cart} />
 
-        if (query.get("success")) {
-            setMessage("Order placed! You will receive an email confirmation.");
-        }
+            <CartCheckoutButton checkoutCart={checkoutCart} />
+        </FlexBoxColumn>
+    );
 
-        if (query.get("canceled")) {
-            setMessage(
-                "Order canceled -- continue to shop around and checkout when you're ready."
-            );
-        }
-    }, []);
+    const emptyCart = (
+        <CartEmpty />
+    );
+
+    const renderCart = _.isEmpty(cart) ? emptyCart : stockedCart;
 
     return (
-        <Box className="cart" m={[0, 8]}>
-            {message ? (
-                <Message message={message} />
-            ) : (
-                <ProductDisplay />
-            )}
+        <Box m={[0, 8]}>
+            <Heading headingStyle={'circle'} heading={`Start your next project`} />
+
+            {renderCart}
         </Box>
     );
-}
+};
+
+export default Cart;

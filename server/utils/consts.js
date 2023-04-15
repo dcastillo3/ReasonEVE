@@ -38,6 +38,16 @@ const storageConfigs = {
     }
 };
 
+const sessionModes = {
+    payment: 'payment'
+};
+
+const errorMessages = {
+    validateCheckoutReturnUrls: 'Host validation failed. Incorrect success and cancel urls.'
+};
+
 module.exports = {
-    storageConfigs
+    storageConfigs,
+    sessionModes,
+    errorMessages
 };

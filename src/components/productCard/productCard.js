@@ -1,20 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FlexBoxColumn } from '../styled';
-import { formatPricesForCartMenu } from './productCardUtils';
 import { ProductCard as ProductCardStyled, ProductCardImage } from './productCardStyledComponents';
 import { Overlay } from '../common';
 import ProductCardPlayButton from './components/productCardPlayButton';
 import ProductCardDetails from './components/productCardDetails';
 import ProductCardButton from './components/productCardButton';
+import { CartContext } from '../../utils/context';
 
 function ProductCard({ product }) {
-    const {
-        mp3Price,
-        leasePrice,
-        exclusivePrice,
-        coverArt
-    } = product;
-    const formattedPrices = formatPricesForCartMenu(mp3Price, leasePrice, exclusivePrice);
+    const { cart, addCartItem } = useContext(CartContext);
+    const { coverArt } = product;
 
     return (
         <ProductCardStyled rounded={true} m={[2, 2]} variant={"backgroundLight"}>
@@ -26,7 +21,7 @@ function ProductCard({ product }) {
                 <FlexBoxColumn m={[3, 5]}>
                     <ProductCardDetails {...product} />
 
-                    <ProductCardButton trackPrices={formattedPrices}/>
+                    <ProductCardButton product={product} cart={cart} addCartItem={addCartItem} />
                 </FlexBoxColumn>
 
             </FlexBoxColumn>

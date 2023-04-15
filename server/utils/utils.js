@@ -4,7 +4,7 @@ const formatResponseData = (data, err) => {
     //TO-DO: Populate err to send to front end
     if(err) {
         responseData = {
-            err,
+            err: err.message,
             success: false
         };
     } else {

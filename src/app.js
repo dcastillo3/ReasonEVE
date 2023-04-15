@@ -1,44 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { AudioPlayer } from './components/audioPlayer';
 import { MainRoutes } from './routes';
 import { Header } from './components/header';
-
-export const TrackContext = React.createContext();
+import useCart from './hooks/useCart';
+import useTracks from './hooks/useTracks';
+import usePlaylist from './hooks/usePlaylist';
+import { Box } from './components/styled';
+import { CartContext, PlaylistContext, TrackContext } from './utils/context';
 
 function App() {
-    const [tracks, setTracks] = useState([]);
-    const getTracks = async () => {
-        try {
-            let res = await axios.get('/api/tracks');
-
-            if (!res?.data?.success) {
-                const { err = {} } = res.data;
-
-                console.error(err);
-            } else if (res?.data?.success) {
-                const { data = {} } = res.data;
-
-                setTracks(data);
-            };
-        } catch (err) {
-            console.error(err.response);
-        };
-    };
+    const tracks = useTracks();
+    const cart = useCart();
+    const playlist = usePlaylist();
 
     useEffect(() => {
-        // Get tracks for music player
-        getTracks();
+        tracks.fetchTracks();
+        playlist.fetchPlaylist();
     }, []);
     
     return (
-        <div>
+        <Box>
             <TrackContext.Provider value={tracks}>
-                <Header />
-                <MainRoutes />
-                <AudioPlayer />
+                <PlaylistContext.Provider value={playlist} >
+                    <CartContext.Provider value={cart}>
+                        <Header />
+                        <MainRoutes />
+                        <AudioPlayer />
+                    </CartContext.Provider>
+                </PlaylistContext.Provider>
             </TrackContext.Provider>
-        </div>
+        </Box>
     );
 };
 

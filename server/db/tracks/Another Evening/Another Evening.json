@@ -1,25 +1,34 @@
 {
     "productName": "Another Evening",
+    "productType": "track",
     "artistName": "ReasonEVE",
     "additionalArtistNames": "",
     "description": "",
-    "mp3Price": "5.00",
-    "leasePrice": "20.00",
-    "exclusivePrice": "300.00",
-    "productType": "track",
-    "dateCreated": "2022-12-10T04:57:19.378Z",
-    "dateUpdated": "2022-12-10T04:57:19.378Z",
-    "active": true,
+    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Another%20Evening/Another%20Evening.mp3",
+    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Another%20Evening/Another%20Evening.jpg",
+    "productPricing": [
+        {
+            "id": "price_1MDL7lDfmT9zYk9O9jmgDX8n",
+            "purchaseType": "mp3",
+            "price": "5.00"
+        },
+        {
+            "id": "price_1MDL7mDfmT9zYk9OJii1Ke8x",
+            "purchaseType": "lease",
+            "price": "20.00"
+        },
+        {
+            "id": "price_1MDL7mDfmT9zYk9ODubpYVwI",
+            "purchaseType": "exclusive",
+            "price": "300.00"
+        }
+    ],
     "purchases": {
         "mp3": [],
         "lease": [],
         "exclusive": []
     },
-    "productIds": {
-        "exclusive": "price_1MDL7mDfmT9zYk9ODubpYVwI",
-        "lease": "price_1MDL7mDfmT9zYk9OJii1Ke8x",
-        "mp3": "price_1MDL7lDfmT9zYk9O9jmgDX8n"
-    },
-    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Another%20Evening/Another%20Evening.mp3",
-    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Another%20Evening/Another%20Evening.jpg"
+    "dateCreated": "2022-12-10T04:57:19.378Z",
+    "dateUpdated": "2022-12-10T04:57:19.378Z",
+    "active": true
 }

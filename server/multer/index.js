@@ -36,7 +36,7 @@ const storageClient = productType => {
         return productUpload;
         
     } catch (err) {
-        throw(err);
+        console.error(err);
     };
 };
 

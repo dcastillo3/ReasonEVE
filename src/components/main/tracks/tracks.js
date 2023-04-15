@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { TrackContext } from '../../../app';
 import { Box, FlexBox, FlexBoxColumn } from '../../styled';
 import { ProductCard } from '../../productCard';
 import { Heading } from '../../common';
+import { TrackContext } from '../../../utils/context';
 
 function Tracks() {
-    const tracks = useContext(TrackContext);
+    const { tracks } = useContext(TrackContext);
     const renderTracks = !_.isEmpty(tracks) 
         && tracks.map((track, idx) => <ProductCard key={idx} product={track} />);
 

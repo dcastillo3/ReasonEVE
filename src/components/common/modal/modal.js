@@ -7,12 +7,12 @@ function Modal({children, modalComponent, variant}) {
     const [showModal, setShowModal] = useState(false);
 
     const handleToggleModal = () => {
-        setShowModal(prevShowModal => !prevShowModal);
+        setShowModal(!showModal);
     };
 
     const renderModal = showModal && (
         <ClickAwayListener onClickAway={handleToggleModal}>
-            <Card rounded={true} variant={variant} p={[2, 4]}>
+            <Card $rounded={true} variant={variant} p={[2, 4]}>
                 {modalComponent()}
             </Card>
         </ClickAwayListener>

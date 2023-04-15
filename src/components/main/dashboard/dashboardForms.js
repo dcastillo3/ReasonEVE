@@ -34,6 +34,14 @@ const addTrackForm = {
             validations: {}
         },
         {
+            id: 'productType',
+            labelName: 'Product Type',
+            inputType: 'hidden',
+            defaultValue: 'track',
+            additionalProps: {},
+            validations: {}
+        },
+        {
             id: 'artistName',
             labelName: 'Artist Name',
             inputType: 'text',
@@ -78,14 +86,6 @@ const addTrackForm = {
             labelName: 'Exclusive Price',
             inputType: 'text',
             defaultValue: '300.00',
-            additionalProps: {},
-            validations: {}
-        },
-        {
-            id: 'productType',
-            labelName: 'Product Type',
-            inputType: 'hidden',
-            defaultValue: 'track',
             additionalProps: {},
             validations: {}
         }

@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ClickAwayListener } from '@mui/material';
 import { Arrow, Box, Card, FlexBox } from '../../styled';
 import { ToolTipArrowContainer, ToolTipComponentContainer, ToolTipContainer } from './tooltipStyledComponents';
 
-function ToolTip({ children, toolTipComponent, variant, pointerDirection, pointerSize }) {
-    const [showToolTip, setShowToolTip] = useState(false);
-
-    const handleToggleToolTip = () => {
-        setShowToolTip(prevShowToolTip => !prevShowToolTip);
-    };
-
+function ToolTip({ children, toolTipComponent, variant, pointerDirection, pointerSize, showToolTip, handleToggleToolTip }) {
     const renderToolTip = showToolTip && (
         <ClickAwayListener onClickAway={handleToggleToolTip}>
             <ToolTipComponentContainer pointerDirection={pointerDirection} pointerSize={pointerSize}>
@@ -17,7 +11,7 @@ function ToolTip({ children, toolTipComponent, variant, pointerDirection, pointe
                     <Arrow size={pointerSize} variant={variant} pointerDirection={pointerDirection} />
                 </ToolTipArrowContainer>
 
-                <Card rounded={true} variant={variant} p={[2, 4]}>
+                <Card $rounded={true} variant={variant} p={[2, 4]}>
                     {toolTipComponent()}
                 </Card>
             </ToolTipComponentContainer>

@@ -10,5 +10,5 @@ export const Card = styled(Box)`
     /* Style overrides last */
     ${buildPalette}
     ${props => props.hover && buildHoverPalette(props)}
-    ${props => props.rounded && buildCardBorderRadius(props)}
+    ${props => props.$rounded && buildCardBorderRadius(props)}
 `;
