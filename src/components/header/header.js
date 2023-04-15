@@ -3,6 +3,7 @@ import { logoName } from './headerConsts';
 import { HeaderContainer, LogoContainer, LogoTitle } from './headerStyledComponents';
 import Menu from './components/menu';
 import { NavLink } from 'react-router-dom';
+import UserMenu from './components/userMenu';
 
 function Header() {
     return (
@@ -14,6 +15,8 @@ function Header() {
             </LogoContainer>
 
             <Menu />
+            
+            <UserMenu />
         </HeaderContainer>
     );
 };

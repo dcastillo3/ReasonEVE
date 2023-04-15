@@ -5,7 +5,7 @@ import { Purchased } from '../components/main/purchased';
 import { Cart } from '../components/main/cart';
 import { Dashboard } from '../components/main/dashboard';
 
-const routes = [
+const menuRoutes = [
     {
         id: 1,
         name: 'Home',
@@ -30,6 +30,9 @@ const routes = [
         path: '/dashboard',
         Element: Dashboard
     },
+];
+
+const generalRoutes = [
     {
         id: 5,
         name: 'Cart',
@@ -44,10 +47,11 @@ const protectedRoutes = [
         name: 'Purchased',
         path: '/purchased',
         Element: Purchased
-    }
+    },
 ];
 
 export {
-    routes,
+    menuRoutes,
+    generalRoutes,
     protectedRoutes
 };

@@ -1,10 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { NotFound } from '../components/main/notFound';
-import { protectedRoutes, routes } from './routesConsts';
+import { protectedRoutes, menuRoutes, generalRoutes } from './routesConsts';
 
 function MainRoutes() {
-    const renderRoutes = routes.map(({ path, Element }, idx) => (
+    const renderMenuRoutes = menuRoutes.map(({ path, Element }, idx) => (
+        <Route key={idx} exact path={path} element={<Element />} />
+    ));
+
+    const renderGeneralRoutes = generalRoutes.map(({ path, Element }, idx) => (
         <Route key={idx} exact path={path} element={<Element />} />
     ));
 
@@ -14,7 +18,8 @@ function MainRoutes() {
 
     return (
         <Routes>
-            {renderRoutes}
+            {renderMenuRoutes}
+            {renderGeneralRoutes}
             {renderProtectedRoutes}
             <Route path='*' element={<NotFound />}/>
         </Routes>
