@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, FlexBoxColumn, Label } from '../../styled';
 import { ProductCardCartButtonIcon } from '../productCardStyledComponents';
-import { formatPriceDisplay } from '../productCardUtils';
+import { formatPriceDisplay } from '../../../utils/reactUtils';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function ProductCardButtonMenu({ product, addCartItem, cart, handleToggleToolTip }) {

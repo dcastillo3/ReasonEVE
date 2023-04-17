@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexBoxColumn, Textarea } from '../styled';
+import { FlexBoxColumn, Textarea } from '../../styled';
 
 const HiddenFormFieldContainer = styled(FlexBoxColumn)`
     display: none;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatArtistNames } from '../../../utils/helpers';
+import { formatArtistNames } from '../../../utils/reactUtils';
 import { FlexBoxColumn, TextCaption, TitleSmall } from '../../styled';
 
 function ProductCardDetails({ artistName, additionalArtistNames, productName }) {

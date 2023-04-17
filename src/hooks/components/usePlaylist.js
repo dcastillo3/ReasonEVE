@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { apis, initialStates } from "../utils/consts";
+import { apis, initialStates } from "../../utils/consts";
 import axios from "axios";
 
 function usePlaylist() {

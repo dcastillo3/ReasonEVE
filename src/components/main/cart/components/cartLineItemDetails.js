@@ -1,5 +1,5 @@
 import React from "react";
-import { formatArtistNames } from "../../../../utils/helpers";
+import { formatArtistNames } from "../../../../utils/reactUtils";
 import { Switcher } from "../../../common";
 import { Box, SubTitle, TextCaption } from "../../../styled";
 import { CartLineItemDetails as CartLineItemDetailsStyled, CartLineItemDetailsContainer } from '../cartStyledComponents';

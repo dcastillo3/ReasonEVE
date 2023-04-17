@@ -1,4 +1,4 @@
-import { formatPriceDisplay } from "../../productCard/productCardUtils";
+import { formatPriceDisplay } from "../../../utils/reactUtils";
 
 const getCartTotal = cart => {
     const cartNumTotal = cart.reduce((prevCartTotal, { selectedPricing }) => prevCartTotal + +selectedPricing.price, 0);

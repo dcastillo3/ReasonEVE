@@ -1,12 +1,5 @@
 import { productCardButtonStatus } from "./productConsts";
 
-const formatPriceDisplay = price => `$${price}`;
-
-const formatCartItem = (productPricingItem, product) => ({
-    ...product,
-    selectedPricing: productPricingItem
-});
-
 const getProductCardButtonText = (product, cart) => {
     const { active } = product;
 
@@ -30,8 +23,6 @@ const getProductCardButtonVariant = (product, cart) => {
 };
 
 export {
-    formatPriceDisplay,
-    formatCartItem,
     getProductCardButtonText,
     getProductCardButtonVariant
 };
