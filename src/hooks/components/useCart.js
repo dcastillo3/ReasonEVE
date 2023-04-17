@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { formatCartItem } from "../components/productCard/productCardUtils";
-import { apis, initialStates, localStorageKeys } from "../utils/consts";
-import { getStateFromLocalStorage, removeLocalStorageState, setLocalStorageState } from "../utils/reactUtils";
+import { apis, initialStates, localStorageKeys } from "../../utils/consts";
+import { formatCartItem } from "../../utils/reactUtils";
+import { getStateFromLocalStorage, removeLocalStorageState, setLocalStorageState } from "../../utils/helpers";
 import axios from "axios";
-import { formatCheckoutData } from "../utils/helpers";
+import { formatCheckoutData } from "../hookUtils";
 
 function useCart() {
     const [cart, setCart] = useState(() => getStateFromLocalStorage(localStorageKeys.cart));

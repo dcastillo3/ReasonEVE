@@ -1,21 +1,25 @@
-import { protectedRoutes } from "../routes/routesConsts";
+import { initialStates, localStorageKeys } from './consts';
 
-const formatArtistNames = (artistName, additionalArtistNames) =>
-    `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`}`;
+const getStateFromLocalStorage = localStorageKey => {
+    const initialState = initialStates[localStorageKey];
+    const localStorageState = localStorage.getItem(localStorageKeys[localStorageKey]);
+    const state = localStorageState ? JSON.parse(localStorageState) : initialState;
 
-const formatCheckoutData = cart => {
-    const { path } = protectedRoutes.find(({id}) => id === 6);
+    return state;
+};
 
-    const formattedCheckoutData = {
-        products: cart,
-        successUrl: `${window.location.origin}${path}`,
-        cancelUrl: `${window.location.href}`
-    };
+const setLocalStorageState = (localStorageKey, state) => {
+    const localStorageState = JSON.stringify(state);
 
-    return formattedCheckoutData;
+    localStorage.setItem(localStorageKey, localStorageState);
+};
+
+const removeLocalStorageState = localStorageKey => {
+    localStorage.removeItem(localStorageKeys[localStorageKey])
 };
 
 export {
-    formatArtistNames,
-    formatCheckoutData
+    getStateFromLocalStorage,
+    setLocalStorageState,
+    removeLocalStorageState
 };

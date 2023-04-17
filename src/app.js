@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { AudioPlayer } from './components/audioPlayer';
 import { MainRoutes } from './routes';
 import { Header } from './components/header';
-import useCart from './hooks/useCart';
-import useTracks from './hooks/useTracks';
-import usePlaylist from './hooks/usePlaylist';
+import { useCart, useTracks, usePlaylist } from './hooks';
 import { Box } from './components/styled';
 import { CartContext, PlaylistContext, TrackContext } from './utils/context';
 

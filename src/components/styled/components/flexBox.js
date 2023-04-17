@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box } from '../box/box';
+import { Box } from './box';
 import { buildFlexBox } from '../styledUtils';
 
 export const FlexBox = styled(Box)`

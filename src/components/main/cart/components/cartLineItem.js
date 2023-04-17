@@ -1,5 +1,5 @@
 import React from "react";
-import { formatPriceDisplay } from "../../../productCard/productCardUtils";
+import { formatPriceDisplay } from "../../../../utils/reactUtils";
 import { Card, FlexBox, SubTitle } from "../../../styled";
 import { CartLineItemEndContainer, CartLineItemImage } from "../cartStyledComponents";
 import CartLineItemDetails from "./cartLineItemDetails";

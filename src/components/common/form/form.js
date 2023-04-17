@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { buildFormData, buildFormFields } from './formUtils';
 import _ from 'lodash/core';
-import { FlexBox, Form as StyledForm, Button, Card, FlexBoxColumn } from '../styled';
-import { Heading } from '../common';
+import { FlexBox, Form as StyledForm, Button, Card, FlexBoxColumn } from '../../styled';
+import { Heading } from '../';
 
 function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubmit}) {
     const [formFields, setFormFields] = useState(inputs);

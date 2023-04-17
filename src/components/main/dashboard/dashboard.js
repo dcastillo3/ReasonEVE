@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Form } from '../../form';
-import { buildFormData } from '../../../utils/reactUtils';
+import { Form } from '../../common';
+import { formatFormData } from './dashboardUtils';
 import { addTrackForm } from './dashboardForms';
 import { Box, Card, Button, Text, TextSmall, TextCaption, Title, TitleSmall, TitleMedium } from '../../styled';
 import { apis } from '../../../utils/consts';
@@ -9,7 +9,7 @@ import { apis } from '../../../utils/consts';
 function Dashboard() {
     const handleAddTrack = async trackData => {
         try {
-            const formData = buildFormData(trackData);
+            const formData = formatFormData(trackData);
             let res = await axios.post(apis.tracks, formData);
 
             if (!res?.data?.success) {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card } from '../box/box';
+import { Card } from './box';
 import { body2, label } from '../styledConsts';
 import { buildTypography } from '../styledUtils';
 

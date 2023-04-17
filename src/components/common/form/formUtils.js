@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
-import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall } from '../styled';
+import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall } from '../../styled';
 import { uploadMessage } from './formConsts';
 import { FormTextArea, HiddenFormFieldContainer } from './formStyledComponents';
 
