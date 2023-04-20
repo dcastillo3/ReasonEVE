@@ -1,4 +1,4 @@
-import { protectedRoutes } from "../routes/routesConsts";
+import { protectedRoutes } from "../../routes/routesConsts";
 
 const formatCheckoutData = cart => {
     const { path } = protectedRoutes.find(({id}) => id === 6);
@@ -12,6 +12,12 @@ const formatCheckoutData = cart => {
     return formattedCheckoutData;
 };
 
+const formatCartItem = (productPricingItem, product) => ({
+    ...product,
+    selectedPricing: productPricingItem
+});
+
 export {
-    formatCheckoutData
+    formatCheckoutData,
+    formatCartItem
 };
