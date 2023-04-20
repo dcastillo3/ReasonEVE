@@ -7,26 +7,26 @@ import CartLineItemRemoveButton from "./cartLineItemRemoveButton";
 import { Overlay } from "../../../common";
 import CartLineItemPlayButton from "./cartLineItemPlayButton";
 
-function CartLineItem({cartItem, removeCartItem, updateCartItem}) {
+function CartLineItem({product, removeCartItem, updateCartItem}) {
     const {
         coverArt,
         selectedPricing
-    } = cartItem;
+    } = product;
     const priceDisplay = formatPriceDisplay(selectedPricing.price);
 
     return (
         <Card $rounded={true} variant={'backgroundLight'} m={[2, 2]} >
             <FlexBox m={[3, 5]}>
                 <FlexBox>
-                    <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton />} >
+                    <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} />} >
                         <CartLineItemImage src={coverArt} />
                     </Overlay>
                 </FlexBox>
 
-                <CartLineItemDetails cartItem={cartItem} updateCartItem={updateCartItem} />
+                <CartLineItemDetails product={product} updateCartItem={updateCartItem} />
 
                 <CartLineItemEndContainer>
-                    <CartLineItemRemoveButton cartItem={cartItem} removeCartItem={removeCartItem} />
+                    <CartLineItemRemoveButton product={product} removeCartItem={removeCartItem} />
 
                     <SubTitle>{priceDisplay}</SubTitle>
                 </CartLineItemEndContainer>

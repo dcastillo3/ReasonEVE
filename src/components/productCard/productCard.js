@@ -14,7 +14,7 @@ function ProductCard({ product }) {
     return (
         <ProductCardStyled rounded={true} m={[2, 2]} variant={"backgroundLight"}>
             <FlexBoxColumn>
-                <Overlay center={true} overlayComponent={() => <ProductCardPlayButton />} >
+                <Overlay center={true} overlayComponent={() => <ProductCardPlayButton product={product} />} >
                     <ProductCardImage src={coverArt} />
                 </Overlay>
 

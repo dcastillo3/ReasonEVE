@@ -4,16 +4,16 @@ import { Switcher } from "../../../common";
 import { Box, SubTitle, TextCaption } from "../../../styled";
 import { CartLineItemDetails as CartLineItemDetailsStyled, CartLineItemDetailsContainer } from '../cartStyledComponents';
 
-function CartLineItemDetails({cartItem, updateCartItem}) {
+function CartLineItemDetails({product, updateCartItem}) {
     const {
         artistName,
         additionalArtistNames,
         productPricing,
         selectedPricing,
         productName
-    } = cartItem;
+    } = product;
     const artists = formatArtistNames(artistName, additionalArtistNames);
-    const handleChooseLicense = productPricingItem => updateCartItem(productPricingItem, cartItem);
+    const handleChooseLicense = productPricingItem => updateCartItem(productPricingItem, product);
 
     const renderSwitcher = productPricing.length > 1 && (
         <Box>

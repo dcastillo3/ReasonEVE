@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { apis, initialStates, localStorageKeys } from "../../utils/consts";
-import { formatCartItem } from "../../utils/reactUtils";
 import { getStateFromLocalStorage, removeLocalStorageState, setLocalStorageState } from "../../utils/helpers";
 import axios from "axios";
-import { formatCheckoutData } from "../hookUtils";
+import { formatCartItem, formatCheckoutData } from "./useCartUtils";
 
 function useCart() {
     const [cart, setCart] = useState(() => getStateFromLocalStorage(localStorageKeys.cart));
@@ -22,7 +21,9 @@ function useCart() {
                 window.location.href = res.data.data;
             };
         } catch (err) {
-            console.error(err.response);
+            const errorMessage = err?.reponse ? err.response : err;
+
+            console.error(errorMessage);
         };
     };
 

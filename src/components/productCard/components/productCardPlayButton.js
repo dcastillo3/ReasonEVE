@@ -1,11 +1,17 @@
-import React from 'react';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import React, { useContext } from 'react';
 import { ProductCardPlayButtonIcon, ProductCardPlayButton as ProductCardPlayButtonStyled } from '../productCardStyledComponents';
+import { PlaylistContext } from '../../../utils/context';
+import { getPlayButtonIcon } from '../../../utils/reactUtils';
 
-function ProductCardPlayButton() {
+function ProductCardPlayButton({product}) {
+    const { currTrack, trackPlaying, togglePlay } = useContext(PlaylistContext);
+    const productCardPlayButtonIcon = getPlayButtonIcon(product, currTrack, trackPlaying);
+
+    const handleClickPlayButton = () => togglePlay(product);
+
     return (
-        <ProductCardPlayButtonStyled p={[0, 0]}>
-            <ProductCardPlayButtonIcon component={PlayCircleIcon} />
+        <ProductCardPlayButtonStyled onClick={handleClickPlayButton} p={[0, 0]}>
+            <ProductCardPlayButtonIcon component={productCardPlayButtonIcon} />
         </ProductCardPlayButtonStyled>
     );
 };

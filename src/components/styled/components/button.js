@@ -5,9 +5,9 @@ export const Button = styled.button`
     border-radius: 3px;
 
     /* Style overrides last */
+    ${buildButtonSize}
     ${buildPalette}
     ${buildHoverPalette}
     ${buildSpacing}
-    ${buildButtonSize}
     ${(props) => buildTypography(props, 'button')}
 `;

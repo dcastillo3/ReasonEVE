@@ -19,7 +19,9 @@ function useTracks() {
                 setTracks(data);
             };
         } catch (err) {
-            console.error(err.response);
+            const errorMessage = err?.reponse ? err.response : err;
+
+            console.error(errorMessage);
         };
     };
 

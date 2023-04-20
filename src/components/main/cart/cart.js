@@ -11,8 +11,8 @@ import CartEmpty from "./components/cartEmpty";
 function Cart() {
     const { cart, removeCartItem, updateCartItem, checkoutCart } = useContext(CartContext);
 
-    const renderCartLineItems = !_.isEmpty(cart) && cart.map((cartItem, idx) => (
-        <CartLineItem key={idx} cartItem={cartItem} removeCartItem={removeCartItem} updateCartItem={updateCartItem} />
+    const renderCartLineItems = !_.isEmpty(cart) && cart.map((product, idx) => (
+        <CartLineItem key={idx} product={product} removeCartItem={removeCartItem} updateCartItem={updateCartItem} />
     ));
 
     const stockedCart = (
