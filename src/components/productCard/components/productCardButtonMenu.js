@@ -16,13 +16,15 @@ function ProductCardButtonMenu({ product, addCartItem, cart, handleToggleToolTip
     const renderPriceButtons = productPricing.map((productPricingItem, idx) => {
         const { id, price, purchaseType } = productPricingItem;
         const productInCart = cart.some(({ selectedPricing }) => selectedPricing.id === id);
-        const buttonText = productInCart ? '' : formatPriceDisplay(price);
+        const buttonText = formatPriceDisplay(price);
         const buttonVariant = productInCart ? 'background' : 'secondary';
         const handlePricingItemButtonClick = productInCart ? null : () => handleAddCartItem(productPricingItem, product);
 
-        const renderInCartIcon = productInCart === true && (
+        const inCartIcon = (
             <ProductCardCartButtonIcon component={ShoppingCartIcon} />
         );
+
+        const renderButtonContent = productInCart ? inCartIcon : buttonText;
 
         return (
             <FlexBoxColumn m={[2, 0]} key={idx}>
@@ -34,7 +36,7 @@ function ProductCardButtonMenu({ product, addCartItem, cart, handleToggleToolTip
                     m={[1, 0]}
                     size={'small'}
                 >
-                    {renderInCartIcon}{buttonText}
+                    {renderButtonContent}
                 </Button>
             </FlexBoxColumn>
         );

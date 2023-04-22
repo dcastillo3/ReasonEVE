@@ -17,8 +17,15 @@ const initialStates = {
     playlist: []
 }
 
+const productCardButtonStatus = {
+    available: 'Add to Cart',
+    sold: 'Sold',
+    incart: 'In Cart'
+};
+
 export {
     apis,
     localStorageKeys,
-    initialStates
+    initialStates,
+    productCardButtonStatus
 };
