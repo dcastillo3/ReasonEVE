@@ -4,13 +4,13 @@ import { ToolTip } from '../../common';
 import { Button, FlexBox } from '../../styled';
 import ProductCardButtonMenu from './productCardButtonMenu';
 import { ProductCardCartButtonIcon } from '../productCardStyledComponents';
-import { getProductCardButtonText, getProductCardButtonVariant } from '../productCardUtils';
+import { getCartButtonText, getCartButtonVariant } from '../../../utils/reactUtils';
 
 function ProductCardButton({ product, cart, addCartItem }) {
     const [showProductCardButtonToolTip, setShowProductCardButtonToolTip] = useState(false);
-    const { productPricing } = product;
-    const buttonVariant = getProductCardButtonVariant(product, cart)
-    const buttonText = getProductCardButtonText(product, cart);
+    const { productPricing = [] } = product;
+    const buttonVariant = getCartButtonVariant(product, cart)
+    const buttonText = getCartButtonText(product, cart);
 
     const handleToggleProductCardButtonToolTip = () => {
         setShowProductCardButtonToolTip(!showProductCardButtonToolTip);
@@ -18,7 +18,7 @@ function ProductCardButton({ product, cart, addCartItem }) {
 
     const productCardButton = (
         <Button
-            onClick={() => addCartItem(productPricingItem, product)}
+            onClick={() => addCartItem(productPricing[0], product)}
             variant={buttonVariant}
             m={[1, 1, 1, 0]}
             size={'small'}
