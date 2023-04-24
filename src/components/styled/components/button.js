@@ -11,3 +11,7 @@ export const Button = styled.button`
     ${buildSpacing}
     ${(props) => buildTypography(props, 'button')}
 `;
+
+export const SemanticButton = styled.button`
+    cursor: pointer;
+`;

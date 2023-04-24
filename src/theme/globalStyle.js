@@ -22,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
         /* Reset style */
         outline: none;
         border: none;
+        padding: 0;
+        background: inherit;
+        color: inherit;
+        letter-spacing: inherit;
+        text-align: inherit;
 
         &:focus {
             outline: none;
@@ -29,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     a {
-        color: ${theme.palette.text.background};
+        color: inherit;
 
         /* Reset style */
         text-decoration: none;
