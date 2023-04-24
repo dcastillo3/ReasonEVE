@@ -1,21 +1,31 @@
-import React from 'react';
-import { logoName } from './headerConsts';
-import { HeaderContainer, LogoContainer, LogoTitle } from './headerStyledComponents';
-import Menu from './components/menu';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { HeaderContainer } from './headerStyledComponents';
 import UserMenu from './components/userMenu';
+import DesktopMenu from './components/desktopMenu';
+import MobileMenu from './components/mobileMenu';
+import { MediaQueryContext } from '../../utils/context';
+import Logo from './components/logo';
 
 function Header() {
-    return (
-        <HeaderContainer p={[0, 8]} m={[8, 1]}>
-            <LogoContainer>
-                <NavLink to={'/'}>
-                    <LogoTitle>{logoName}</LogoTitle>
-                </NavLink>
-            </LogoContainer>
+    const { isDesktop } = useContext(MediaQueryContext);
+    const headerContainerPadding = isDesktop ? [8] : [2];
 
-            <Menu />
+    const renderDesktopMenu = isDesktop && (
+        <DesktopMenu />
+    );
+
+    const renderMobileMenu = !isDesktop && (
+        <MobileMenu />
+    );
+
+    return (
+        <HeaderContainer isDesktop={isDesktop} p={headerContainerPadding}>
+            {renderMobileMenu}
             
+            <Logo isDesktop={isDesktop} />
+
+            {renderDesktopMenu}
+
             <UserMenu />
         </HeaderContainer>
     );

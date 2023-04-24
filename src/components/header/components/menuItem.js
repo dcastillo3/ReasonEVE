@@ -1,21 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Box } from '../../styled';
 import { MenuItem as MenuItemStyled } from '../headerStyledComponents';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { SemanticButton } from '../../styled';
 
-function MenuItem({name, path}) {
-    const renderMenuItem = ({isActive}) => (
-        <MenuItemStyled active={isActive}>
-            {name}
-        </MenuItemStyled>
-    );
+function MenuItem({name, path, callback}) {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+    const isActive = pathname === path;
+
+    const handleMenuItemClick = path => {
+        navigate(path);
+        
+        if(callback) callback();
+    };
 
     return (
-        <Box>
-            <NavLink to={path}>
-                {renderMenuItem}
-            </NavLink>
-        </Box>
+        <SemanticButton onClick={() => handleMenuItemClick(path)}>
+            <MenuItemStyled isActive={isActive}>
+                {name}
+            </MenuItemStyled>
+        </SemanticButton>
     );
 };
 

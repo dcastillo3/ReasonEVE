@@ -1,26 +1,31 @@
 import styled from "styled-components";
-import { FlexBox, Text, Title } from "../styled";
+import { FlexBox, FlexBoxColumn, Box, Text, Title, Card, Button } from "../styled";
 import { Icon } from "@mui/material";
 
 const HeaderContainer = styled(FlexBox)`
     align-items: center;
+    ${({isDesktop}) => !isDesktop && `justify-content: space-between;`}
 `;
 
 const LogoContainer = styled(FlexBox)`
-    flex: 1;
+    ${({isDesktop}) => isDesktop && `flex: 1;`}
 `;
 
 const LogoTitle = styled(Title)`
     font-size: ${({theme}) => theme.typography.h3.fontSize};
 `;
 
-const MenuContainer = styled(FlexBox)`
-    justify-content: space-between;
-    width: ${({theme}) => theme.spacing(163)};
+const MenuContainer = styled(Box)`
+`;
+
+const DesktopMenuContainer = styled(FlexBox)`
+`;
+
+const MobileMenuContainer = styled(FlexBoxColumn)`
 `;
 
 const MenuItem = styled(Text)`
-    ${({active}) => active && 'font-weight: 600;'}
+    ${({isActive}) => isActive && 'font-weight: 600;'}
 `;
 
 const CartIcon = styled(Icon)`
@@ -29,11 +34,35 @@ const CartIcon = styled(Icon)`
     top: 3px !important;
 `;
 
+const MenuIcon = styled(Icon)`
+    font-size: ${({theme}) => theme.typography.h3.fontSize} !important;
+    position: relative !important;
+    top: 3px !important;
+`;
+
+const MobileMenuItemsContainer = styled(Card)`
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: ${({theme}) => theme.spacing(50)};
+    z-index: 9;
+`;
+
+const MobileMenuItemContainer = styled(Box)`
+    border-bottom: solid 1px ${({theme, borderVariant}) => theme.palette[borderVariant].main};
+`;
+
 export {
     HeaderContainer,
     LogoContainer,
     LogoTitle,
     MenuContainer,
+    DesktopMenuContainer,
+    MobileMenuContainer,
     MenuItem,
-    CartIcon
+    CartIcon,
+    MenuIcon,
+    MobileMenuItemsContainer,
+    MobileMenuItemContainer
 };
