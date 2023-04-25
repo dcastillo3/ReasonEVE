@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ProductCardPlayButtonIcon, ProductCardPlayButton as ProductCardPlayButtonStyled } from '../productCardStyledComponents';
-import { PlaylistContext } from '../../../utils/context';
+import { PlaylistContext } from '../../../context';
 import { getPlayButtonIcon } from '../../../utils/reactUtils';
 
 function ProductCardPlayButton({product}) {

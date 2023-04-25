@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Box, FlexBox, FlexBoxColumn } from '../../styled';
 import { ProductCard } from '../../productCard';
 import { Heading } from '../../common';
-import { TrackContext } from '../../../utils/context';
+import { TrackContext } from '../../../context';
 
 function Tracks() {
     const { tracks } = useContext(TrackContext);

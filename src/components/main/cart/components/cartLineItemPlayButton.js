@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CartLineItemPlayButtonIcon, CartLineItemPlayButton as CartLineItemPlayButtonStyled } from '../cartStyledComponents';
-import { PlaylistContext } from '../../../../utils/context';
+import { PlaylistContext } from '../../../../context';
 import { getPlayButtonIcon } from '../../../../utils/reactUtils';
 
 function CartLineItemPlayButton({product}) {

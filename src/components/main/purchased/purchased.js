@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Box } from '../../styled';
-import { CartContext } from '../../../utils/context';
+import { CartContext } from '../../../context';
 
 function Purchased() {
     const { clearCart } = useContext(CartContext);

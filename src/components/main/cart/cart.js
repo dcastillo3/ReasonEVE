@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import _ from "lodash";
 import { Heading } from "../../common";
 import { Box, FlexBoxColumn } from "../../styled";
-import { CartContext } from "../../../utils/context";
+import { CartContext } from "../../../context";
 import CartCheckoutButton from "./components/cartCheckoutButton";
 import CartLineItem from "./components/cartLineItem";
 import CartTotal from "./components/cartTotal";
