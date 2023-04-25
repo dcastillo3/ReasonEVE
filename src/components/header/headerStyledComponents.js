@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexBox, FlexBoxColumn, Box, Text, Title, Card, Button } from "../styled";
+import { FlexBox, FlexBoxColumn, Box, Text, Title, Card } from "../styled";
 import { Icon } from "@mui/material";
 
 const HeaderContainer = styled(FlexBox)`

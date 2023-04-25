@@ -8,9 +8,18 @@ const PlaylistContext = createContext();
 
 const MediaQueryContext = createContext();
 
+const buildCustomTheme = theme => {
+    const customTheme = {
+        ...theme
+    };
+
+    return customTheme;
+};
+
 export {
     TrackContext,
     CartContext,
     PlaylistContext,
-    MediaQueryContext
+    MediaQueryContext,
+    buildCustomTheme
 };

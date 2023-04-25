@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { ToolTip } from '../../common';
 import { Button, FlexBox } from '../../styled';
-import { CartContext, PlaylistContext } from '../../../utils/context';
+import { CartContext, PlaylistContext } from '../../../context';
 import { getCartButtonVariant } from '../../../utils/reactUtils';
 import { AudioPlayerCartButtonIcon } from '../audioPlayerStyledComponents';
 import AudioPlayerButtonMenu from './audioPlayerButtonMenu';

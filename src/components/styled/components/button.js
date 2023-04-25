@@ -3,6 +3,7 @@ import { buildButtonSize, buildHoverPalette, buildPalette, buildSpacing, buildTy
 
 export const Button = styled.button`
     border-radius: 3px;
+    text-align: center;
 
     /* Style overrides last */
     ${buildButtonSize}
@@ -13,5 +14,6 @@ export const Button = styled.button`
 `;
 
 export const SemanticButton = styled.button`
+    text-align: center;
     cursor: pointer;
 `;

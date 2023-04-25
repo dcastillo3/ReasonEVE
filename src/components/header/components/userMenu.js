@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { FlexBox, SemanticButton } from '../../styled';
-import { CartContext } from '../../../utils/context';
+import { CartContext } from '../../../context';
 import _ from 'lodash';
 import { getRouteById } from '../../../routes/routesUtils';
 

@@ -3,7 +3,7 @@ import { HeaderContainer } from './headerStyledComponents';
 import UserMenu from './components/userMenu';
 import DesktopMenu from './components/desktopMenu';
 import MobileMenu from './components/mobileMenu';
-import { MediaQueryContext } from '../../utils/context';
+import { MediaQueryContext } from '../../context';
 import Logo from './components/logo';
 
 function Header() {

@@ -5,7 +5,7 @@ import { Overlay } from '../common';
 import ProductCardPlayButton from './components/productCardPlayButton';
 import ProductCardDetails from './components/productCardDetails';
 import ProductCardButton from './components/productCardButton';
-import { CartContext } from '../../utils/context';
+import { CartContext } from '../../context';
 
 function ProductCard({ product }) {
     const { cart, addCartItem } = useContext(CartContext);
