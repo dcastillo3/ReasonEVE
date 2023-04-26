@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { theme } from './';
+import { minMobileWidth } from '../hooks/useMediaQuery/useMediaQueryConsts';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -8,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
         color: ${theme.palette.text.background};
         font-family: ${theme.typography.fontFamily};
         letter-spacing: 0.2px;
+        min-width: ${minMobileWidth}px;
 
         /* Reset style */
         margin: 0;

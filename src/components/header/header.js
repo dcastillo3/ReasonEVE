@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { HeaderContainer } from './headerStyledComponents';
 import UserMenu from './components/userMenu';
 import DesktopMenu from './components/desktopMenu';
 import MobileMenu from './components/mobileMenu';
-import { MediaQueryContext } from '../../context';
 import Logo from './components/logo';
+import { useMediaQuery } from '../../hooks';
 
 function Header() {
-    const { isDesktop } = useContext(MediaQueryContext);
+    const { isDesktop } = useMediaQuery();
     const headerContainerPadding = isDesktop ? [8] : [2];
 
     const renderDesktopMenu = isDesktop && (
@@ -19,7 +19,7 @@ function Header() {
     );
 
     return (
-        <HeaderContainer isDesktop={isDesktop} p={headerContainerPadding}>
+        <HeaderContainer $isDesktop={isDesktop} p={headerContainerPadding}>
             {renderMobileMenu}
             
             <Logo isDesktop={isDesktop} />

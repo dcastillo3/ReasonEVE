@@ -8,7 +8,7 @@ function CartTotal({cart}) {
     const cartTotal = getCartTotal(cart);
 
     return (
-        <CartTotalContainer m={[8, 2, 4, 2]}>
+        <CartTotalContainer m={[8, 0, 4, 0]}>
             <Box m={[0, 4]}>
                 <TitleSmall>{cartTotalText}</TitleSmall>
             </Box>

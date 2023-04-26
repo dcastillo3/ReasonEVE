@@ -1,20 +1,20 @@
 import React from "react";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { Box, FlexBoxColumn, Text, TitleSmall } from "../../../styled";
-import { CartEmptyIcon } from "../cartStyledComponents";
+import { FlexBox, FlexBoxColumn } from "../../../styled";
+import { CartEmptyIcon, CartEmptyText, CartEmptyTitle } from "../cartStyledComponents";
 
 function CartEmpty() {
     return (
         <FlexBoxColumn center={'center'} >
             <CartEmptyIcon component={ShoppingCartOutlinedIcon} />
 
-            <Box m={[1, 0]}>
-                <TitleSmall>Your cart is empty</TitleSmall>
-            </Box>
+            <FlexBox center={true} m={[1, 5]}>
+                <CartEmptyTitle>Your cart is empty</CartEmptyTitle>
+            </FlexBox>
 
-            <Box m={[4, 0]}>
-                <Text>When you add an item to your cart, it will appear here</Text>
-            </Box>
+            <FlexBox center={true} m={[4, 5]}>
+                <CartEmptyText>When you add an item to your cart, it will appear here</CartEmptyText>
+            </FlexBox>
         </FlexBoxColumn>
     );
 };

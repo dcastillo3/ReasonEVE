@@ -14,7 +14,7 @@ function Logo({isDesktop}) {
     };
 
     return (
-        <LogoContainer isDesktop={isDesktop}>
+        <LogoContainer $isDesktop={isDesktop}>
             <SemanticButton onClick={handleLogoClick}>
                 <LogoTitle>{logoName}</LogoTitle>
             </SemanticButton>

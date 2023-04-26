@@ -4,7 +4,7 @@ import { Switcher } from "../../../common";
 import { Box, SubTitle, TextCaption } from "../../../styled";
 import { CartLineItemDetails as CartLineItemDetailsStyled, CartLineItemDetailsContainer } from '../cartStyledComponents';
 
-function CartLineItemDetails({product, updateCartItem}) {
+function CartLineItemDetails({product, updateCartItem, isDesktop}) {
     const {
         artistName,
         additionalArtistNames,
@@ -15,7 +15,7 @@ function CartLineItemDetails({product, updateCartItem}) {
     const artists = formatArtistNames(artistName, additionalArtistNames);
     const handleChooseLicense = productPricingItem => updateCartItem(productPricingItem, product);
 
-    const renderSwitcher = productPricing.length > 1 && (
+    const renderSwitcher = isDesktop && productPricing.length > 1 && (
         <Box>
             <Switcher
                 items={productPricing}
@@ -27,7 +27,7 @@ function CartLineItemDetails({product, updateCartItem}) {
     );
 
     return (
-        <CartLineItemDetailsContainer m={[0, 5]}>
+        <CartLineItemDetailsContainer m={[3, 0, 3, 5]}>
             <CartLineItemDetailsStyled>
                 <SubTitle>{productName}</SubTitle>
                 <TextCaption>{artists}</TextCaption>

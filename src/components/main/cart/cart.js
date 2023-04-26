@@ -7,21 +7,38 @@ import CartCheckoutButton from "./components/cartCheckoutButton";
 import CartLineItem from "./components/cartLineItem";
 import CartTotal from "./components/cartTotal";
 import CartEmpty from "./components/cartEmpty";
+import { useMediaQuery } from "../../../hooks";
+import { CartLineItemDivider } from "./cartStyledComponents";
 
 function Cart() {
+    const { isDesktop } = useMediaQuery();
     const { cart, removeCartItem, updateCartItem, checkoutCart } = useContext(CartContext);
+    const cartMargin = isDesktop ? [0, 8] : [0, 5];
 
-    const renderCartLineItems = !_.isEmpty(cart) && cart.map((product, idx) => (
-        <CartLineItem key={idx} product={product} removeCartItem={removeCartItem} updateCartItem={updateCartItem} />
-    ));
+    const renderCartLineItems = !_.isEmpty(cart) && cart.map((product, idx) => {
+        const nextProduct = (idx + 1) < cart.length;
+        const renderCartLineItemDivider = !isDesktop && nextProduct && (
+            <CartLineItemDivider variant={'backgroundLight'} />
+        );
+
+        return (
+            <Box key={idx}>
+                <CartLineItem product={product} removeCartItem={removeCartItem} updateCartItem={updateCartItem} isDesktop={isDesktop} />
+
+                {renderCartLineItemDivider}
+            </Box>
+        );
+    });
 
     const stockedCart = (
         <FlexBoxColumn>
             {renderCartLineItems}
 
-            <CartTotal cart={cart} />
+            <Box m={cartMargin}>
+                <CartTotal cart={cart} />
 
-            <CartCheckoutButton checkoutCart={checkoutCart} />
+                <CartCheckoutButton checkoutCart={checkoutCart} isDesktop={isDesktop} />
+            </Box>
         </FlexBoxColumn>
     );
 
@@ -32,8 +49,10 @@ function Cart() {
     const renderCart = _.isEmpty(cart) ? emptyCart : stockedCart;
 
     return (
-        <Box m={[0, 8]}>
-            <Heading headingStyle={'circle'} heading={`Start your next project`} />
+        <Box>
+            <Box m={cartMargin}>
+                <Heading headingStyle={'circle'} heading={`Start your next project`} />
+            </Box>
 
             {renderCart}
         </Box>

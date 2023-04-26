@@ -1,32 +1,35 @@
 import React from "react";
 import { formatPriceDisplay } from "../../../../utils/reactUtils";
 import { Card, FlexBox, SubTitle } from "../../../styled";
-import { CartLineItemEndContainer, CartLineItemImage } from "../cartStyledComponents";
+import { CartLineItemEndContainer, CartLineItemImage, CartLineItemImageContainer } from "../cartStyledComponents";
 import CartLineItemDetails from "./cartLineItemDetails";
 import CartLineItemRemoveButton from "./cartLineItemRemoveButton";
 import { Overlay } from "../../../common";
 import CartLineItemPlayButton from "./cartLineItemPlayButton";
 
-function CartLineItem({product, removeCartItem, updateCartItem}) {
+function CartLineItem({product, removeCartItem, updateCartItem, isDesktop}) {
     const {
         coverArt,
         selectedPricing
     } = product;
     const priceDisplay = formatPriceDisplay(selectedPricing.price);
+    const cartLIneItemMargin = isDesktop ? [2, 8] : [0, 0];
 
     return (
-        <Card $rounded={true} variant={'backgroundLight'} m={[2, 2]} >
-            <FlexBox m={[3, 5]}>
-                <FlexBox>
-                    <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} />} >
-                        <CartLineItemImage src={coverArt} />
+        <Card $rounded={true} variant={'backgroundLight'} m={cartLIneItemMargin} >
+            <FlexBox $wrap={true}>
+                <FlexBox m={[3, 0, 3, 5]}>
+                    <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} isDesktop={isDesktop} />} >
+                        <CartLineItemImageContainer>
+                            <CartLineItemImage src={coverArt} />
+                        </CartLineItemImageContainer>
                     </Overlay>
                 </FlexBox>
 
-                <CartLineItemDetails product={product} updateCartItem={updateCartItem} />
+                <CartLineItemDetails product={product} updateCartItem={updateCartItem} isDesktop={isDesktop} />
 
-                <CartLineItemEndContainer>
-                    <CartLineItemRemoveButton product={product} removeCartItem={removeCartItem} />
+                <CartLineItemEndContainer m={[3, 5]}>
+                    <CartLineItemRemoveButton product={product} removeCartItem={removeCartItem} isDesktop={isDesktop} />
 
                     <SubTitle>{priceDisplay}</SubTitle>
                 </CartLineItemEndContainer>

@@ -1,22 +1,41 @@
 import React from 'react';
-import { TitleMedium } from '../../styled';
+import { Box, TitleMedium, TitleSmall } from '../../styled';
 import { HeadingContainer } from './headingStyledComponents';
 import { buildStyledWord, formatHeading } from './headingUtils';
+import { useMediaQuery } from '../../../hooks';
 
 function Heading({heading, variant, headingStyle}) {
+    const { isDesktop } = useMediaQuery();
     const {
-        headingFirstHalf,
+        headingFirstWords,
         secondToLastWord,
         lastWord
     } = formatHeading(heading);
+    const styledWord = buildStyledWord(headingStyle, variant, secondToLastWord, isDesktop);
+    
+    const headingContent = (
+        <Box>
+            {headingFirstWords} {styledWord} {lastWord}
+        </Box>
+    );
 
-    const renderStyledWord = buildStyledWord(headingStyle, variant, secondToLastWord);
+    const mediumHeading = (
+        <TitleMedium>
+            {headingContent}
+        </TitleMedium>
+    );
+    
+    const smallHeading = (
+        <TitleSmall>
+            {headingContent}
+        </TitleSmall>
+    );
+
+    const renderHeading = isDesktop ? mediumHeading : smallHeading;
 
     return (
-        <HeadingContainer m={[10, 0]} $wrap={true}>
-            <TitleMedium>
-                {headingFirstHalf} {renderStyledWord} {lastWord}
-            </TitleMedium>
+        <HeadingContainer m={[10, 0]} $wrap={true} $isDesktop={isDesktop}>
+            {renderHeading}
         </HeadingContainer>
     );
 };
