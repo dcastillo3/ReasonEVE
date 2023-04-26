@@ -3,7 +3,8 @@ import { FlexBox, Span } from '../../styled';
 
 const HeadingContainer = styled(FlexBox)`
     align-items: center;
-    width: ${({theme}) => theme.spacing(88)};
+    max-width: ${({theme, $isDesktop}) => 
+        $isDesktop ? theme.spacing(88) : theme.spacing(76)};
 `;
 
 const HeadingCircleContainer = styled(Span)`

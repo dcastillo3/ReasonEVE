@@ -8,6 +8,7 @@ const ToolTipContainer = styled(Box)`
 
 const ToolTipComponentContainer = styled(FlexBox)`
     position: absolute;
+    z-index: ${({theme}) => theme.zIndex.tooltip};
 
     /* Style overrides last */
     ${buildToolTipContainerStyle}

@@ -6,10 +6,9 @@ import { checkoutButtonText } from "../cartConsts";
 function CartCheckoutButton({checkoutCart}) {
     return (
         <CartCheckoutButtonContainer>
-            <Button variant={'secondary'} onClick={checkoutCart} m={[2, 2]}>{checkoutButtonText}</Button>
+            <Button variant={'secondary'} onClick={checkoutCart} m={[2, 0]}>{checkoutButtonText}</Button>
         </CartCheckoutButtonContainer>
     );
 };
-
 
 export default CartCheckoutButton;

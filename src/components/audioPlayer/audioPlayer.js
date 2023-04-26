@@ -5,6 +5,7 @@ import { Box } from '../styled';
 import { useTheme } from 'styled-components';
 import AudioPlayerCartButton from './components/audioPlayerCartButton';
 import { attachCartButtonToAudioPlayer } from './audioPlayerUtils';
+import { AudioPlayerContainer } from './audioPlayerStyledComponents';
 
 function AudioPlayer() {
     const [mounted, setMounted] = useState(false);
@@ -17,12 +18,13 @@ function AudioPlayer() {
     }, [mounted]);
 
     return (
-        <Box id="music-player">
+        <AudioPlayerContainer id="music-player">
+            <AudioPlayerCartButton />
+            
             <ThemeProvider theme={theme}>
-                <AudioPlayerCartButton />
                 <MusicPlayer sx={{overflow: 'initial'}} disableDrawer={false} />
             </ThemeProvider>
-        </Box>
+        </AudioPlayerContainer>
     );
 };
 

@@ -4,11 +4,11 @@ import { Icon } from "@mui/material";
 
 const HeaderContainer = styled(FlexBox)`
     align-items: center;
-    ${({isDesktop}) => !isDesktop && `justify-content: space-between;`}
+    ${({$isDesktop}) => !$isDesktop && `justify-content: space-between;`}
 `;
 
 const LogoContainer = styled(FlexBox)`
-    ${({isDesktop}) => isDesktop && `flex: 1;`}
+    ${({$isDesktop}) => $isDesktop && `flex: 1;`}
 `;
 
 const LogoTitle = styled(Title)`
@@ -41,12 +41,12 @@ const MenuIcon = styled(Icon)`
 `;
 
 const MobileMenuItemsContainer = styled(Card)`
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
     width: ${({theme}) => theme.spacing(50)};
-    z-index: 9;
+    z-index: ${({theme}) => theme.zIndex.drawer};
 `;
 
 const MobileMenuItemContainer = styled(Box)`
