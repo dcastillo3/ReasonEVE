@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderContainer } from './headerStyledComponents';
+import { HeaderContainer, HeaderFlexBoxContainer } from './headerStyledComponents';
 import UserMenu from './components/userMenu';
 import DesktopMenu from './components/desktopMenu';
 import MobileMenu from './components/mobileMenu';
@@ -8,7 +8,7 @@ import { useMediaQuery } from '../../hooks';
 
 function Header() {
     const { isDesktop } = useMediaQuery();
-    const headerContainerPadding = isDesktop ? [8] : [2];
+    const headerContainerPadding = isDesktop ? [5, 8] : [2];
 
     const renderDesktopMenu = isDesktop && (
         <DesktopMenu />
@@ -19,14 +19,16 @@ function Header() {
     );
 
     return (
-        <HeaderContainer $isDesktop={isDesktop} p={headerContainerPadding}>
-            {renderMobileMenu}
-            
-            <Logo isDesktop={isDesktop} />
+        <HeaderContainer variant={'background'} p={headerContainerPadding}>
+            <HeaderFlexBoxContainer $isDesktop={isDesktop}>
+                {renderMobileMenu}
 
-            {renderDesktopMenu}
+                <Logo isDesktop={isDesktop} />
 
-            <UserMenu />
+                {renderDesktopMenu}
+
+                <UserMenu />
+            </HeaderFlexBoxContainer>
         </HeaderContainer>
     );
 };

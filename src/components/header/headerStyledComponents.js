@@ -2,8 +2,17 @@ import styled from "styled-components";
 import { FlexBox, FlexBoxColumn, Box, Text, Title, Card } from "../styled";
 import { Icon } from "@mui/material";
 
-const HeaderContainer = styled(FlexBox)`
+const HeaderContainer = styled(Card)`
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: ${({theme}) => theme.zIndex.appBar};
+`;
+
+const HeaderFlexBoxContainer = styled(FlexBox)`
     align-items: center;
+    
     ${({$isDesktop}) => !$isDesktop && `justify-content: space-between;`}
 `;
 
@@ -30,8 +39,6 @@ const MenuItem = styled(Text)`
 
 const CartIcon = styled(Icon)`
     font-size: ${({theme}) => theme.typography.h3.fontSize} !important;
-    position: relative !important;
-    top: 3px !important;
 `;
 
 const MenuIcon = styled(Icon)`
@@ -64,5 +71,6 @@ export {
     CartIcon,
     MenuIcon,
     MobileMenuItemsContainer,
-    MobileMenuItemContainer
+    MobileMenuItemContainer,
+    HeaderFlexBoxContainer
 };
