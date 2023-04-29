@@ -49,13 +49,13 @@ function Cart() {
     const renderCart = _.isEmpty(cart) ? emptyCart : stockedCart;
 
     return (
-        <Box>
+        <FlexBoxColumn>
             <Box $m={cartMargin}>
                 <Heading headingStyle={'circle'} heading={`Start your next project`} />
             </Box>
 
             {renderCart}
-        </Box>
+        </FlexBoxColumn>
     );
 };
 
