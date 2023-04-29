@@ -18,7 +18,7 @@ function Cart() {
     const renderCartLineItems = !_.isEmpty(cart) && cart.map((product, idx) => {
         const nextProduct = (idx + 1) < cart.length;
         const renderCartLineItemDivider = !isDesktop && nextProduct && (
-            <CartLineItemDivider variant={'backgroundLight'} />
+            <CartLineItemDivider $variant={'backgroundLight'} />
         );
 
         return (
@@ -34,7 +34,7 @@ function Cart() {
         <FlexBoxColumn>
             {renderCartLineItems}
 
-            <Box m={cartMargin}>
+            <Box $m={cartMargin}>
                 <CartTotal cart={cart} />
 
                 <CartCheckoutButton checkoutCart={checkoutCart} isDesktop={isDesktop} />
@@ -50,7 +50,7 @@ function Cart() {
 
     return (
         <Box>
-            <Box m={cartMargin}>
+            <Box $m={cartMargin}>
                 <Heading headingStyle={'circle'} heading={`Start your next project`} />
             </Box>
 

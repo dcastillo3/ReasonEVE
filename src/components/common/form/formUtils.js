@@ -15,7 +15,7 @@ const buildFormFields = (formFields, formData, handleChangeField, fieldsPerRow) 
     let idx = 0;
     const addFormRow = () => {
         const formRow = (
-            <FlexBox itemsPerRow={fieldsPerRow} key={idx}>
+            <FlexBox $itemsPerRow={fieldsPerRow} key={idx}>
                 {inputStack}
             </FlexBox>
         );
@@ -68,7 +68,7 @@ const buildInput = (formField, formData, handleChangeField) => {
     switch(inputType) {
         case 'text': {
             return (
-                <FlexBoxColumn m={[3]} key={id} $wrap={true}>
+                <FlexBoxColumn $m={[3]} key={id} $wrap={true}>
                     <Label>{labelName}</Label>
                     <Input onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
@@ -77,7 +77,7 @@ const buildInput = (formField, formData, handleChangeField) => {
 
         case 'textarea': {
             return (
-                <FlexBoxColumn m={[3]} key={id} $wrap={true}>
+                <FlexBoxColumn $m={[3]} key={id} $wrap={true}>
                     <Label>{labelName}</Label>
                     <FormTextArea onChange={handleChangeField} value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </FlexBoxColumn>
@@ -86,7 +86,7 @@ const buildInput = (formField, formData, handleChangeField) => {
 
         case 'hidden': {
             return (
-                <HiddenFormFieldContainer m={[3]} key={id}>
+                <HiddenFormFieldContainer $m={[3]} key={id}>
                     <Label>{labelName}</Label>
                     <Input value={inputValue} type={inputType} id={id} name={id} {...additionalProps} />
                 </HiddenFormFieldContainer>
@@ -119,7 +119,7 @@ const buildInput = (formField, formData, handleChangeField) => {
             const inputProps = getInputProps();
 
             const renderUploadContainer = (
-                <DragAndDrop p={[5]} hover variant="backgroundLight" {...rootProps}>
+                <DragAndDrop $p={[5]} hover $variant="backgroundLight" {...rootProps}>
                     <Input {...inputProps} {...additionalProps} />
                     <TextCaption>
                         {uploadMessage}
@@ -128,13 +128,13 @@ const buildInput = (formField, formData, handleChangeField) => {
             );
 
             const renderUploadItems = !_.isEmpty(inputValue) && inputValue.map(file => (
-                <Box m={[1, 0]} p={[1, 2]} key={file.name}>
+                <Box $m={[1, 0]} $p={[1, 2]} key={file.name}>
                     {file.name}
                 </Box>
             ));
 
             const renderUploadPreview = !_.isEmpty(inputValue) && (
-                <Card m={[2]} variant="success">
+                <Card $m={[2]} $variant="success">
                     <FlexBoxColumn>
                         {renderUploadItems}
                     </FlexBoxColumn>
@@ -143,7 +143,7 @@ const buildInput = (formField, formData, handleChangeField) => {
 
             const renderUploadErrors = !_.isEmpty(fileRejections) && fileRejections.map(({ file, errors }) => {
                 const errorMessages = errors.map(e => (
-                    <Box m={[1, 0]} p={[1, 2]} key={e.code}>
+                    <Box $m={[1, 0]} $p={[1, 2]} key={e.code}>
                         <TextSmall>
                             {e.message}
                         </TextSmall>
@@ -151,9 +151,9 @@ const buildInput = (formField, formData, handleChangeField) => {
                 ));
 
                 return (
-                    <Card m={[2]} variant="warning">
+                    <Card $m={[2]} $variant="warning">
                         <FlexBoxColumn key={file.path}>
-                            <Box m={[1, 0]} p={[1, 2]}>
+                            <Box $m={[1, 0]} $p={[1, 2]}>
                                 {file.path}
                             </Box>
 
@@ -166,7 +166,7 @@ const buildInput = (formField, formData, handleChangeField) => {
             });
 
             return (
-                <FlexBoxColumn m={[3]} key={id}>
+                <FlexBoxColumn $m={[3]} key={id}>
                     <Label>{labelName}</Label>
                     {renderUploadContainer}
 

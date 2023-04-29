@@ -3,7 +3,7 @@ import { Box } from '../../styled';
 
 function Home() {
     return (
-        <Box p={[0, 8]}>
+        <Box $p={[0, 8]}>
             Home
         </Box>
     );

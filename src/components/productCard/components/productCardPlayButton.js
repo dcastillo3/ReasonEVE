@@ -10,7 +10,7 @@ function ProductCardPlayButton({product}) {
     const handleClickPlayButton = () => togglePlay(product);
 
     return (
-        <ProductCardPlayButtonStyled onClick={handleClickPlayButton} p={[0, 0]}>
+        <ProductCardPlayButtonStyled onClick={handleClickPlayButton} $p={[0, 0]}>
             <ProductCardPlayButtonIcon component={productCardPlayButtonIcon} />
         </ProductCardPlayButtonStyled>
     );

@@ -24,7 +24,7 @@ const CartLineItemImage = styled(Image)`
 `;
 
 const CartLineItemDivider = styled(Box)`
-    border-bottom: ${({theme}) => theme.spacing(1)} dashed ${({theme, variant}) => theme.palette[variant].main};
+    border-bottom: ${({theme}) => theme.spacing(1)} dashed ${({theme, $variant}) => theme.palette[$variant].main};
 `;
 
 const CartLineItemDetailsContainer = styled(FlexBoxColumn)`
@@ -36,6 +36,10 @@ const CartLineItemDetails = styled(FlexBoxColumn)`
 
 const CartLineItemRemoveButtonContainer = styled(FlexBoxColumn)`
     flex: 1;
+`;
+
+const CartLineItemStartContainer = styled(FlexBoxColumn)`
+    align-items: flex-start;
 `;
 
 const CartLineItemEndContainer = styled(FlexBoxColumn)`
@@ -87,6 +91,7 @@ export {
     CartLineItemDivider,
     CartLineItemDetailsContainer,
     CartLineItemDetails,
+    CartLineItemStartContainer,
     CartLineItemEndContainer,
     CartLineItemRemoveButtonContainer,
     CartLineItemRemoveIcon,

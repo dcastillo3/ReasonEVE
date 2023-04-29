@@ -4,7 +4,7 @@ import { OverlayContainer } from './overlayStyledComponents';
 
 function Overlay({ children, overlayComponent, center = false }) {
     return (
-        <FlexBox center={center}>
+        <FlexBox $center={center}>
             <OverlayContainer>
                 {overlayComponent()}
             </OverlayContainer>

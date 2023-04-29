@@ -3,7 +3,7 @@ import { Box } from '../../styled';
 
 function NotFound() {
     return (
-        <Box m={[0, 8]}>
+        <Box $m={[0, 8]}>
             404 not found
         </Box>
     );

@@ -18,7 +18,7 @@ const formatHeading = heading => {
 
 const buildStyledWord = (headingStyle, variant, secondToLastWord, isDesktop) => {
     const defaultStyle = (
-        <Span $rotate={'right'} p={[1, 3]} variant={variant}>{secondToLastWord}</Span>
+        <Span $rotate={'right'} $p={[1, 3]} $variant={variant}>{secondToLastWord}</Span>
     );
 
     switch (headingStyle) {
@@ -26,7 +26,7 @@ const buildStyledWord = (headingStyle, variant, secondToLastWord, isDesktop) => 
             const headingCirclePadding = isDesktop ? [3] : [2];
 
             return (
-                <HeadingCircleContainer variant={variant} $rotate={'right'} p={headingCirclePadding}>
+                <HeadingCircleContainer $variant={variant} $rotate={'right'} $p={headingCirclePadding}>
                     <HeadingCircleDummySquare />
                     <HeadingCircleContent $content={secondToLastWord} />
                 </HeadingCircleContainer>

@@ -19,7 +19,7 @@ function Header() {
     );
 
     return (
-        <HeaderContainer variant={'background'} p={headerContainerPadding}>
+        <HeaderContainer $variant={'background'} $p={headerContainerPadding}>
             <HeaderFlexBoxContainer $isDesktop={isDesktop}>
                 {renderMobileMenu}
 

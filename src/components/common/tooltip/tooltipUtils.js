@@ -9,8 +9,8 @@ const buildArrowBorderSizes = (theme, pointerSize) => {
     return arrowBorderSizes;
 };
 
-const buildToolTipArrowStyle = ({theme, pointerDirection, pointerSize}) => {
-    const [arrowDegree] = buildArrowBorderSizes(theme, pointerSize);
+const buildToolTipArrowStyle = ({theme, $pointerDirection, $pointerSize}) => {
+    const [arrowDegree] = buildArrowBorderSizes(theme, $pointerSize);
     const pointerDirectionPositions = {
         left: {
             right: '100%',
@@ -29,7 +29,7 @@ const buildToolTipArrowStyle = ({theme, pointerDirection, pointerSize}) => {
             left: arrowDegree
         }
     };
-    const toolTipArrowStyle = pointerDirectionPositions[pointerDirection];
+    const toolTipArrowStyle = pointerDirectionPositions[$pointerDirection];
 
     return toolTipArrowStyle;
 };
@@ -44,8 +44,8 @@ const buildToolTipMargins = (theme, pointerDirection, pointerSize) => {
     return toolTipMargin;
 };
 
-const buildToolTipContainerStyle = ({theme, pointerDirection, pointerSize}) => {
-    const toolTipMargins = buildToolTipMargins(theme, pointerDirection, pointerSize);
+const buildToolTipContainerStyle = ({theme, $pointerDirection, $pointerSize}) => {
+    const toolTipMargins = buildToolTipMargins(theme, $pointerDirection, $pointerSize);
     const bottomPosition = theme.spacing(2);
     const containerPositions = {
         left: {
@@ -67,7 +67,7 @@ const buildToolTipContainerStyle = ({theme, pointerDirection, pointerSize}) => {
             margin: toolTipMargins
         }
     };
-    const toolTipContainerStyle = containerPositions[pointerDirection];
+    const toolTipContainerStyle = containerPositions[$pointerDirection];
 
     return toolTipContainerStyle;
 };

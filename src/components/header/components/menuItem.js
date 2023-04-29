@@ -16,7 +16,7 @@ function MenuItem({name, path, callback}) {
 
     return (
         <SemanticButton onClick={() => handleMenuItemClick(path)}>
-            <MenuItemStyled isActive={isActive}>
+            <MenuItemStyled $isActive={isActive}>
                 {name}
             </MenuItemStyled>
         </SemanticButton>

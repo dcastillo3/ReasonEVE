@@ -10,7 +10,7 @@ function CartLineItemPlayButton({product, isDesktop}) {
     const handleClickPlayButton = () => togglePlay(product);
 
     return (
-        <CartLineItemPlayButtonStyled onClick={handleClickPlayButton} p={[0, 0]}>
+        <CartLineItemPlayButtonStyled onClick={handleClickPlayButton} $p={[0, 0]}>
             <CartLineItemPlayButtonIcon $isDesktop={isDesktop} component={productCardPlayButtonIcon} />
         </CartLineItemPlayButtonStyled>
     );

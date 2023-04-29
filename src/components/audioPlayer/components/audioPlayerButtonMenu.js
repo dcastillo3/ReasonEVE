@@ -27,14 +27,14 @@ function AudioPlayerButtonMenu({ product, addCartItem, cart, handleToggleToolTip
         const renderButtonContent = productInCart ? inCartIcon : buttonText;
 
         return (
-            <FlexBoxColumn m={[2, 0]} key={idx}>
+            <FlexBoxColumn $m={[2, 0]} key={idx}>
                 <Label>{purchaseType}:</Label>
                 <Button
                     disabled={productInCart}
                     onClick={handlePricingItemButtonClick}
-                    variant={buttonVariant}
-                    m={[1, 0]}
-                    size={'small'}
+                    $variant={buttonVariant}
+                    $m={[1, 0]}
+                    $size={'small'}
                 >
                     {renderButtonContent}
                 </Button>

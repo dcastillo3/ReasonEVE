@@ -29,9 +29,9 @@ function AudioPlayerCartButton() {
     const audioPlayerCartButton = (
         <AudioPlayerCartCustomButton
             onClick={() => addCartItem(productPricing[0], product)}
-            variant={buttonVariant}
-            m={[2]}
-            size={'small'}
+            $variant={buttonVariant}
+            $m={[2]}
+            $size={'small'}
         >
             {renderButtonContent}
         </AudioPlayerCartCustomButton>
@@ -50,7 +50,7 @@ function AudioPlayerCartButton() {
                 handleToggleToolTip={handleToggleAudioPlayerButtonToolTip}
             />}
         >
-            <AudioPlayerCartCustomButton variant={buttonVariant} size={'small'}>
+            <AudioPlayerCartCustomButton $variant={buttonVariant} $size={'small'}>
                 {renderButtonContent}
             </AudioPlayerCartCustomButton>
         </ToolTip>

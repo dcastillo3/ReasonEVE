@@ -11,7 +11,7 @@ function Switcher({ items, handleChooseItem, activeItem, itemProp }) {
         const handleSwitcherClick = itemName === activeItemName ? null : () => handleChooseItem(item);
 
         return (
-            <Button key={idx} size={'small'} variant={buttonVariant} onClick={handleSwitcherClick}>
+            <Button key={idx} $size={'small'} $variant={buttonVariant} onClick={handleSwitcherClick}>
                 {itemName}
             </Button>
         );

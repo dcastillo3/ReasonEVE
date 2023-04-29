@@ -34,7 +34,7 @@ const MobileMenuContainer = styled(FlexBoxColumn)`
 `;
 
 const MenuItem = styled(Text)`
-    ${({isActive}) => isActive && 'font-weight: 600;'}
+    ${({$isActive}) => $isActive && 'font-weight: 600;'}
 `;
 
 const CartIcon = styled(Icon)`
@@ -57,7 +57,7 @@ const MobileMenuItemsContainer = styled(Card)`
 `;
 
 const MobileMenuItemContainer = styled(Box)`
-    border-bottom: solid 1px ${({theme, borderVariant}) => theme.palette[borderVariant].main};
+    border-bottom: solid 1px ${({theme, $borderVariant}) => theme.palette[$borderVariant].main};
 `;
 
 export {

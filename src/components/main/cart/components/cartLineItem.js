@@ -1,7 +1,7 @@
 import React from "react";
 import { formatPriceDisplay } from "../../../../utils/reactUtils";
 import { Card, FlexBox, SubTitle } from "../../../styled";
-import { CartLineItemEndContainer, CartLineItemImage, CartLineItemImageContainer } from "../cartStyledComponents";
+import { CartLineItemEndContainer, CartLineItemImage, CartLineItemImageContainer, CartLineItemStartContainer } from "../cartStyledComponents";
 import CartLineItemDetails from "./cartLineItemDetails";
 import CartLineItemRemoveButton from "./cartLineItemRemoveButton";
 import { Overlay } from "../../../common";
@@ -16,19 +16,19 @@ function CartLineItem({product, removeCartItem, updateCartItem, isDesktop}) {
     const cartLIneItemMargin = isDesktop ? [2, 8] : [0, 0];
 
     return (
-        <Card $rounded={true} variant={'backgroundLight'} m={cartLIneItemMargin} >
-            <FlexBox $wrap={true}>
-                <FlexBox m={[3, 0, 3, 5]}>
+        <Card $rounded={true} $variant={'backgroundLight'} $m={cartLIneItemMargin} >
+            <FlexBox>
+                <CartLineItemStartContainer $m={[3, 0, 3, 5]}>
                     <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} isDesktop={isDesktop} />} >
                         <CartLineItemImageContainer>
                             <CartLineItemImage src={coverArt} />
                         </CartLineItemImageContainer>
                     </Overlay>
-                </FlexBox>
+                </CartLineItemStartContainer>
 
                 <CartLineItemDetails product={product} updateCartItem={updateCartItem} isDesktop={isDesktop} />
 
-                <CartLineItemEndContainer m={[3, 5]}>
+                <CartLineItemEndContainer $m={[3, 5]}>
                     <CartLineItemRemoveButton product={product} removeCartItem={removeCartItem} isDesktop={isDesktop} />
 
                     <SubTitle>{priceDisplay}</SubTitle>

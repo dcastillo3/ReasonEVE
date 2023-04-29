@@ -10,7 +10,7 @@ function Purchased() {
     }, []);
 
     return (
-        <Box p={[0, 8]}>
+        <Box $p={[0, 8]}>
             Thank you for your purchase!
         </Box>
     );

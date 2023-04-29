@@ -28,17 +28,17 @@ function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubm
         && buildFormFields(formFields, formData, handleChangeField, fieldsPerRow);
 
     return (
-        <Card variant="backgroundLight">
-            <FlexBox center>
+        <Card $variant="backgroundLight">
+            <FlexBox $center>
                 <FlexBoxColumn>
-                    <FlexBox m={[5]}>
+                    <FlexBox $m={[5]}>
                         <Heading variant={'success'} heading={title} />
                     </FlexBox>
 
                     <FlexBox>
                         <StyledForm onSubmit={handleSubmitForm}>
                             {renderFormFields}
-                            <Button m={[5, 3]} type="submit">{buttonName}</Button>
+                            <Button $m={[5, 3]} type="submit">{buttonName}</Button>
                         </StyledForm>
                     </FlexBox>
                 </FlexBoxColumn>

@@ -29,7 +29,7 @@ function Dashboard() {
         <Box>
             <Form formParams={addTrackForm} handleSubmit={handleAddTrack} />
 
-            <Box p={[3, 5]} m={[0, 8]}>
+            <Box $p={[3, 5]} $m={[0, 8]}>
                 <Text>
                     Box Text
                 </Text>
@@ -55,7 +55,7 @@ function Dashboard() {
                 </TitleSmall>
             </Box>
 
-            <Card p={[3, 5]} m={[0, 8]} hover>
+            <Card $p={[3, 5]} $m={[0, 8]} hover>
                 <Text>
                     Card Text
                 </Text>
@@ -81,7 +81,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card p={[3, 5]} m={[0, 8]} variant="secondary">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant="secondary">
                 <Text>
                     Card Text
                 </Text>
@@ -107,7 +107,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card p={[3, 5]} m={[0, 8]} variant="success">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant="success">
                 <Text>
                     Card Text
                 </Text>
@@ -133,7 +133,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card p={[3, 5]} m={[0, 8]} variant="warning">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant="warning">
                 <Text>
                     Card Text
                 </Text>
@@ -159,7 +159,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card p={[3, 5]} m={[0, 8]} variant="error">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant="error">
                 <Text>
                     Card Text
                 </Text>
@@ -185,7 +185,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card p={[3, 5]} m={[0, 8]} variant="info">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant="info">
                 <Text>
                     Card Text
                 </Text>
@@ -211,28 +211,28 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Box p={[3, 0]} m={[0, 8]}>
+            <Box $p={[3, 0]} $m={[0, 8]}>
                 <Button>
                     Button
                 </Button>
 
-                <Button variant="secondary">
+                <Button $variant="secondary">
                     Button
                 </Button>
 
-                <Button variant="success">
+                <Button $variant="success">
                     Button
                 </Button>
 
-                <Button variant="warning">
+                <Button $variant="warning">
                     Button
                 </Button>
 
-                <Button variant="error">
+                <Button $variant="error">
                     Button
                 </Button>
 
-                <Button variant="info">
+                <Button $variant="info">
                     Button
                 </Button>
             </Box>

@@ -12,13 +12,13 @@ function ProductCard({ product }) {
     const { coverArt } = product;
 
     return (
-        <ProductCardStyled rounded={true} m={[2, 2]} variant={"backgroundLight"}>
+        <ProductCardStyled rounded={true} $m={[2, 2]} $variant={"backgroundLight"}>
             <FlexBoxColumn>
                 <Overlay center={true} overlayComponent={() => <ProductCardPlayButton product={product} />} >
                     <ProductCardImage src={coverArt} />
                 </Overlay>
 
-                <FlexBoxColumn m={[3, 5]}>
+                <FlexBoxColumn $m={[3, 5]}>
                     <ProductCardDetails {...product} />
 
                     <ProductCardButton product={product} cart={cart} addCartItem={addCartItem} />

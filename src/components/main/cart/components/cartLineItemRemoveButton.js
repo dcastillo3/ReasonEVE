@@ -8,7 +8,7 @@ function CartLineItemRemoveButton({product, removeCartItem, isDesktop}) {
 
     return (
         <CartLineItemRemoveButtonContainer>
-            <Button p={buttonPadding} size={'small'} variant={'warning'} onClick={() => removeCartItem(product)}>
+            <Button $p={buttonPadding} $size={'small'} $variant={'warning'} onClick={() => removeCartItem(product)}>
                 <CartLineItemRemoveIcon component={NotInterestedIcon} />
             </Button>
         </CartLineItemRemoveButtonContainer>
