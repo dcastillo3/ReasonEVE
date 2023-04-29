@@ -11,11 +11,11 @@ function Tracks() {
 
     return (
         <FlexBoxColumn>
-            <Box m={[0, 8]}>
+            <Box $m={[0, 8]}>
                 <Heading variant={'success'} heading={'Find your next sound'} />
             </Box>
 
-            <FlexBox m={[0, 8]} $wrap={true}>
+            <FlexBox $m={[0, 8]} $wrap={true}>
                 {renderTracks}
             </FlexBox>
         </FlexBoxColumn>

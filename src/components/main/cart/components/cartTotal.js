@@ -8,12 +8,12 @@ function CartTotal({cart}) {
     const cartTotal = getCartTotal(cart);
 
     return (
-        <CartTotalContainer m={[8, 0, 4, 0]}>
-            <Box m={[0, 4]}>
+        <CartTotalContainer $m={[8, 0, 4, 0]}>
+            <Box $m={[0, 4]}>
                 <TitleSmall>{cartTotalText}</TitleSmall>
             </Box>
             <TitleSmall>
-                <Span $rotate={'right'} variant={'success'} p={[1, 3]}>{cartTotal}</Span>
+                <Span $rotate={'right'} $variant={'success'} $p={[1, 3]}>{cartTotal}</Span>
             </TitleSmall>
         </CartTotalContainer>
     );

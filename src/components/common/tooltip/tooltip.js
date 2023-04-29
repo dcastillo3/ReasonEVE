@@ -6,12 +6,12 @@ import { ToolTipArrowContainer, ToolTipComponentContainer, ToolTipContainer } fr
 function ToolTip({ children, toolTipComponent, variant, pointerDirection, pointerSize, showToolTip, handleToggleToolTip }) {
     const renderToolTip = showToolTip && (
         <ClickAwayListener onClickAway={handleToggleToolTip}>
-            <ToolTipComponentContainer pointerDirection={pointerDirection} pointerSize={pointerSize}>
-                <ToolTipArrowContainer pointerDirection={pointerDirection} pointerSize={pointerSize}>
-                    <Arrow size={pointerSize} variant={variant} pointerDirection={pointerDirection} />
+            <ToolTipComponentContainer $pointerDirection={pointerDirection} $pointerSize={pointerSize}>
+                <ToolTipArrowContainer $pointerDirection={pointerDirection} $pointerSize={pointerSize}>
+                    <Arrow $size={pointerSize} $variant={variant} $pointerDirection={pointerDirection} />
                 </ToolTipArrowContainer>
 
-                <Card $rounded={true} variant={variant} p={[2, 4]}>
+                <Card $rounded={true} $variant={variant} $p={[2, 4]}>
                     {toolTipComponent()}
                 </Card>
             </ToolTipComponentContainer>

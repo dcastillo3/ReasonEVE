@@ -34,7 +34,7 @@ function Heading({heading, variant, headingStyle}) {
     const renderHeading = isDesktop ? mediumHeading : smallHeading;
 
     return (
-        <HeadingContainer m={[10, 0]} $wrap={true} $isDesktop={isDesktop}>
+        <HeadingContainer $m={[10, 0]} $wrap={true} $isDesktop={isDesktop}>
             {renderHeading}
         </HeadingContainer>
     );

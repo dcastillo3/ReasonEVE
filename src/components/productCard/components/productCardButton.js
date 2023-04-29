@@ -19,9 +19,9 @@ function ProductCardButton({ product, cart, addCartItem }) {
     const productCardButton = (
         <Button
             onClick={() => addCartItem(productPricing[0], product)}
-            variant={buttonVariant}
-            m={[1, 1, 1, 0]}
-            size={'small'}
+            $variant={buttonVariant}
+            $m={[1, 1, 1, 0]}
+            $size={'small'}
         >
             <ProductCardCartButtonIcon component={ShoppingCartIcon} /> {buttonText}
         </Button>
@@ -40,7 +40,7 @@ function ProductCardButton({ product, cart, addCartItem }) {
                 handleToggleToolTip={handleToggleProductCardButtonToolTip}
             />}
         >
-            <Button variant={buttonVariant} m={[1, 1, 1, 0]} size={'small'}>
+            <Button $variant={buttonVariant} $m={[1, 1, 1, 0]} $size={'small'}>
                 <ProductCardCartButtonIcon component={ShoppingCartIcon} /> {buttonText}
             </Button>
         </ToolTip>

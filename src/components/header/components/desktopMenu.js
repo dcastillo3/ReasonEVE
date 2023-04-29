@@ -6,7 +6,7 @@ import { Box } from '../../styled';
 
 function DesktopMenu() {
     const renderMenuItems = menuRoutes.map(({ name, path }, idx) => (
-        <Box key={idx} m={[0, 15]}>
+        <Box key={idx} $m={[0, 15]}>
             <MenuItem key={idx} name={name} path={path} />
         </Box>
     ));

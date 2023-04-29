@@ -14,14 +14,14 @@ function MobileMenu() {
     };
 
     const menuItems = showMenu && menuRoutes.map(({ name, path }, idx) => (
-        <MobileMenuItemContainer key={idx} p={[4, 0]} m={[0, 4]} borderVariant={'backgroundLight'}>
+        <MobileMenuItemContainer key={idx} $p={[4, 0]} $m={[0, 4]} $borderVariant={'backgroundLight'}>
             <MenuItem name={name} path={path} callback={toggleMobileMenu} />
         </MobileMenuItemContainer>
     ));
 
     const renderMenuItems = showMenu && (
         <ClickAwayListener onClickAway={toggleMobileMenu}>
-            <MobileMenuItemsContainer variant={'info'}>
+            <MobileMenuItemsContainer $variant={'info'}>
                 <FlexBoxColumn>
                     {menuItems}
                 </FlexBoxColumn>
