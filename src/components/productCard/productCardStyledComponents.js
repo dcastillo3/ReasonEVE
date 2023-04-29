@@ -1,15 +1,35 @@
 import { Icon } from '@mui/material';
 import styled from 'styled-components';
-import { Button, Card, Image } from '../styled';
+import { Box, Button, Card, FlexBoxColumn, Image } from '../styled';
 
 const ProductCard = styled(Card)`
-    width: ${({theme}) => theme.spacing(87)};
+    width: ${({theme, $isDesktop}) => $isDesktop ? theme.spacing(87) : theme.spacing(76)};
+    height: ${({theme, $isDesktop}) => $isDesktop ? theme.spacing(140) : theme.spacing(140)};
+`;
+
+const ProductCardFlexBoxColumnContainer = styled(FlexBoxColumn)`
+    height: 100%;
+`;
+
+const ProductCardImageContainer = styled(Box)`
+    position: relative;
+    width: 100%;
+    max-width: ${({theme}) => theme.spacing(87)};
+    min-width: ${({theme}) => theme.spacing(76)};
+
+    &:after {
+        content: '';
+        display: block;
+        padding-bottom: 100%;
+    }
 `;
 
 const ProductCardImage = styled(Image)`
-    width: ${({theme}) => theme.spacing(87)};
-    height: ${({theme}) => theme.spacing(87)};
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border-radius: ${({theme}) => theme.spacing(1, 1, 0, 0)};
+    object-fit: cover;
 `;
 
 const ProductCardPlayButton = styled(Button)`
@@ -29,6 +49,8 @@ const ProductCardPlayButtonIcon = styled(Icon)`
 
 export {
     ProductCard,
+    ProductCardFlexBoxColumnContainer,
+    ProductCardImageContainer,
     ProductCardImage,
     ProductCardPlayButton,
     ProductCardCartButtonIcon,

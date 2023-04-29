@@ -13,10 +13,10 @@ function CartLineItem({product, removeCartItem, updateCartItem, isDesktop}) {
         selectedPricing
     } = product;
     const priceDisplay = formatPriceDisplay(selectedPricing.price);
-    const cartLIneItemMargin = isDesktop ? [2, 8] : [0, 0];
+    const cartLineItemMargin = isDesktop ? [2, 8] : [0, 0];
 
     return (
-        <Card $rounded={true} $variant={'backgroundLight'} $m={cartLIneItemMargin} >
+        <Card $rounded={true} $variant={'backgroundLight'} $m={cartLineItemMargin} >
             <FlexBox>
                 <CartLineItemStartContainer $m={[3, 0, 3, 5]}>
                     <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} isDesktop={isDesktop} />} >
