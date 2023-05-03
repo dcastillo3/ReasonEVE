@@ -4,12 +4,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import { useTheme } from 'styled-components';
 import AudioPlayerCartButton from './components/audioPlayerCartButton';
 import { AudioPlayerContainer } from './audioPlayerStyledComponents';
+import { useMediaQuery } from '../../hooks';
 
 function AudioPlayer() {
     const theme = useTheme();
+    const { isDesktop } = useMediaQuery();
 
     return (
-        <AudioPlayerContainer id="music-player">
+        <AudioPlayerContainer $isDesktop={isDesktop} id="music-player">
             <AudioPlayerCartButton />
             
             <ThemeProvider theme={theme}>

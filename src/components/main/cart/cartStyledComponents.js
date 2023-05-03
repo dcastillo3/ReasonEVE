@@ -31,6 +31,7 @@ const CartLineItemDetailsContainer = styled(FlexBoxColumn)`
 `;
 
 const CartLineItemDetails = styled(FlexBoxColumn)`
+    ${({theme, $isDesktop}) => !$isDesktop && `max-width: ${theme.spacing(33)};`}
     flex: 1;
 `;
 

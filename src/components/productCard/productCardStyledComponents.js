@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Box, Button, Card, FlexBoxColumn, Image } from '../styled';
 
 const ProductCard = styled(Card)`
-    width: ${({theme, $isDesktop}) => $isDesktop ? theme.spacing(87) : theme.spacing(76)};
-    height: ${({theme, $isDesktop}) => $isDesktop ? theme.spacing(140) : theme.spacing(140)};
+    width: ${({theme, $isDesktop}) => $isDesktop ? theme.spacing(87) : theme.spacing(36)};
 `;
 
 const ProductCardFlexBoxColumnContainer = styled(FlexBoxColumn)`
@@ -14,8 +13,6 @@ const ProductCardFlexBoxColumnContainer = styled(FlexBoxColumn)`
 const ProductCardImageContainer = styled(Box)`
     position: relative;
     width: 100%;
-    max-width: ${({theme}) => theme.spacing(87)};
-    min-width: ${({theme}) => theme.spacing(76)};
 
     &:after {
         content: '';
@@ -44,7 +41,7 @@ const ProductCardCartButtonIcon = styled(Icon)`
 
 const ProductCardPlayButtonIcon = styled(Icon)`
     color: ${({theme}) => theme.palette.backgroundLight.main} !important;
-    font-size: ${({theme}) => theme.typography.h1.fontSize} !important;
+    font-size: ${({theme, $isDesktop}) => !$isDesktop ? theme.typography.h2.fontSize : theme.typography.h1.fontSize} !important;
 `;
 
 export {

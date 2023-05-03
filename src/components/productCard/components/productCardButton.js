@@ -6,11 +6,11 @@ import ProductCardButtonMenu from './productCardButtonMenu';
 import { ProductCardCartButtonIcon } from '../productCardStyledComponents';
 import { getCartButtonText, getCartButtonVariant } from '../../../utils/reactUtils';
 
-function ProductCardButton({ product, cart, addCartItem }) {
+function ProductCardButton({ product, cart, addCartItem, isDesktop }) {
     const [showProductCardButtonToolTip, setShowProductCardButtonToolTip] = useState(false);
     const { productPricing = [] } = product;
     const buttonVariant = getCartButtonVariant(product, cart)
-    const buttonText = getCartButtonText(product, cart);
+    const buttonText = isDesktop && getCartButtonText(product, cart);
 
     const handleToggleProductCardButtonToolTip = () => {
         setShowProductCardButtonToolTip(!showProductCardButtonToolTip);
