@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../../styled";
 import { CartLineItemRemoveButtonContainer, CartLineItemRemoveIcon } from "../cartStyledComponents";
-import NotInterestedIcon from '@mui/icons-material/NotInterested';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 function CartLineItemRemoveButton({product, removeCartItem, isDesktop}) {
     const buttonPadding = !isDesktop ? [0, 1] : null;
@@ -9,7 +9,7 @@ function CartLineItemRemoveButton({product, removeCartItem, isDesktop}) {
     return (
         <CartLineItemRemoveButtonContainer>
             <Button $p={buttonPadding} $size={'small'} $variant={'warning'} onClick={() => removeCartItem(product)}>
-                <CartLineItemRemoveIcon component={NotInterestedIcon} />
+                <CartLineItemRemoveIcon component={RemoveIcon} />
             </Button>
         </CartLineItemRemoveButtonContainer>
     );
