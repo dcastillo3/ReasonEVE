@@ -27,10 +27,17 @@ const buildCardBorderRadius = ({ theme }) => {
     return cssProps;
 };
 
-const buildTypography = ({ theme }, $element = defaultElement) => {
+const buildTypography = ({ theme, $truncate }, $element = defaultElement) => {
     const typography = theme.typography[$element];
+    const cssProps = { ...typography };
 
-    return typography;
+    if($truncate) {
+        cssProps.whiteSpace = 'noWrap'
+        cssProps.overflow = 'hidden'
+        cssProps.textOverflow = 'ellipsis'
+    };
+
+    return cssProps;
 };
 
 const buildFlexBox = ({$itemsPerRow, $wrap, $center}) => {

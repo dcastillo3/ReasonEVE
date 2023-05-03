@@ -3,7 +3,7 @@ import { ProductCardPlayButtonIcon, ProductCardPlayButton as ProductCardPlayButt
 import { PlaylistContext } from '../../../context';
 import { getPlayButtonIcon } from '../../../utils/reactUtils';
 
-function ProductCardPlayButton({product}) {
+function ProductCardPlayButton({product, isDesktop}) {
     const { currTrack, trackPlaying, togglePlay } = useContext(PlaylistContext);
     const productCardPlayButtonIcon = getPlayButtonIcon(product, currTrack, trackPlaying);
 
@@ -11,7 +11,7 @@ function ProductCardPlayButton({product}) {
 
     return (
         <ProductCardPlayButtonStyled onClick={handleClickPlayButton} $p={[0, 0]}>
-            <ProductCardPlayButtonIcon component={productCardPlayButtonIcon} />
+            <ProductCardPlayButtonIcon $isDesktop={isDesktop} component={productCardPlayButtonIcon} />
         </ProductCardPlayButtonStyled>
     );
 };

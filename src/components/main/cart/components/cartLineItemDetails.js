@@ -28,9 +28,9 @@ function CartLineItemDetails({product, updateCartItem, isDesktop}) {
 
     return (
         <CartLineItemDetailsContainer $m={[3, 0, 3, 5]}>
-            <CartLineItemDetailsStyled>
-                <SubTitle>{productName}</SubTitle>
-                <TextCaption>{artists}</TextCaption>
+            <CartLineItemDetailsStyled $isDesktop={isDesktop}>
+                <SubTitle $truncate={true}>{productName}</SubTitle>
+                <TextCaption $truncate={true}>{artists}</TextCaption>
             </CartLineItemDetailsStyled>
 
             {renderSwitcher}

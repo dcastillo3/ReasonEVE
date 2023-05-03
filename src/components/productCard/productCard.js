@@ -13,16 +13,16 @@ function ProductCard({ product, isDesktop }) {
     return (
         <ProductCardStyled rounded={true} $m={[2]} $variant={"backgroundLight"} $isDesktop={isDesktop}>
             <ProductCardFlexBoxColumnContainer>
-                <Overlay center={true} overlayComponent={() => <ProductCardPlayButton product={product} />} >
+                <Overlay center={true} overlayComponent={() => <ProductCardPlayButton isDesktop={isDesktop} product={product} />} >
                     <ProductCardImageContainer>
                         <ProductCardImage src={coverArt} />
                     </ProductCardImageContainer>
                 </Overlay>
 
                 <ProductCardFlexBoxColumnContainer $m={[3, 5]}>
-                    <ProductCardDetails {...product} />
+                    <ProductCardDetails {...product} isDesktop={isDesktop} />
 
-                    <ProductCardButton product={product} cart={cart} addCartItem={addCartItem} />
+                    <ProductCardButton isDesktop={isDesktop} product={product} cart={cart} addCartItem={addCartItem} />
                 </ProductCardFlexBoxColumnContainer>
 
             </ProductCardFlexBoxColumnContainer>
