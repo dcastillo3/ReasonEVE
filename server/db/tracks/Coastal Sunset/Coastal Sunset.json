@@ -1,0 +1,34 @@
+{
+    "productName": "Coastal Sunset",
+    "productType": "track",
+    "artistName": "ReasonEVE",
+    "additionalArtistNames": "",
+    "description": "Indulge in a musical voyage that captures the essence of a serene evening in Los Angeles. With a red sky and beachside ambiance this enchanting composition transports you to a dreamy coastal retreat. Experience the calming melodies that evoke relaxation and inner peace, embracing the unique charm of an LA sunset.",
+    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Coastal%20Sunset/Coastal%20Sunset.wav",
+    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Coastal%20Sunset/Coastal%20Sunset.jpg",
+    "productPricing": [
+        {
+            "id": "price_1N5N1lDfmT9zYk9Oo4ZIuvkS",
+            "purchaseType": "mp3",
+            "price": "5.00"
+        },
+        {
+            "id": "price_1N5N1mDfmT9zYk9O13illlFt",
+            "purchaseType": "lease",
+            "price": "20.00"
+        },
+        {
+            "id": "price_1N5N1mDfmT9zYk9ONwGKS1eu",
+            "purchaseType": "exclusive",
+            "price": "300.00"
+        }
+    ],
+    "purchases": {
+        "mp3": [],
+        "lease": [],
+        "exclusive": []
+    },
+    "dateCreated": "2023-05-08T05:54:28.087Z",
+    "dateUpdated": "2023-05-08T05:54:28.087Z",
+    "active": true
+}

@@ -46,15 +46,8 @@ const buildProductLinks = (fileData, {productName, productType}) => {
     return productLinks;
 };
 
-const buildInitialProductPurchases = productPricing => {
-    const purchases = {};
-
-    for(let productType in productPricing) {
-        purchases[productType] = [];
-    };
-
-    return purchases;
-};
+const buildInitialProductPurchases = productPricing =>
+    productPricing.reduce((prevValue, { purchaseType }) => ({ ...prevValue, [purchaseType]: [] }), {});
 
 const formatProductData = (productData, fileData, products) => {
     const { productType } = productData;
