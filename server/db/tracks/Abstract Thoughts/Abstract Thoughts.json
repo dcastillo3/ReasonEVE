@@ -1,0 +1,34 @@
+{
+    "productName": "Abstract Thoughts",
+    "productType": "track",
+    "artistName": "ReasonEVE",
+    "additionalArtistNames": "",
+    "description": "Experience an enchanting composition that captures abstract thoughts and emotions. Created on a rainy New York City night, inviting introspection with its haunting melodies and captivating atmosphere. Explore the interplay of melancholy and hope.",
+    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Abstract%20Thoughts/Abstract%20Thoughts.wav",
+    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Abstract%20Thoughts/Abstract%20Thoughts.jpg",
+    "productPricing": [
+        {
+            "id": "price_1N5MrCDfmT9zYk9OcI6u3i8u",
+            "purchaseType": "mp3",
+            "price": "5.00"
+        },
+        {
+            "id": "price_1N5MrCDfmT9zYk9OjB5h03QJ",
+            "purchaseType": "lease",
+            "price": "20.00"
+        },
+        {
+            "id": "price_1N5MrDDfmT9zYk9Of0HmgidS",
+            "purchaseType": "exclusive",
+            "price": "300.00"
+        }
+    ],
+    "purchases": {
+        "mp3": [],
+        "lease": [],
+        "exclusive": []
+    },
+    "dateCreated": "2023-05-08T05:43:32.941Z",
+    "dateUpdated": "2023-05-08T05:43:32.941Z",
+    "active": true
+}
