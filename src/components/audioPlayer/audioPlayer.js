@@ -9,13 +9,14 @@ import { useMediaQuery } from '../../hooks';
 function AudioPlayer() {
     const theme = useTheme();
     const { isDesktop } = useMediaQuery();
+    const musicPlayerHeight = theme.spacing(15);
 
     return (
         <AudioPlayerContainer $isDesktop={isDesktop} id="music-player">
             <AudioPlayerCartButton />
             
             <ThemeProvider theme={theme}>
-                <MusicPlayer sx={{overflow: 'initial'}} disableDrawer={false} />
+                <MusicPlayer sx={{overflow: 'initial', height: musicPlayerHeight}} disableDrawer={true} />
             </ThemeProvider>
         </AudioPlayerContainer>
     );

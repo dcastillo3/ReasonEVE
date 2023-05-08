@@ -1,4 +1,4 @@
-import { defaultElement, defaultVariant, buttonSizes, defaultButtonSize, arrowSizes, defaultArrowSize } from "./styledConsts";
+import { defaultElement, defaultVariant, buttonSizes, defaultButtonSize, arrowSizes, defaultArrowSize, defaultGap, defaultItemSize } from "./styledConsts";
 
 const buildPalette = ({ theme, $variant = defaultVariant }) => ({
     background: theme.palette[$variant].main,
@@ -60,6 +60,20 @@ const buildFlexBox = ({$itemsPerRow, $wrap, $center}) => {
                 flex: ${flexBoxWidth}%;
             }
         `;
+    };
+
+    return cssProps;
+};
+
+const buildGrid = ({theme, $center, $gap = defaultGap, $itemSize = defaultItemSize}) => {
+    const cssProps = {
+        gap: theme.spacing($gap),
+        gridTemplateColumns: `repeat(auto-fit, ${theme.spacing($itemSize)})`
+    };
+
+    if($center) {
+        cssProps.justifyContent = 'center';
+        cssProps.alignItems = 'center';
     };
 
     return cssProps;
@@ -149,6 +163,7 @@ export {
     buildHoverPalette,
     buildTypography,
     buildFlexBox,
+    buildGrid,
     buildSpacing,
     buildButtonSize,
     buildArrow,

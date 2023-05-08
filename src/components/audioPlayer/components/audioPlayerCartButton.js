@@ -14,6 +14,8 @@ function AudioPlayerCartButton() {
     const [showAudioPlayerCartButtonToolTip, setShowAudioPlayerCartButtonToolTip] = useState(false);
     const { productPricing = [] } = product;
     const buttonVariant = getCartButtonVariant(product, cart);
+    const buttonSize = 'small';
+    const buttonMargin = [0, 0, 0, 2];
     const buttonText = getCartButtonText(product, cart);
 
     const handleToggleAudioPlayerButtonToolTip = () => {
@@ -30,8 +32,8 @@ function AudioPlayerCartButton() {
         <AudioPlayerCartCustomButton
             onClick={() => addCartItem(productPricing[0], product)}
             $variant={buttonVariant}
-            $m={[2]}
-            $size={'small'}
+            $m={buttonMargin}
+            $size={buttonSize}
         >
             {renderButtonContent}
         </AudioPlayerCartCustomButton>
@@ -40,7 +42,7 @@ function AudioPlayerCartButton() {
     const audioPlayerToolTipButton = (
         <ToolTip
             variant={'info'}
-            pointerDirection={'left'}
+            pointerDirection={'down'}
             showToolTip={showAudioPlayerCartButtonToolTip}
             handleToggleToolTip={handleToggleAudioPlayerButtonToolTip}
             toolTipComponent={() => <AudioPlayerButtonMenu
@@ -50,7 +52,7 @@ function AudioPlayerCartButton() {
                 handleToggleToolTip={handleToggleAudioPlayerButtonToolTip}
             />}
         >
-            <AudioPlayerCartCustomButton $variant={buttonVariant} $size={'small'}>
+            <AudioPlayerCartCustomButton $m={buttonMargin} $variant={buttonVariant} $size={buttonSize}>
                 {renderButtonContent}
             </AudioPlayerCartCustomButton>
         </ToolTip>
@@ -59,7 +61,7 @@ function AudioPlayerCartButton() {
     const renderAudioPlayerCartButton = productPricing.length > 1 ? audioPlayerToolTipButton : audioPlayerCartButton;
 
     return (
-        <AudioPlayerCartButtonContainer id="audio-player-cart-button">
+        <AudioPlayerCartButtonContainer $variant={'info'} $p={[2, 0, 0, 0]} id="audio-player-cart-button">
             {renderAudioPlayerCartButton}
         </AudioPlayerCartButtonContainer>
     );

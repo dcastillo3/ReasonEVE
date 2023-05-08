@@ -1,24 +1,28 @@
 import styled from 'styled-components';
 import { Icon } from "@mui/material";
-import { Box, Button, FlexBox } from '../styled';
+import { Box, Button, Card } from '../styled';
 
 const AudioPlayerContainer = styled(Box)`
     position: relative;
     z-index: ${({theme}) => theme.zIndex.appBar};
 
-    &> div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation4.css-5f91ah-MuiPaper-root > div.MuiBox-root.css-v9o3i7 > div.MuiBox-root.css-r8kwtw {
+    /* Needs to be updated if drawer enabled/disabled */
+    &> div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation4.css-zo9pk0-MuiPaper-root > div > div.MuiBox-root.css-r8kwtw {
         ${({theme, $isDesktop}) => !$isDesktop && `width: ${theme.spacing(20)};`}
     }
 
-    &> div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation4.css-5f91ah-MuiPaper-root > div.MuiBox-root.css-v9o3i7 > div.MuiBox-root.css-r8kwtw > div.MuiBox-root.css-1am57kc {
+    /* Needs to be updated if drawer enabled/disabled */
+    &> div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation4.css-zo9pk0-MuiPaper-root > div > div.MuiBox-root.css-r8kwtw > div {
         text-overflow: ellipsis;
     }
 `;
 
-const AudioPlayerCartButtonContainer = styled(FlexBox)`
+const AudioPlayerCartButtonContainer = styled(Card)`
     position: fixed;
     bottom: ${({theme}) => theme.spacing(15)};
-    left: ${({theme}) => theme.spacing(2)};
+    left: 0;
+    right: 0;
+    border-bottom: ${({theme}) => theme.palette.background.main} solid 1px;
 `;
 
 const AudioPlayerCartButtonIcon = styled(Icon)`

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Box, Button, Card, FlexBoxColumn, Image } from '../styled';
 
 const ProductCard = styled(Card)`
-    width: ${({theme, $isDesktop}) => $isDesktop ? theme.spacing(87) : theme.spacing(36)};
 `;
 
 const ProductCardFlexBoxColumnContainer = styled(FlexBoxColumn)`

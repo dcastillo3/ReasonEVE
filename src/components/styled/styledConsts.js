@@ -34,6 +34,10 @@ const arrowSizes = {
 
 const defaultArrowSize = 'medium';
 
+const defaultGap = 4;
+
+const defaultItemSize = 36;
+
 export {
     defaultVariant,
     defaultElement,
@@ -48,5 +52,7 @@ export {
     buttonSizes,
     defaultButtonSize,
     arrowSizes,
-    defaultArrowSize
+    defaultArrowSize,
+    defaultGap,
+    defaultItemSize
 };
