@@ -93,8 +93,8 @@ const updateProductIndexData = (productName, productType) => {
     const newIndexData = {
         ...indexData,
         indexData: [
-            ...indexData.indexData,
-            productName
+            productName,
+            ...indexData.indexData
         ],
         dateUpdated: getFormattedDate()
     };
