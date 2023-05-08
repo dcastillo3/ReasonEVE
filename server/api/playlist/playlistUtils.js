@@ -40,11 +40,11 @@ const updatePlaylistIndex = (productName, productType, playlistIndexType) => {
     const newIndexData = {
         ...playlistIndex,
         [playlistIndexType]: [
-            ...playlistIndex[playlistIndexType],
             {
                 productName,
                 productType
-            }
+            },
+            ...playlistIndex[playlistIndexType]
         ],
         dateUpdated: getFormattedDate()
     };
