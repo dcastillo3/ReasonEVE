@@ -1,12 +1,12 @@
-import { defaultElement, defaultVariant, buttonSizes, defaultButtonSize, arrowSizes, defaultArrowSize, defaultGap, defaultItemSize } from "./styledConsts";
+import { propDefaults, buttonSizes, arrowSizes, pointerDirectionProps, spanProps } from "./styledConsts";
 
-const buildPalette = ({ theme, $variant = defaultVariant }) => ({
+const buildPalette = ({ theme, $variant = propDefaults.variant }) => ({
     background: theme.palette[$variant].main,
     color: theme.palette.text[$variant],
     transition: theme.transitions.easing.sharp
 });
 
-const buildHoverPalette = ({ theme, $variant = defaultVariant }) => {
+const buildHoverPalette = ({ theme, $variant = propDefaults.variant }) => {
     const bgHoverColor = theme.palette[$variant].light;
     const cssProps = `
         &:hover {
@@ -27,7 +27,7 @@ const buildCardBorderRadius = ({ theme }) => {
     return cssProps;
 };
 
-const buildTypography = ({ theme, $truncate }, $element = defaultElement) => {
+const buildTypography = ({ theme, $truncate }, $element = propDefaults.element) => {
     const typography = theme.typography[$element];
     const cssProps = { ...typography };
 
@@ -65,7 +65,7 @@ const buildFlexBox = ({$itemsPerRow, $wrap, $center}) => {
     return cssProps;
 };
 
-const buildGrid = ({theme, $center, $gap = defaultGap, $itemSize = defaultItemSize}) => {
+const buildGrid = ({theme, $center, $gap = propDefaults.gap, $itemSize = propDefaults.itemSize}) => {
     const cssProps = {
         gap: theme.spacing($gap),
         gridTemplateColumns: `repeat(auto-fit, ${theme.spacing($itemSize)})`
@@ -98,14 +98,14 @@ const buildSpacing = ({ theme, $m, $p}) => {
 };
 
 const buildButtonSize = ({ theme, $size }) => {
-    const buttonSize = $size ? buttonSizes[$size] : buttonSizes[defaultButtonSize];
+    const buttonSize = $size ? buttonSizes[$size] : buttonSizes[propDefaults.buttonSize];
     const buttonSpacing = buildSpacing({theme, $m: null, $p: buttonSize});
 
     return buttonSpacing;
 };
 
 const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
-    const borders = $size ? arrowSizes[$size] : arrowSizes[defaultArrowSize];
+    const borders = $size ? arrowSizes[$size] : arrowSizes[propDefaults.arrowSize];
     const [pointerDegree, pointerSize] = borders.map(border => theme.spacing(border));
     const arrowColor = theme.palette[$variant].main;
     const pointerDegreeCss = `${pointerDegree} solid transparent`;
@@ -114,7 +114,7 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
     let cssProps = {};
 
     switch ($pointerDirection) {
-        case 'left': {
+        case pointerDirectionProps.left: {
             cssProps = {
                 borderTop: pointerDegreeCss,
                 borderBottom: emptyDegreeCss,
@@ -124,7 +124,7 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
             break;
         };
 
-        case 'right': {
+        case pointerDirectionProps.right: {
             cssProps = {
                 borderTop: pointerDegreeCss,
                 borderBottom: emptyDegreeCss,
@@ -134,7 +134,7 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
             break;
         };
 
-        case 'up': {
+        case pointerDirectionProps.up: {
             cssProps = {
                 borderLeft: pointerDegreeCss,
                 borderRight: emptyDegreeCss,
@@ -144,7 +144,7 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
             break;
         };
 
-        case 'down': {
+        case pointerDirectionProps.down: {
             cssProps = {
                 borderLeft: pointerDegreeCss,
                 borderRight: emptyDegreeCss,
@@ -153,6 +153,18 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
             
             break;
         };
+    };
+
+    return cssProps;
+};
+
+const buildSpan = ({ $rotate }) => {
+    let cssProps = {};
+
+    if($rotate) {
+        const rotation = $rotate === spanProps.rotate.right ? '8deg' : '-8deg'
+
+        cssProps.rotate = rotation;
     };
 
     return cssProps;
@@ -167,5 +179,6 @@ export {
     buildSpacing,
     buildButtonSize,
     buildArrow,
-    buildCardBorderRadius
+    buildCardBorderRadius,
+    buildSpan
 };

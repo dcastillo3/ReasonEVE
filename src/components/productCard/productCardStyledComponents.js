@@ -2,9 +2,6 @@ import { Icon } from '@mui/material';
 import styled from 'styled-components';
 import { Box, Button, Card, FlexBoxColumn, Image } from '../styled';
 
-const ProductCard = styled(Card)`
-`;
-
 const ProductCardFlexBoxColumnContainer = styled(FlexBoxColumn)`
     height: 100%;
 `;
@@ -44,7 +41,6 @@ const ProductCardPlayButtonIcon = styled(Icon)`
 `;
 
 export {
-    ProductCard,
     ProductCardFlexBoxColumnContainer,
     ProductCardImageContainer,
     ProductCardImage,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, FlexBoxColumn, Label } from '../../styled';
+import { Box, Button, FlexBoxColumn, Label, buttonProps } from '../../styled';
 import { ProductCardCartButtonIcon } from '../productCardStyledComponents';
 import { formatPriceDisplay } from '../../../utils/reactUtils';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -17,7 +17,7 @@ function ProductCardButtonMenu({ product, addCartItem, cart, handleToggleToolTip
         const { id, price, purchaseType } = productPricingItem;
         const productInCart = cart.some(({ selectedPricing }) => selectedPricing.id === id);
         const buttonText = formatPriceDisplay(price);
-        const buttonVariant = productInCart ? 'background' : 'secondary';
+        const buttonVariant = productInCart ? buttonProps.variant.background : buttonProps.variant.secondary;
         const handlePricingItemButtonClick = productInCart ? null : () => handleAddCartItem(productPricingItem, product);
 
         const inCartIcon = (
@@ -34,7 +34,7 @@ function ProductCardButtonMenu({ product, addCartItem, cart, handleToggleToolTip
                     onClick={handlePricingItemButtonClick}
                     $variant={buttonVariant}
                     $m={[1, 0]}
-                    $size={'small'}
+                    $size={buttonProps.size.small}
                 >
                     {renderButtonContent}
                 </Button>

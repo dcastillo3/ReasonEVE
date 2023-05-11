@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
-import { ProductCard as ProductCardStyled, ProductCardImage, ProductCardImageContainer, ProductCardFlexBoxColumnContainer } from './productCardStyledComponents';
+import { ProductCardImage, ProductCardImageContainer, ProductCardFlexBoxColumnContainer } from './productCardStyledComponents';
 import { Overlay } from '../common';
 import ProductCardPlayButton from './components/productCardPlayButton';
 import ProductCardDetails from './components/productCardDetails';
 import ProductCardButton from './components/productCardButton';
 import { CartContext } from '../../context';
+import { Card, cardProps } from '../styled';
 
 function ProductCard({ product, isDesktop }) {
     const { cart, addCartItem } = useContext(CartContext);
     const { coverArt } = product;
 
     return (
-        <ProductCardStyled rounded={true} $variant={"backgroundLight"} $isDesktop={isDesktop}>
+        <Card rounded={true} $variant={cardProps.variant.backgroundLight} $isDesktop={isDesktop}>
             <ProductCardFlexBoxColumnContainer>
                 <Overlay center={true} overlayComponent={() => <ProductCardPlayButton isDesktop={isDesktop} product={product} />} >
                     <ProductCardImageContainer>
@@ -26,7 +27,7 @@ function ProductCard({ product, isDesktop }) {
                 </ProductCardFlexBoxColumnContainer>
 
             </ProductCardFlexBoxColumnContainer>
-        </ProductCardStyled>
+        </Card>
     );
 };
 

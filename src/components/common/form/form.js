@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { buildFormData, buildFormFields } from './formUtils';
 import _ from 'lodash/core';
-import { FlexBox, Form as StyledForm, Button, Card, FlexBoxColumn } from '../../styled';
-import { Heading } from '../';
+import { FlexBox, Form as StyledForm, Button, Card, FlexBoxColumn, cardProps } from '../../styled';
+import { Heading, headingProps } from '../';
 
 function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubmit}) {
     const [formFields, setFormFields] = useState(inputs);
@@ -28,11 +28,11 @@ function Form({formParams: {title, buttonName, fieldsPerRow, inputs}, handleSubm
         && buildFormFields(formFields, formData, handleChangeField, fieldsPerRow);
 
     return (
-        <Card $variant="backgroundLight">
+        <Card $variant={cardProps.variant.backgroundLight}>
             <FlexBox $center>
                 <FlexBoxColumn>
                     <FlexBox $m={[5]}>
-                        <Heading variant={'success'} heading={title} />
+                        <Heading variant={headingProps.variant.success} heading={title} />
                     </FlexBox>
 
                     <FlexBox>

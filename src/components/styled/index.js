@@ -7,3 +7,12 @@ export { Text, TextSmall, TextCaption, Span } from './components/text';
 export { Title, TitleMedium, TitleSmall, SubTitle } from './components/title';
 export { Arrow } from './components/arrow';
 export { Image } from './components/image';
+export {
+    variantProps,
+    pointerDirectionProps,
+    pointerSizeProps,
+    arrowProps,
+    cardProps,
+    buttonProps,
+    spanProps
+} from './styledConsts';
