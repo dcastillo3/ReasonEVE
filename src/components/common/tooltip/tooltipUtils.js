@@ -1,8 +1,8 @@
-import { arrowSizes, defaultArrowSize } from "../../styled/styledConsts";
+import { arrowSizes, propDefaults } from "../../styled/styledConsts";
 import { toolTipMargins } from "./tooltipConsts";
 
 const buildArrowBorderSizes = (theme, pointerSize) => {
-    const arrowSize = pointerSize ? pointerSize : defaultArrowSize;
+    const arrowSize = pointerSize ? pointerSize : propDefaults.arrowSize;
     const arrowBorders = arrowSizes[arrowSize];
     const arrowBorderSizes = arrowBorders.map(border => theme.spacing(border));
 
@@ -35,7 +35,7 @@ const buildToolTipArrowStyle = ({theme, $pointerDirection, $pointerSize}) => {
 };
 
 const buildToolTipMargins = (theme, pointerDirection, pointerSize) => {
-    const arrowSize = pointerSize ? pointerSize : defaultArrowSize;
+    const arrowSize = pointerSize ? pointerSize : propDefaults.arrowSize;
     const [arrowDegree, arrowWidth] = arrowSizes[arrowSize];
     const initialToolTipMargins = toolTipMargins[pointerDirection];
     const calculatedToolTipMargins = initialToolTipMargins.map(margin => margin > 0 ? (margin + arrowWidth) : margin );

@@ -1,6 +1,6 @@
 import React from "react";
 import { formatPriceDisplay } from "../../../../utils/reactUtils";
-import { Card, FlexBox, SubTitle } from "../../../styled";
+import { Card, FlexBox, SubTitle, cardProps } from "../../../styled";
 import { CartLineItemEndContainer, CartLineItemImage, CartLineItemImageContainer, CartLineItemStartContainer } from "../cartStyledComponents";
 import CartLineItemDetails from "./cartLineItemDetails";
 import CartLineItemRemoveButton from "./cartLineItemRemoveButton";
@@ -16,7 +16,7 @@ function CartLineItem({product, removeCartItem, updateCartItem, isDesktop}) {
     const cartLineItemMargin = isDesktop ? [2, 8] : [0, 0];
 
     return (
-        <Card $rounded={true} $variant={'backgroundLight'} $m={cartLineItemMargin} >
+        <Card $rounded={true} $variant={cardProps.variant.backgroundLight} $m={cartLineItemMargin} >
             <FlexBox>
                 <CartLineItemStartContainer $m={[3, 0, 3, 5]}>
                     <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} isDesktop={isDesktop} />} >

@@ -1,25 +1,24 @@
 import styled from 'styled-components';
-import { body2, caption } from '../styledConsts';
-import { buildPalette, buildSpacing, buildTypography } from '../styledUtils';
+import { typographyProps } from '../styledConsts';
+import { buildPalette, buildSpacing, buildSpan, buildTypography } from '../styledUtils';
 
 export const Text = styled.p`
     ${(props) => buildTypography(props)}
 `;
 
 export const TextSmall = styled.p`
-    ${(props) => buildTypography(props, body2)}
+    ${(props) => buildTypography(props, typographyProps.body2)}
 `;
 
 export const TextCaption = styled.p`
-    ${(props) => buildTypography(props, caption)}
+    ${(props) => buildTypography(props, typographyProps.caption)}
 `;
 
 export const Span = styled.span`
     display: inline-block;
-    ${({$rotate}) => $rotate === 'right' && 'rotate: 8deg;'}
-    ${({$rotate}) => $rotate === 'left' && 'rotate: -8deg;'}
 
     /* Style overrides last */
     ${buildPalette}
     ${buildSpacing}
+    ${buildSpan}
 `;

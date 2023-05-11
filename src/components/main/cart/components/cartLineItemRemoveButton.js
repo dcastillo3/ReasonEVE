@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../../styled";
+import { Button, buttonProps } from "../../../styled";
 import { CartLineItemRemoveButtonContainer, CartLineItemRemoveIcon } from "../cartStyledComponents";
 import RemoveIcon from '@mui/icons-material/Remove';
 
@@ -8,7 +8,7 @@ function CartLineItemRemoveButton({product, removeCartItem, isDesktop}) {
 
     return (
         <CartLineItemRemoveButtonContainer>
-            <Button $p={buttonPadding} $size={'small'} $variant={'warning'} onClick={() => removeCartItem(product)}>
+            <Button $p={buttonPadding} $size={buttonProps.size.small} $variant={buttonProps.variant.warning} onClick={() => removeCartItem(product)}>
                 <CartLineItemRemoveIcon component={RemoveIcon} />
             </Button>
         </CartLineItemRemoveButtonContainer>

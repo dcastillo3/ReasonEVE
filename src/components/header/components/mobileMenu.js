@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { menuRoutes } from '../../../routes/routesConsts';
 import { MobileMenuContainer, MenuIcon as MenuIconStyled, MobileMenuItemsContainer, MobileMenuItemContainer } from '../headerStyledComponents';
 import MenuItem from './menuItem';
-import { FlexBoxColumn, SemanticButton } from '../../styled';
+import { FlexBoxColumn, SemanticButton, cardProps } from '../../styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ClickAwayListener } from '@mui/material';
 
@@ -21,7 +21,7 @@ function MobileMenu() {
 
     const renderMenuItems = showMenu && (
         <ClickAwayListener onClickAway={toggleMobileMenu}>
-            <MobileMenuItemsContainer $variant={'info'}>
+            <MobileMenuItemsContainer $variant={cardProps.variant.info}>
                 <FlexBoxColumn>
                     {menuItems}
                 </FlexBoxColumn>

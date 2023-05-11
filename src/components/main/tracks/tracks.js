@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Box, FlexBoxColumn, Grid } from '../../styled';
 import { ProductCard } from '../../productCard';
-import { Heading } from '../../common';
+import { Heading, headingProps } from '../../common';
 import { TrackContext } from '../../../context';
 import { useMediaQuery } from '../../../hooks';
+import { tracksHeading } from './tracksConsts';
 
 function Tracks() {
     const { isDesktop } = useMediaQuery();
@@ -18,7 +19,7 @@ function Tracks() {
     return (
         <FlexBoxColumn>
             <Box $m={headingMargin}>
-                <Heading variant={'success'} heading={'Find your next sound'} />
+                <Heading variant={headingProps.variant.success} heading={tracksHeading} />
             </Box>
 
             <Grid $m={tracksMargin} $center={true} $isDesktop={isDesktop} $itemSize={tracksItemSize}>

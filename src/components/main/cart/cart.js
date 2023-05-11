@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import _ from "lodash";
-import { Heading } from "../../common";
-import { Box, FlexBoxColumn } from "../../styled";
+import { Heading, headingProps } from "../../common";
+import { Box, FlexBoxColumn, variantProps } from "../../styled";
 import { CartContext } from "../../../context";
 import CartCheckoutButton from "./components/cartCheckoutButton";
 import CartLineItem from "./components/cartLineItem";
@@ -9,6 +9,7 @@ import CartTotal from "./components/cartTotal";
 import CartEmpty from "./components/cartEmpty";
 import { useMediaQuery } from "../../../hooks";
 import { CartLineItemDivider } from "./cartStyledComponents";
+import { cartHeading } from "./cartConsts";
 
 function Cart() {
     const { isDesktop } = useMediaQuery();
@@ -18,7 +19,7 @@ function Cart() {
     const renderCartLineItems = !_.isEmpty(cart) && cart.map((product, idx) => {
         const nextProduct = (idx + 1) < cart.length;
         const renderCartLineItemDivider = !isDesktop && nextProduct && (
-            <CartLineItemDivider $variant={'backgroundLight'} />
+            <CartLineItemDivider $variant={variantProps.backgroundLight} />
         );
 
         return (
@@ -51,7 +52,7 @@ function Cart() {
     return (
         <FlexBoxColumn>
             <Box $m={cartMargin}>
-                <Heading headingStyle={'circle'} heading={`Start your next project`} />
+                <Heading headingStyle={headingProps.headingStyle.circle} heading={cartHeading} />
             </Box>
 
             {renderCart}

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { buildButtonSize, buildHoverPalette, buildPalette, buildSpacing, buildTypography } from '../styledUtils';
+import { typographyProps } from '../styledConsts';
 
 export const Button = styled.button`
     border-radius: 3px;
@@ -10,7 +11,7 @@ export const Button = styled.button`
     ${buildPalette}
     ${buildHoverPalette}
     ${buildSpacing}
-    ${(props) => buildTypography(props, 'button')}
+    ${(props) => buildTypography(props, typographyProps.button)}
 `;
 
 export const SemanticButton = styled.button`

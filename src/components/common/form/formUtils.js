@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
-import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall } from '../../styled';
+import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall, cardProps } from '../../styled';
 import { uploadMessage } from './formConsts';
 import { FormTextArea, HiddenFormFieldContainer } from './formStyledComponents';
 
@@ -119,7 +119,7 @@ const buildInput = (formField, formData, handleChangeField) => {
             const inputProps = getInputProps();
 
             const renderUploadContainer = (
-                <DragAndDrop $p={[5]} hover $variant="backgroundLight" {...rootProps}>
+                <DragAndDrop $p={[5]} hover $variant={cardProps.variant.backgroundLight} {...rootProps}>
                     <Input {...inputProps} {...additionalProps} />
                     <TextCaption>
                         {uploadMessage}
@@ -134,7 +134,7 @@ const buildInput = (formField, formData, handleChangeField) => {
             ));
 
             const renderUploadPreview = !_.isEmpty(inputValue) && (
-                <Card $m={[2]} $variant="success">
+                <Card $m={[2]} $variant={cardProps.variant.success}>
                     <FlexBoxColumn>
                         {renderUploadItems}
                     </FlexBoxColumn>
@@ -151,7 +151,7 @@ const buildInput = (formField, formData, handleChangeField) => {
                 ));
 
                 return (
-                    <Card $m={[2]} $variant="warning">
+                    <Card $m={[2]} $variant={cardProps.variant.warning}>
                         <FlexBoxColumn key={file.path}>
                             <Box $m={[1, 0]} $p={[1, 2]}>
                                 {file.path}

@@ -2,6 +2,7 @@ import _ from 'lodash/core';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import { productCardButtonStatus } from './consts';
+import { buttonProps } from '../components/styled';
 
 const formatPriceDisplay = price => `$${price}`;
 
@@ -13,7 +14,7 @@ const getPlayButtonIcon = (product, currTrack, trackPlaying) =>
 
 const getCartButtonVariant = (product, cart) => {
     const productInCart = cart.some(({ productName }) => productName === product.productName);
-    const cartButtonVariant = productInCart ? 'background' : 'primary';
+    const cartButtonVariant = productInCart ? buttonProps.variant.background : buttonProps.variant.primary;
 
     return cartButtonVariant;
 };

@@ -1,6 +1,7 @@
 import React from "react";
-import { Span } from "../../styled";
+import { Span, spanProps } from "../../styled";
 import { HeadingCircleContainer, HeadingCircleContent, HeadingCircleDummySquare } from "./headingStyledComponents";
+import { headingProps } from "../";
 
 const formatHeading = heading => {
     const headingArr = heading.split(' ');
@@ -18,22 +19,22 @@ const formatHeading = heading => {
 
 const buildStyledWord = (headingStyle, variant, secondToLastWord, isDesktop) => {
     const defaultStyle = (
-        <Span $rotate={'right'} $p={[1, 3]} $variant={variant}>{secondToLastWord}</Span>
+        <Span $rotate={spanProps.rotate.right} $p={[1, 3]} $variant={variant}>{secondToLastWord}</Span>
     );
 
     switch (headingStyle) {
-        case 'circle': {
+        case headingProps.headingStyle.circle: {
             const headingCirclePadding = isDesktop ? [3] : [2];
 
             return (
-                <HeadingCircleContainer $variant={variant} $rotate={'right'} $p={headingCirclePadding}>
+                <HeadingCircleContainer $variant={variant} $rotate={spanProps.rotate.right} $p={headingCirclePadding}>
                     <HeadingCircleDummySquare />
                     <HeadingCircleContent $content={secondToLastWord} />
                 </HeadingCircleContainer>
             );
         };
         
-        case 'square': {
+        case headingProps.headingStyle.square: {
             return defaultStyle;
         };
         default: {

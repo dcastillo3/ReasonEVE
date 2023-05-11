@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form } from '../../common';
 import { formatFormData } from './dashboardUtils';
 import { addTrackForm } from './dashboardForms';
-import { Box, Card, Button, Text, TextSmall, TextCaption, Title, TitleSmall, TitleMedium } from '../../styled';
+import { Box, Card, Button, Text, TextSmall, TextCaption, Title, TitleSmall, TitleMedium, cardProps, buttonProps } from '../../styled';
 import { apis } from '../../../utils/consts';
 
 function Dashboard() {
@@ -81,7 +81,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card $p={[3, 5]} $m={[0, 8]} $variant="secondary">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant={cardProps.variant.secondary}>
                 <Text>
                     Card Text
                 </Text>
@@ -107,7 +107,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card $p={[3, 5]} $m={[0, 8]} $variant="success">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant={cardProps.variant.success}>
                 <Text>
                     Card Text
                 </Text>
@@ -133,7 +133,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card $p={[3, 5]} $m={[0, 8]} $variant="warning">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant={cardProps.variant.warning}>
                 <Text>
                     Card Text
                 </Text>
@@ -159,7 +159,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card $p={[3, 5]} $m={[0, 8]} $variant="error">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant={cardProps.variant.error}>
                 <Text>
                     Card Text
                 </Text>
@@ -185,7 +185,7 @@ function Dashboard() {
                 </TitleSmall>
             </Card>
 
-            <Card $p={[3, 5]} $m={[0, 8]} $variant="info">
+            <Card $p={[3, 5]} $m={[0, 8]} $variant={cardProps.variant.info}>
                 <Text>
                     Card Text
                 </Text>
@@ -216,23 +216,23 @@ function Dashboard() {
                     Button
                 </Button>
 
-                <Button $variant="secondary">
+                <Button $variant={buttonProps.variant.secondary}>
                     Button
                 </Button>
 
-                <Button $variant="success">
+                <Button $variant={buttonProps.variant.success}>
                     Button
                 </Button>
 
-                <Button $variant="warning">
+                <Button $variant={buttonProps.variant.warning}>
                     Button
                 </Button>
 
-                <Button $variant="error">
+                <Button $variant={buttonProps.variant.error}>
                     Button
                 </Button>
 
-                <Button $variant="info">
+                <Button $variant={buttonProps.variant.info}>
                     Button
                 </Button>
             </Box>

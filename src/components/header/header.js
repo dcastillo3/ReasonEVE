@@ -5,6 +5,7 @@ import DesktopMenu from './components/desktopMenu';
 import MobileMenu from './components/mobileMenu';
 import Logo from './components/logo';
 import { useMediaQuery } from '../../hooks';
+import { cardProps } from '../styled';
 
 function Header() {
     const { isDesktop } = useMediaQuery();
@@ -19,7 +20,7 @@ function Header() {
     );
 
     return (
-        <HeaderContainer $variant={'background'} $p={headerContainerPadding}>
+        <HeaderContainer $variant={cardProps.variant.background} $p={headerContainerPadding}>
             <HeaderFlexBoxContainer $isDesktop={isDesktop}>
                 {renderMobileMenu}
 

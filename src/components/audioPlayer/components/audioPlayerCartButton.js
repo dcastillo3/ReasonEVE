@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { ToolTip } from '../../common';
+import { ToolTip, tooltipProps } from '../../common';
 import { CartContext, PlaylistContext } from '../../../context';
 import { getCartButtonText, getCartButtonVariant } from '../../../utils/reactUtils';
 import { AudioPlayerCartButtonContainer, AudioPlayerCartButtonIcon, AudioPlayerCartCustomButton } from '../audioPlayerStyledComponents';
 import AudioPlayerButtonMenu from './audioPlayerButtonMenu';
 import { useMediaQuery } from '../../../hooks';
+import { buttonProps } from '../../styled';
 
 function AudioPlayerCartButton() {
     const { currTrack: product } = useContext(PlaylistContext);
@@ -14,7 +15,6 @@ function AudioPlayerCartButton() {
     const [showAudioPlayerCartButtonToolTip, setShowAudioPlayerCartButtonToolTip] = useState(false);
     const { productPricing = [] } = product;
     const buttonVariant = getCartButtonVariant(product, cart);
-    const buttonSize = 'small';
     const buttonMargin = [0, 0, 0, 2];
     const buttonText = getCartButtonText(product, cart);
 
@@ -33,7 +33,7 @@ function AudioPlayerCartButton() {
             onClick={() => addCartItem(productPricing[0], product)}
             $variant={buttonVariant}
             $m={buttonMargin}
-            $size={buttonSize}
+            $size={buttonProps.size.small}
         >
             {renderButtonContent}
         </AudioPlayerCartCustomButton>
@@ -41,8 +41,8 @@ function AudioPlayerCartButton() {
 
     const audioPlayerToolTipButton = (
         <ToolTip
-            variant={'info'}
-            pointerDirection={'down'}
+            variant={tooltipProps.variant.info}
+            pointerDirection={tooltipProps.pointerDirection.down}
             showToolTip={showAudioPlayerCartButtonToolTip}
             handleToggleToolTip={handleToggleAudioPlayerButtonToolTip}
             toolTipComponent={() => <AudioPlayerButtonMenu
@@ -52,7 +52,7 @@ function AudioPlayerCartButton() {
                 handleToggleToolTip={handleToggleAudioPlayerButtonToolTip}
             />}
         >
-            <AudioPlayerCartCustomButton $m={buttonMargin} $variant={buttonVariant} $size={buttonSize}>
+            <AudioPlayerCartCustomButton $m={buttonMargin} $variant={buttonVariant} $size={buttonProps.size.small}>
                 {renderButtonContent}
             </AudioPlayerCartCustomButton>
         </ToolTip>
@@ -61,7 +61,7 @@ function AudioPlayerCartButton() {
     const renderAudioPlayerCartButton = productPricing.length > 1 ? audioPlayerToolTipButton : audioPlayerCartButton;
 
     return (
-        <AudioPlayerCartButtonContainer $variant={'info'} $p={[2, 0, 0, 0]} id="audio-player-cart-button">
+        <AudioPlayerCartButtonContainer $variant={buttonProps.variant.info} $p={[2, 0, 0, 0]} id="audio-player-cart-button">
             {renderAudioPlayerCartButton}
         </AudioPlayerCartButtonContainer>
     );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { ToolTip } from '../../common';
-import { Button, FlexBox } from '../../styled';
+import { ToolTip, tooltipProps } from '../../common';
+import { Button, FlexBox, buttonProps } from '../../styled';
 import ProductCardButtonMenu from './productCardButtonMenu';
 import { ProductCardCartButtonIcon } from '../productCardStyledComponents';
 import { getCartButtonText, getCartButtonVariant } from '../../../utils/reactUtils';
@@ -21,7 +21,7 @@ function ProductCardButton({ product, cart, addCartItem, isDesktop }) {
             onClick={() => addCartItem(productPricing[0], product)}
             $variant={buttonVariant}
             $m={[1, 1, 1, 0]}
-            $size={'small'}
+            $size={buttonProps.size.small}
         >
             <ProductCardCartButtonIcon component={ShoppingCartIcon} /> {buttonText}
         </Button>
@@ -29,8 +29,8 @@ function ProductCardButton({ product, cart, addCartItem, isDesktop }) {
 
     const productCardToolTipButton = (
         <ToolTip
-            variant={'info'}
-            pointerDirection={'left'}
+            variant={tooltipProps.variant.info}
+            pointerDirection={tooltipProps.pointerDirection.left}
             showToolTip={showProductCardButtonToolTip}
             handleToggleToolTip={handleToggleProductCardButtonToolTip}
             toolTipComponent={() => <ProductCardButtonMenu
@@ -40,7 +40,7 @@ function ProductCardButton({ product, cart, addCartItem, isDesktop }) {
                 handleToggleToolTip={handleToggleProductCardButtonToolTip}
             />}
         >
-            <Button $variant={buttonVariant} $m={[1, 1, 1, 0]} $size={'small'}>
+            <Button $variant={buttonVariant} $m={[1, 1, 1, 0]} $size={buttonProps.size.small}>
                 <ProductCardCartButtonIcon component={ShoppingCartIcon} /> {buttonText}
             </Button>
         </ToolTip>
