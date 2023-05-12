@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-if(process.env.NODE_ENV !== 'production') require('../secrets');
+if(process.env.NODE_ENV !== 'production') require('../.env');
 
 const server = express();
 const port = 8000;
@@ -16,5 +16,5 @@ server.use(bodyParser.json());
 server.use('/api', require('./api'));
 
 server.listen(port, function () {
-    console.log('Server is running on port: ', port);
+    console.log(`Server is running on port: ${port}`);
 });
