@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { generalRoutes, menuRoutes, protectedRoutes } from "./routesConsts";
+import { initialDocumentTitle, generalRoutes, menuRoutes, protectedRoutes } from "./routesConsts";
 
 const getRouteById = id => {
     const menuRoute = menuRoutes.find(route => route.id === id);
@@ -12,6 +12,10 @@ const getRouteById = id => {
     if (!_.isEmpty(protectedRoute)) return protectedRoute;
 };
 
+const buildDocumentTitle = title =>
+    title !== getRouteById(1).name ? `${initialDocumentTitle} | ${title}` : initialDocumentTitle;
+
 export {
-    getRouteById
+    getRouteById,
+    buildDocumentTitle
 };
