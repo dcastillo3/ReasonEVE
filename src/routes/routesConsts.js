@@ -4,7 +4,9 @@ import { Packs } from '../components/main/packs';
 import { Purchased } from '../components/main/purchased';
 import { Cart } from '../components/main/cart';
 import { Dashboard } from '../components/main/dashboard';
+import { NotFound } from '../components/main/notFound';
 
+//Maintain ID's
 const menuRoutes = [
     {
         id: 1,
@@ -38,6 +40,12 @@ const generalRoutes = [
         name: 'Cart',
         path: '/cart',
         Element: Cart
+    },
+    {
+        id: 7,
+        name: 'Not Found',
+        path: '*',
+        Element: NotFound
     }
 ];
 
@@ -50,8 +58,11 @@ const protectedRoutes = [
     },
 ];
 
+const initialDocumentTitle = 'ReasonEVE';
+
 export {
     menuRoutes,
     generalRoutes,
-    protectedRoutes
+    protectedRoutes,
+    initialDocumentTitle
 };

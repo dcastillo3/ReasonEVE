@@ -1,19 +1,19 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { NotFound } from '../components/main/notFound';
 import { protectedRoutes, menuRoutes, generalRoutes } from './routesConsts';
+import Page from './page';
 
 function MainRoutes() {
-    const renderMenuRoutes = menuRoutes.map(({ path, Element }, idx) => (
-        <Route key={idx} exact path={path} element={<Element />} />
+    const renderMenuRoutes = menuRoutes.map(({ name, path, Element }, idx) => (
+        <Route key={idx} exact path={path} element={<Page title={name}><Element /></Page>} />
     ));
 
-    const renderGeneralRoutes = generalRoutes.map(({ path, Element }, idx) => (
-        <Route key={idx} exact path={path} element={<Element />} />
+    const renderGeneralRoutes = generalRoutes.map(({ name, path, Element }, idx) => (
+        <Route key={idx} exact path={path} element={<Page title={name}><Element /></Page>} />
     ));
 
-    const renderProtectedRoutes = protectedRoutes.map(({ path, Element }, idx) => (
-        <Route key={idx} exact path={path} element={<Element />} />
+    const renderProtectedRoutes = protectedRoutes.map(({ name, path, Element }, idx) => (
+        <Route key={idx} exact path={path} element={<Page title={name}><Element /></Page>} />
     ));
 
     return (
@@ -21,7 +21,6 @@ function MainRoutes() {
             {renderMenuRoutes}
             {renderGeneralRoutes}
             {renderProtectedRoutes}
-            <Route path='*' element={<NotFound />}/>
         </Routes>
     );
 };
