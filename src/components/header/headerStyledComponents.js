@@ -60,6 +60,10 @@ const MobileMenuItemContainer = styled(Box)`
     border-bottom: solid 1px ${({theme, $borderVariant}) => theme.palette[$borderVariant].main};
 `;
 
+const DesktopMenuItemContainer = styled(Box)`
+    width: ${({theme}) => theme.spacing(36)};
+`;
+
 export {
     HeaderContainer,
     LogoContainer,
@@ -72,5 +76,6 @@ export {
     MenuIcon,
     MobileMenuItemsContainer,
     MobileMenuItemContainer,
-    HeaderFlexBoxContainer
+    HeaderFlexBoxContainer,
+    DesktopMenuItemContainer
 };
