@@ -19,8 +19,8 @@ const ModalBackDrop = styled(FlexBox)`
 const ModalComponentContainer = styled(Card)`
     position: relative;
     display: flex;
-    width: ${({$isMobile}) => $isMobile ? '100vw' : '80vw'};
-    height: ${({$isMobile}) => $isMobile ? '100vh' : '70vh'};
+    width: ${({$isMobile}) => $isMobile ? '100%' : '80vw'};
+    height: ${({$isMobile}) => $isMobile ? '100%' : '70vh'};
     ${({theme, $isMobile}) => !$isMobile && `border-radius: ${theme.spacing(1)}`}
 `;
 
