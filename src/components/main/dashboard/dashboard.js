@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Form } from '../../common';
+import { Form, Modal, modalProps } from '../../common';
 import { formatFormData } from './dashboardUtils';
 import { addTrackForm } from './dashboardForms';
 import { Box, Card, Button, Text, TextSmall, TextCaption, Title, TitleSmall, TitleMedium, cardProps, buttonProps } from '../../styled';
 import { apis } from '../../../utils/consts';
 
 function Dashboard() {
+    const [showAddTrackModal, setShowAddTrackModal] = useState(false);
+
+    const handleToggleAddTrackModal = () => {
+        setShowAddTrackModal(!showAddTrackModal);
+    };
+
     const handleAddTrack = async trackData => {
         try {
             const formData = formatFormData(trackData);
@@ -27,7 +33,19 @@ function Dashboard() {
 
     return (
         <Box>
-            <Form formParams={addTrackForm} handleSubmit={handleAddTrack} />
+            <Modal
+                modalComponent={() => <Form
+                    formParams={addTrackForm}
+                    handleSubmit={handleAddTrack}
+                />}
+                variant={modalProps.variant.backgroundLight}
+                showModal={showAddTrackModal}
+                handleToggleModal={handleToggleAddTrackModal}
+            />
+            
+            <Box $p={[3, 5]} $m={[0, 8]}>
+                <Button onClick={handleToggleAddTrackModal}>Add Track</Button>
+            </Box>
 
             <Box $p={[3, 5]} $m={[0, 8]}>
                 <Text>
