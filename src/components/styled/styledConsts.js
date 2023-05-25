@@ -36,8 +36,8 @@ const variantProps = {
 const pointerDirectionProps = {
     left: 'left',
     right: 'right',
-    up: 'up',
-    down: 'down'
+    top: 'top',
+    bottom: 'bottom'
 };
 
 const pointerSizeProps = {

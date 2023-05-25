@@ -19,7 +19,7 @@ function CartLineItem({product, removeCartItem, updateCartItem, isDesktop}) {
         <Card $rounded={true} $variant={cardProps.variant.backgroundLight} $m={cartLineItemMargin} >
             <FlexBox>
                 <CartLineItemStartContainer $m={[3, 0, 3, 5]}>
-                    <Overlay center={true} overlayComponent={() => <CartLineItemPlayButton product={product} isDesktop={isDesktop} />} >
+                    <Overlay overlayComponent={() => <CartLineItemPlayButton product={product} isDesktop={isDesktop} />} >
                         <CartLineItemImageContainer>
                             <CartLineItemImage src={coverArt} />
                         </CartLineItemImageContainer>
