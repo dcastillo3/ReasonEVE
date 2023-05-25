@@ -1,5 +1,11 @@
 import { arrowSizes, propDefaults } from "../../styled/styledConsts";
-import { toolTipMargins } from "./tooltipConsts";
+import { toolTipMargins, tooltipProps } from "./tooltipConsts";
+
+const pointerOnXAxis = pointerDirection => 
+    pointerDirection === tooltipProps.pointerDirection.left || pointerDirection === tooltipProps.pointerDirection.right;
+
+const pointerOnYAxis = pointerDirection => 
+    pointerDirection === tooltipProps.pointerDirection.top || pointerDirection === tooltipProps.pointerDirection.bottom;
 
 const buildArrowBorderSizes = (theme, pointerSize) => {
     const arrowSize = pointerSize ? pointerSize : propDefaults.arrowSize;
@@ -9,7 +15,7 @@ const buildArrowBorderSizes = (theme, pointerSize) => {
     return arrowBorderSizes;
 };
 
-const buildToolTipArrowStyle = ({theme, $pointerDirection, $pointerSize}) => {
+const buildToolTipArrowStyle = ({theme, $pointerDirection, $pointerSize, $flipX, $flipY}) => {
     const [arrowDegree] = buildArrowBorderSizes(theme, $pointerSize);
     const pointerDirectionPositions = {
         left: {
@@ -20,16 +26,26 @@ const buildToolTipArrowStyle = ({theme, $pointerDirection, $pointerSize}) => {
             left: '100%',
             bottom: arrowDegree
         },
-        up: {
+        top: {
             bottom: '100%',
             left: arrowDegree
         },
-        down: {
+        bottom: {
             top: '100%',
             left: arrowDegree
         }
     };
     const toolTipArrowStyle = pointerDirectionPositions[$pointerDirection];
+
+    if(pointerOnXAxis($pointerDirection) && $flipX) {
+        toolTipArrowStyle.top = toolTipArrowStyle.bottom;
+        toolTipArrowStyle.bottom = 'initial';
+    };
+
+    if(pointerOnYAxis($pointerDirection) && $flipY) {
+        toolTipArrowStyle.right = toolTipArrowStyle.left;
+        toolTipArrowStyle.left = 'initial';
+    };
 
     return toolTipArrowStyle;
 };
@@ -44,30 +60,40 @@ const buildToolTipMargins = (theme, pointerDirection, pointerSize) => {
     return toolTipMargin;
 };
 
-const buildToolTipContainerStyle = ({theme, $pointerDirection, $pointerSize}) => {
+const buildToolTipContainerStyle = ({theme, $pointerDirection, $pointerSize, $flipX, $flipY}) => {
     const toolTipMargins = buildToolTipMargins(theme, $pointerDirection, $pointerSize);
-    const bottomPosition = theme.spacing(2);
+    const positionPercentage = '100%';
+    const arrowSpacing = theme.spacing(2);
     const containerPositions = {
         left: {
-            left: '100%',
-            bottom: bottomPosition,
-            margin: toolTipMargins
+            left: positionPercentage,
+            margin: toolTipMargins,
+            bottom: arrowSpacing
         },
         right: {
-            right: '100%',
-            bottom: bottomPosition,
+            right: positionPercentage,
+            margin: toolTipMargins,
+            bottom: arrowSpacing
+        },
+        top: {
+            top: positionPercentage,
             margin: toolTipMargins
         },
-        up: {
-            top: '100%',
-            margin: toolTipMargins
-        },
-        down: {
-            bottom: '100%',
+        bottom: {
+            bottom: positionPercentage,
             margin: toolTipMargins
         }
     };
     const toolTipContainerStyle = containerPositions[$pointerDirection];
+
+    if(pointerOnXAxis($pointerDirection) && $flipX) {
+        toolTipContainerStyle.top = toolTipContainerStyle.bottom;
+        toolTipContainerStyle.bottom = 'initial';
+    };
+
+    if(pointerOnYAxis($pointerDirection) && $flipY) {
+        toolTipContainerStyle.right = '0px';
+    };
 
     return toolTipContainerStyle;
 };

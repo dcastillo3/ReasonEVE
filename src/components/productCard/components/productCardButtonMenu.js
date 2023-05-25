@@ -43,7 +43,7 @@ function ProductCardButtonMenu({ product, addCartItem, cart, handleToggleToolTip
     });
 
     return (
-        <Box>
+        <Box $p={[2, 4]}>
             <FlexBoxColumn>
                 {renderPriceButtons}
             </FlexBoxColumn>

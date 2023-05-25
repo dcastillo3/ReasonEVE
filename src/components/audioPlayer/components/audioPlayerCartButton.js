@@ -42,7 +42,7 @@ function AudioPlayerCartButton() {
     const audioPlayerToolTipButton = (
         <ToolTip
             variant={tooltipProps.variant.info}
-            pointerDirection={tooltipProps.pointerDirection.down}
+            pointerDirection={tooltipProps.pointerDirection.bottom}
             showToolTip={showAudioPlayerCartButtonToolTip}
             handleToggleToolTip={handleToggleAudioPlayerButtonToolTip}
             toolTipComponent={() => <AudioPlayerButtonMenu

@@ -14,7 +14,7 @@ function ProductCard({ product, isDesktop }) {
     return (
         <Card rounded={true} $variant={cardProps.variant.backgroundLight} $isDesktop={isDesktop}>
             <ProductCardFlexBoxColumnContainer>
-                <Overlay center={true} overlayComponent={() => <ProductCardPlayButton isDesktop={isDesktop} product={product} />} >
+                <Overlay overlayComponent={() => <ProductCardPlayButton isDesktop={isDesktop} product={product} />} >
                     <ProductCardImageContainer>
                         <ProductCardImage src={coverArt} />
                     </ProductCardImageContainer>

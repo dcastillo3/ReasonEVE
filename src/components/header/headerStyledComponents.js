@@ -64,6 +64,15 @@ const DesktopMenuItemContainer = styled(Box)`
     width: ${({theme}) => theme.spacing(36)};
 `;
 
+const CartIconOverlayContainer = styled(Card)`
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: ${({theme}) => theme.spacing(4)};
+    height: ${({theme}) => theme.spacing(4)};
+`;
+
 export {
     HeaderContainer,
     LogoContainer,
@@ -77,5 +86,6 @@ export {
     MobileMenuItemsContainer,
     MobileMenuItemContainer,
     HeaderFlexBoxContainer,
-    DesktopMenuItemContainer
+    DesktopMenuItemContainer,
+    CartIconOverlayContainer
 };

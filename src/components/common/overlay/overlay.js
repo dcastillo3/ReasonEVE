@@ -1,15 +1,14 @@
 import React from 'react';
-import { FlexBox } from '../../styled';
-import { OverlayContainer } from './overlayStyledComponents';
+import { OverlayContainer, OverlayPositionContainer } from './overlayStyledComponents';
 
-function Overlay({ children, overlayComponent, center = false }) {
+function Overlay({ children, overlayComponent, overlayPositionX, overlayPositionY }) {
     return (
-        <FlexBox $center={center}>
+        <OverlayPositionContainer $overlayPositionX={overlayPositionX} $overlayPositionY={overlayPositionY}>
             <OverlayContainer>
                 {overlayComponent()}
             </OverlayContainer>
             {children}
-        </FlexBox>
+        </OverlayPositionContainer>
     );
 };
 

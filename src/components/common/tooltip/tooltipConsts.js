@@ -3,8 +3,8 @@ import { pointerDirectionProps, pointerSizeProps, variantProps } from "../../sty
 const toolTipMargins = {
     left: [0, 0, 0, 2],
     right: [0, 2, 0, 0],
-    up: [2, 0, 0, 0],
-    down: [0, 0, 2, 0]
+    top: [2, 0, 0, 0],
+    bottom: [0, 0, 2, 0]
 };
 
 const tooltipProps = {

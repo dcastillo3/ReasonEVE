@@ -134,7 +134,7 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
             break;
         };
 
-        case pointerDirectionProps.up: {
+        case pointerDirectionProps.top: {
             cssProps = {
                 borderLeft: pointerDegreeCss,
                 borderRight: emptyDegreeCss,
@@ -144,7 +144,7 @@ const buildArrow = ({ theme, $variant, $pointerDirection, $size }) => {
             break;
         };
 
-        case pointerDirectionProps.down: {
+        case pointerDirectionProps.bottom: {
             cssProps = {
                 borderLeft: pointerDegreeCss,
                 borderRight: emptyDegreeCss,

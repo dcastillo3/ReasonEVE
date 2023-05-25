@@ -14,8 +14,8 @@ function Modal({children, modalComponent, variant, showModal, handleToggleModal}
         <ModalBackDrop $center={true}>
             <ClickAwayListener onClickAway={handleToggleModal}>
                 <ModalComponentContainer $variant={variant} $isMobile={isMobile}>
-                    <ModalComponentScrollContainer $m={[1]}>
-                        <ModalExitIconContainer $isMobile={isMobile} $m={[3, 5]}>
+                    <ModalComponentScrollContainer>
+                        <ModalExitIconContainer $isMobile={isMobile} $m={[4, 6]}>
                             <Button $size={buttonProps.size.small} onClick={handleToggleModal}>
                                 <ModalExitIcon component={CloseOutlinedIcon} />
                             </Button>

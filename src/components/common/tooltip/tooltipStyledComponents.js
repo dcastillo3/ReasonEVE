@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Box, FlexBox } from '../../styled';
 import { buildToolTipArrowStyle, buildToolTipContainerStyle } from './tooltipUtils';
+import _ from 'lodash';
 
 const ToolTipContainer = styled(Box)`
     position: relative;
