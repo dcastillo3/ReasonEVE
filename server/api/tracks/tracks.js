@@ -11,6 +11,7 @@ const { formatResponseData } = require('../../utils/utils');
 const { track } = require('./tracksConsts');
 const { updatePlaylistIndex } = require('../playlist/playlistUtils');
 const { indexTypes: {recentlyAdded} } = require('../playlist/playlistConsts');
+const bodyParser = require('body-parser');
 
 // Get tracks from index
 router.get('/', (req, res) => {
@@ -27,6 +28,12 @@ router.get('/', (req, res) => {
         console.error(err);
     };
 });
+
+//Post requests below this line will have body parsed via json method
+router.use(bodyParser.json());
+
+//Enable if url encoding needs parsing
+// router.use(bodyParser.urlencoded({ extended: true }));
 
 // Add to tracks directory
 router.post('/', storageClient(track), async (req, res) => {

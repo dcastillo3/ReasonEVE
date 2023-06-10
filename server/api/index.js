@@ -12,8 +12,12 @@ router.use('/playlist', require('./playlist/playlist'));
 //Checkout route
 router.use('/checkout', require('./checkout/checkout'));
 
+//Webhooks route
+router.use('/webhooks', require('./webhooks/webhooks'));
+
 router.use((req, res, next) => {
     const error = new Error('Not Found');
+    
     error.status = 404;
     next(error);
 });
