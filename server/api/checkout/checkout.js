@@ -2,6 +2,13 @@ const router = require('express').Router();
 const { stripeClient } = require('../../stripe');
 const { formatCheckoutSessionData } = require('../../utils/productUtils');
 const { formatResponseData } = require('../../utils/utils');
+const bodyParser = require('body-parser');
+
+//Post requests below this line will have body parsed via json method
+router.use(bodyParser.json());
+
+//Enable if url encoding needs parsing
+// router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post('/', async ({ body: { products, successUrl, cancelUrl }, headers: { host } }, res) => {
     try {
