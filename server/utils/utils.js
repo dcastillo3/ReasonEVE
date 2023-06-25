@@ -19,7 +19,10 @@ const formatResponseData = (data, err) => {
 
 const getFormattedDate = () => new Date().toISOString();
 
+const getUniqueId = () => Date.now() + Math.floor(Math.random() * 1000);
+
 module.exports = {
     formatResponseData,
-    getFormattedDate
+    getFormattedDate,
+    getUniqueId
 };

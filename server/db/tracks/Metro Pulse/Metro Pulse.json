@@ -1,34 +1,46 @@
 {
+    "productId": 1687688256178,
     "productName": "Metro Pulse",
     "productType": "track",
     "artistName": "ReasonEVE",
     "additionalArtistNames": "",
     "description": "Immerse yourself in a seductive musical journey that transports you to a cyberpunk-inspired future city of the 80s. This captivating song captures the essence of a sultry evening amidst neon lights and compact streets. Experience the electrifying atmosphere and immerse yourself in the seductive allure of a futuristic metropolis illuminated by vibrant hues.",
-    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Metro%20Pulse/Metro%20Pulse.wav",
+    "preview": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Metro%20Pulse/Metro%20Pulse.mp3",
     "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Metro%20Pulse/Metro%20Pulse.jpg",
+    "s3Keys": {
+        "mp3": "tracks/Metro Pulse/mp3/Metro Pulse.mp3",
+        "lease": "tracks/Metro Pulse/lease/Metro Pulse.wav",
+        "exclusive": "tracks/Metro Pulse/exclusive/Metro Pulse.zip"
+    },
     "productPricing": [
         {
-            "id": "price_1N5OLjDfmT9zYk9OzuP4qdwU",
+            "id": "price_1NMq0hDfmT9zYk9OJbof9SaS",
             "purchaseType": "mp3",
             "price": "5.00"
         },
         {
-            "id": "price_1N5OLjDfmT9zYk9O9htbIOHi",
+            "id": "price_1NMq0hDfmT9zYk9OtfLD9Wun",
             "purchaseType": "lease",
             "price": "20.00"
         },
         {
-            "id": "price_1N5OLkDfmT9zYk9OBvCpCZVB",
+            "id": "price_1NMq0hDfmT9zYk9ObO1L7bRx",
             "purchaseType": "exclusive",
             "price": "300.00"
         }
     ],
     "purchases": {
         "mp3": [],
-        "lease": [],
+        "lease": [
+            {
+                "eventId": "evt_1NMq3iDfmT9zYk9O5eyT08XF",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel RefactorTesting"
+            }
+        ],
         "exclusive": []
     },
-    "dateCreated": "2023-05-08T07:19:09.847Z",
-    "dateUpdated": "2023-05-08T07:19:09.847Z",
+    "dateCreated": "2023-06-25T10:17:35.661Z",
+    "dateUpdated": "2023-06-25T10:17:35.661Z",
     "active": true
 }

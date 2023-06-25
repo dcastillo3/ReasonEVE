@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexBox, FlexBoxColumn, Box, Text, Title, Card } from "../styled";
+import { FlexBox, FlexBoxColumn, Box, Text, Title, Card, SemanticButton } from "../styled";
 import { Icon } from "@mui/material";
 
 const HeaderContainer = styled(Card)`
@@ -73,6 +73,10 @@ const CartIconOverlayContainer = styled(Card)`
     height: ${({theme}) => theme.spacing(4)};
 `;
 
+const CartIconOverlayButton = styled(SemanticButton)`
+    display: block;
+`;
+
 export {
     HeaderContainer,
     LogoContainer,
@@ -87,5 +91,6 @@ export {
     MobileMenuItemContainer,
     HeaderFlexBoxContainer,
     DesktopMenuItemContainer,
-    CartIconOverlayContainer
+    CartIconOverlayContainer,
+    CartIconOverlayButton
 };

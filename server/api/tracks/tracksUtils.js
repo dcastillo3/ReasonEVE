@@ -3,42 +3,50 @@ const { trackPurchaseTypes } = require("./tracksConsts");
 const buildTrackName = ({productName, artistName, additionalArtistNames}, type) =>
     `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`} - ${productName} | ${type}`;
 
-const getTrackProductParams = productData => {
+const getTrackProductParams = (productData, { coverArt }) => {
     const {
         mp3Price,
         leasePrice,
-        exclusivePrice
+        exclusivePrice,
+        description
     } = productData;
+    const coverArtUrls = [ coverArt ];
     let trackProductData = [
         {
             name: buildTrackName(productData, trackPurchaseTypes.mp3),
-            price: mp3Price
+            description,
+            price: mp3Price,
+            images: coverArtUrls
         },
         {
             name: buildTrackName(productData, trackPurchaseTypes.lease),
-            price: leasePrice
+            description,
+            price: leasePrice,
+            images: coverArtUrls
         },
         {
             name: buildTrackName(productData, trackPurchaseTypes.exclusive),
-            price: exclusivePrice
+            description,
+            price: exclusivePrice,
+            images: coverArtUrls
         }
     ];
 
     return trackProductData;
 };
 
-const getTrackProductIds = products => products.reduce((prevValue, {name, default_price}) => {
-    const productId = name.split('| ')[1];
+const getTrackProductIds = stripeProducts => stripeProducts.reduce((prevValue, {name, default_price}) => {
+    const productType = name.split('| ')[1];
     const trackId = {
-        [productId]: default_price.id,
+        [productType]: default_price.id,
         ...prevValue
     };
 
     return trackId;
 }, {});
 
-const buildTrackProductPricing = (products, {mp3Price, leasePrice, exclusivePrice}) => {
-    const trackProductIds = getTrackProductIds(products);
+const buildTrackProductPricing = (stripeProducts, {mp3Price, leasePrice, exclusivePrice}) => {
+    const trackProductIds = getTrackProductIds(stripeProducts);
     //Sort productPricing as: mp3, lease, exclusive
     const productPricing = [
         {

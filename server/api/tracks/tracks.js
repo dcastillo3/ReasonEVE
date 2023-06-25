@@ -1,11 +1,14 @@
 const router = require('express').Router();
-const storageClient = require('../../multer');
+const storageClient = require('../../multer/multer');
 const {
     createProduct,
     writeProductData,
     formatProductData,
-    getProductData,
-    updateProductIndexData
+    updateProductIndexData,
+    uploadS3Products,
+    saveLocalProductFiles,
+    formatFilesByDestination,
+    getAllProductsData
 } = require('../../utils/productUtils');
 const { formatResponseData } = require('../../utils/utils');
 const { track } = require('./tracksConsts');
@@ -16,7 +19,7 @@ const bodyParser = require('body-parser');
 // Get tracks from index
 router.get('/', (req, res) => {
     try {
-        const tracks = getProductData(track);
+        const tracks = getAllProductsData(track);
         const responseData = formatResponseData(tracks);
 
         res.send(responseData);
@@ -38,15 +41,21 @@ router.use(bodyParser.json());
 // Add to tracks directory
 router.post('/', storageClient(track), async (req, res) => {
     try {
-        const { body: productData, files: fileData } = req;
+        const { body: productData, files: filesData } = req;
         const { productName, productType } = productData;
+        
+        const filesByDestination = formatFilesByDestination(filesData, productType);
+        //save local product files
+        const productLinks = saveLocalProductFiles(productData, filesByDestination);
+        //upload S3 product files
+        const s3Keys = await uploadS3Products(productData, filesByDestination);
 
         //create stripe products
-        const trackProducts = await createProduct(productData);
-        const formattedTrackData = formatProductData(productData, fileData, trackProducts);
+        const stripeProducts = await createProduct(productData, productLinks);
+        const formattedTrackData = formatProductData(productData, productLinks, s3Keys, stripeProducts);
         //write track data locally
         const writtenData = await writeProductData(formattedTrackData);
-        const responseData = formatResponseData(writtenData);
+        const responseData = formatResponseData(writtenData, null);
 
         //write track index data locally
         updateProductIndexData(productName, productType);

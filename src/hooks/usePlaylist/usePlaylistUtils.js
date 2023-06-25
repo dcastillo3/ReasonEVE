@@ -6,7 +6,7 @@ const formatPlaylistForMusicPlayer = tracks => tracks.map(track => new Track(
     track.coverArt,
     track.productName,
     track.artistName,
-    track.url
+    track.preview
 ));
 
 const playMusicPlayer = playlist => {

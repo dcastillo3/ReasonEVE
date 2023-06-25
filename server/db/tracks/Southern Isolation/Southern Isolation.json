@@ -1,34 +1,82 @@
 {
+    "productId": 1687169197005,
     "productName": "Southern Isolation",
     "productType": "track",
     "artistName": "ReasonEVE",
     "additionalArtistNames": "",
-    "description": "",
-    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.mp3",
-    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE@latest/server/db/tracks/Southern%20Isolation/Southern%20Isolation.jpg",
+    "description": "Experience a powerful musical narrative that explores the resilience and joy found amidst challenging circumstances. This evocative composition delves into the depths of growing up in poverty and the ghetto, yet unearths nostalgic moments of happiness. With vivid recollections of Mexican culture and the scorching desert climate, this song transports you to a world where ordinary trips to the grocery store become vibrant and cherished memories.",
+    "preview": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.mp3",
+    "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Southern%20Isolation/Southern%20Isolation.jpg",
+    "s3Keys": {
+        "mp3": "tracks/Southern Isolation/mp3/Southern Isolation.mp3",
+        "lease": "tracks/Southern Isolation/lease/Southern Isolation.wav",
+        "exclusive": "tracks/Southern Isolation/exclusive/Southern Isolation.zip"
+    },
     "productPricing": [
         {
-            "id": "price_1MDL8wDfmT9zYk9OdWk3Vwa4",
+            "id": "price_1NKeynDfmT9zYk9OT1UhKzoP",
             "purchaseType": "mp3",
             "price": "5.00"
         },
         {
-            "id": "price_1MDL8xDfmT9zYk9OrO0aHrMe",
+            "id": "price_1NKeynDfmT9zYk9OFWqJy6bZ",
             "purchaseType": "lease",
             "price": "20.00"
         },
         {
-            "id": "price_1MDL8xDfmT9zYk9OkZAuewzL",
+            "id": "price_1NKeyoDfmT9zYk9OMlEqIR7h",
             "purchaseType": "exclusive",
             "price": "300.00"
         }
     ],
     "purchases": {
-        "mp3": [],
-        "lease": [],
+        "mp3": [
+            {
+                "eventId": "evt_1NLKnMDfmT9zYk9ONrBmHnjg",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            },
+            {
+                "eventId": "evt_1NLKs3DfmT9zYk9OC5BOj2DP",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            },
+            {
+                "eventId": "evt_1NLLLkDfmT9zYk9OU6yWkB1g",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            },
+            {
+                "eventId": "evt_1NLLQDDfmT9zYk9OaMGHqjtn",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            },
+            {
+                "eventId": "evt_1NLKqdDfmT9zYk9OFOlCCmV4",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            },
+            {
+                "eventId": "evt_1NMiv4DfmT9zYk9OEP8YcCvZ",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel NewUploads Test"
+            }
+        ],
+        "lease": [
+            {
+                "eventId": "evt_1NLL4PDfmT9zYk9Ohi2rKm1L",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            },
+            {
+                "eventId": "evt_1NLLIuDfmT9zYk9OOZTKXLFM",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel EmailTemplate"
+            }
+        ],
         "exclusive": []
     },
-    "dateCreated": "2022-12-10T04:58:32.187Z",
-    "dateUpdated": "2022-12-10T04:58:32.187Z",
+    "dateCreated": "2023-06-19T10:06:36.927Z",
+    "dateUpdated": "2023-06-19T10:06:36.927Z",
     "active": true
 }
