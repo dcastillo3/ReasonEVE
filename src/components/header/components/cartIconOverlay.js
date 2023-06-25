@@ -1,8 +1,8 @@
 import React from 'react';
-import { CartIconOverlayContainer } from '../headerStyledComponents';
+import { CartIconOverlayButton, CartIconOverlayContainer } from '../headerStyledComponents';
 import { Box, cardProps } from '../../styled';
 
-function CartIconOverlay({ cartItemCount }) {
+function CartIconOverlay({ cartItemCount, handleCartClick }) {
     const renderCartIconOverlay = cartItemCount > 0 && (
         <CartIconOverlayContainer $variant={cardProps.variant.success}>
             {cartItemCount}
@@ -11,7 +11,9 @@ function CartIconOverlay({ cartItemCount }) {
 
     return (
         <Box>
-            {renderCartIconOverlay}
+            <CartIconOverlayButton onClick={handleCartClick}>
+                {renderCartIconOverlay}
+            </CartIconOverlayButton>
         </Box>
     );
 };

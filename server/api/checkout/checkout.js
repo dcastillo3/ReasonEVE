@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { stripeClient } = require('../../stripe');
+const { stripeClient } = require('../../stripe/stripe');
 const { formatCheckoutSessionData } = require('../../utils/productUtils');
 const { formatResponseData } = require('../../utils/utils');
 const bodyParser = require('body-parser');
@@ -15,6 +15,11 @@ router.post('/', async ({ body: { products, successUrl, cancelUrl }, headers: { 
         const sessionData = formatCheckoutSessionData(products, successUrl, cancelUrl, host);
         const session = await stripeClient.checkout.sessions.create(sessionData);
         const responseData = formatResponseData(session.url);
+
+        console.log(`
+            Successfully created stripe checkout session and redirected customer.
+            session.url: ${session.url}
+        `);
     
         res.status(200).send(responseData);
     } catch (err) {

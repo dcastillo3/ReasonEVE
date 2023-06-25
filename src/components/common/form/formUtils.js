@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import _ from 'lodash/core';
-import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, TextCaption, TextSmall, cardProps } from '../../styled';
+import { Box, Card, DragAndDrop, FlexBox, FlexBoxColumn, Input, Label, Text, TextSmall, cardProps } from '../../styled';
 import { uploadMessage } from './formConsts';
-import { FormTextArea, HiddenFormFieldContainer } from './formStyledComponents';
+import { FormTextArea, HiddenFormFieldContainer, UploadMessageText } from './formStyledComponents';
 
 const buildFormData = inputs =>
     inputs.reduce((prevVal, { id, defaultValue }) => ({ ...prevVal, [id]: defaultValue }), {});
@@ -27,12 +27,12 @@ const buildFormFields = (formFields, formData, handleChangeField, fieldsPerRow) 
 
     while (idx < formFields.length) {
         const formField = formFields[idx];
-        const { inputType } = formField;
+        const { inputType, fullRow } = formField;
 
         //Maintain fields per row display when a field is hidden
         if(inputType === 'hidden') fieldsPerCurrRow += 1;
-        //Display textarea field as entire row
-        if(inputType === 'textarea') {
+        //Display full row fields as entire row
+        if(fullRow) {
             //If row has fields, push row
             if(inputStack.length) addFormRow();
             
@@ -121,15 +121,17 @@ const buildInput = (formField, formData, handleChangeField) => {
             const renderUploadContainer = (
                 <DragAndDrop $p={[5]} hover $variant={cardProps.variant.backgroundLight} {...rootProps}>
                     <Input {...inputProps} {...additionalProps} />
-                    <TextCaption>
+                    <UploadMessageText>
                         {uploadMessage}
-                    </TextCaption>
+                    </UploadMessageText>
                 </DragAndDrop>
             );
 
             const renderUploadItems = !_.isEmpty(inputValue) && inputValue.map(file => (
                 <Box $m={[1, 0]} $p={[1, 2]} key={file.name}>
-                    {file.name}
+                    <Text $truncate={true}>
+                        {file.name}
+                    </Text>
                 </Box>
             ));
 
@@ -144,7 +146,7 @@ const buildInput = (formField, formData, handleChangeField) => {
             const renderUploadErrors = !_.isEmpty(fileRejections) && fileRejections.map(({ file, errors }) => {
                 const errorMessages = errors.map(e => (
                     <Box $m={[1, 0]} $p={[1, 2]} key={e.code}>
-                        <TextSmall>
+                        <TextSmall $truncate={true}>
                             {e.message}
                         </TextSmall>
                     </Box>

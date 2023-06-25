@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 
-if(process.env.NODE_ENV !== 'production') require('../.env');
+//Import environment variables
+require('dotenv').config();
 
 const server = express();
 const port = 8000;

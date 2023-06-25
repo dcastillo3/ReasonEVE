@@ -1,34 +1,46 @@
 {
+    "productId": 1687659638667,
     "productName": "Coastal Sunset",
     "productType": "track",
     "artistName": "ReasonEVE",
     "additionalArtistNames": "",
     "description": "Indulge in a musical voyage that captures the essence of a serene evening in Los Angeles. With a red sky and beachside ambiance this enchanting composition transports you to a dreamy coastal retreat. Experience the calming melodies that evoke relaxation and inner peace, embracing the unique charm of an LA sunset.",
-    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Coastal%20Sunset/Coastal%20Sunset.wav",
+    "preview": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Coastal%20Sunset/Coastal%20Sunset.mp3",
     "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Coastal%20Sunset/Coastal%20Sunset.jpg",
+    "s3Keys": {
+        "mp3": "tracks/Coastal Sunset/mp3/Coastal Sunset.mp3",
+        "lease": "tracks/Coastal Sunset/lease/Coastal Sunset.wav",
+        "exclusive": "tracks/Coastal Sunset/exclusive/Coastal Sunset.zip"
+    },
     "productPricing": [
         {
-            "id": "price_1N5N1lDfmT9zYk9Oo4ZIuvkS",
+            "id": "price_1NMiZ8DfmT9zYk9Ov1xiETdd",
             "purchaseType": "mp3",
             "price": "5.00"
         },
         {
-            "id": "price_1N5N1mDfmT9zYk9O13illlFt",
+            "id": "price_1NMiZ8DfmT9zYk9O9ynRtLJ4",
             "purchaseType": "lease",
             "price": "20.00"
         },
         {
-            "id": "price_1N5N1mDfmT9zYk9ONwGKS1eu",
+            "id": "price_1NMiZ8DfmT9zYk9OJp8exyvV",
             "purchaseType": "exclusive",
             "price": "300.00"
         }
     ],
     "purchases": {
         "mp3": [],
-        "lease": [],
+        "lease": [
+            {
+                "eventId": "evt_1NMiv4DfmT9zYk9OEP8YcCvZ",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel NewUploads Test"
+            }
+        ],
         "exclusive": []
     },
-    "dateCreated": "2023-05-08T05:54:28.087Z",
-    "dateUpdated": "2023-05-08T05:54:28.087Z",
+    "dateCreated": "2023-06-25T02:20:38.315Z",
+    "dateUpdated": "2023-06-25T02:20:38.315Z",
     "active": true
 }

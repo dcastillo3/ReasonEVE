@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexBoxColumn, Textarea } from '../../styled';
+import { FlexBoxColumn, TextCaption, Textarea } from '../../styled';
 
 const HiddenFormFieldContainer = styled(FlexBoxColumn)`
     display: none;
@@ -10,7 +10,12 @@ const FormTextArea = styled(Textarea)`
     resize: vertical;
 `;
 
+const UploadMessageText = styled(TextCaption)`
+    text-align: center;
+`;
+
 export {
     HiddenFormFieldContainer,
-    FormTextArea
+    FormTextArea,
+    UploadMessageText
 };

@@ -1,24 +1,30 @@
 {
+    "productId": 1687659068723,
     "productName": "Abstract Thoughts",
     "productType": "track",
     "artistName": "ReasonEVE",
     "additionalArtistNames": "",
     "description": "Experience an enchanting composition that captures abstract thoughts and emotions. Created on a rainy New York City night, inviting introspection with its haunting melodies and captivating atmosphere. Explore the interplay of melancholy and hope.",
-    "url": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Abstract%20Thoughts/Abstract%20Thoughts.wav",
+    "preview": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Abstract%20Thoughts/Abstract%20Thoughts.mp3",
     "coverArt": "https://cdn.jsdelivr.net/gh/dcastillo3/ReasonEVE/server/db/tracks/Abstract%20Thoughts/Abstract%20Thoughts.jpg",
+    "s3Keys": {
+        "mp3": "tracks/Abstract Thoughts/mp3/Abstract Thoughts.mp3",
+        "lease": "tracks/Abstract Thoughts/lease/Abstract Thoughts.wav",
+        "exclusive": "tracks/Abstract Thoughts/exclusive/Abstract Thoughts.zip"
+    },
     "productPricing": [
         {
-            "id": "price_1N5MrCDfmT9zYk9OcI6u3i8u",
+            "id": "price_1NMiPvDfmT9zYk9OD2eaoNtT",
             "purchaseType": "mp3",
             "price": "5.00"
         },
         {
-            "id": "price_1N5MrCDfmT9zYk9OjB5h03QJ",
+            "id": "price_1NMiPwDfmT9zYk9OwKWAIRuO",
             "purchaseType": "lease",
             "price": "20.00"
         },
         {
-            "id": "price_1N5MrDDfmT9zYk9Of0HmgidS",
+            "id": "price_1NMiPwDfmT9zYk9ON3Mx5Cnz",
             "purchaseType": "exclusive",
             "price": "300.00"
         }
@@ -26,9 +32,15 @@
     "purchases": {
         "mp3": [],
         "lease": [],
-        "exclusive": []
+        "exclusive": [
+            {
+                "eventId": "evt_1NMiv4DfmT9zYk9OEP8YcCvZ",
+                "email": "dcastillo3@gmail.com",
+                "name": "Daniel NewUploads Test"
+            }
+        ]
     },
-    "dateCreated": "2023-05-08T05:43:32.941Z",
-    "dateUpdated": "2023-05-08T05:43:32.941Z",
+    "dateCreated": "2023-06-25T02:11:08.092Z",
+    "dateUpdated": "2023-06-25T02:11:08.092Z",
     "active": true
 }

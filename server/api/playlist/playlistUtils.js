@@ -13,7 +13,7 @@ const getPlaylist = () => {
     //Initialize playlist with spotlight tracks
     const playlist = spotlight.map(({productName, productType}) => {
         const trackDataPath = getProductDataPath(productName, productType);
-        const trackData = require(trackDataPath);
+        const { s3Key, ...trackData } = require(trackDataPath);
         const mappedItem = `${productType}-${productName}`;
 
         playlistMap[mappedItem] = true;
@@ -52,6 +52,11 @@ const updatePlaylistIndex = (productName, productType, playlistIndexType) => {
 
     //write product index data
     fs.writeFileSync(indexFilePath, fileData);
+
+    console.log(`
+        Successfully added ${productName} to playlist index data. 
+        indexPath: ${indexFilePath}
+    `);
 
 };
 

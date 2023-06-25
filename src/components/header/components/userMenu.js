@@ -26,9 +26,9 @@ function UserMenu() {
     };
 
     const renderCartSummaryTooltip = isDesktop && pathname !== path && (
-        <CartSummaryTooltip 
-            cart={cart} 
-            isDesktop={isDesktop} 
+        <CartSummaryTooltip
+            cart={cart}
+            isDesktop={isDesktop}
             path={path}
             navigate={navigate}
         />
@@ -37,9 +37,12 @@ function UserMenu() {
     return (
         <FlexBox>
             {renderCartSummaryTooltip}
-            
-            <Overlay 
-                overlayComponent={() => <CartIconOverlay cartItemCount={cartItemCount} />} 
+
+            <Overlay
+                overlayComponent={() => <CartIconOverlay
+                    cartItemCount={cartItemCount}
+                    handleCartClick={handleCartClick}
+                />}
                 overlayPositionX={overlayProps.overlayPositionX.right}
                 overlayPositionY={overlayProps.overlayPositionY.top}
             >

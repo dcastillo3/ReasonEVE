@@ -4,15 +4,61 @@ const addTrackForm = {
     fieldsPerRow: 2,
     inputs: [
         {
-            id: 'track',
-            labelName: 'Track',
+            id: 'productName',
+            labelName: 'Title',
+            inputType: 'text',
+            defaultValue: '',
+            additionalProps: {},
+            validations: {},
+            fullRow: false
+        },
+        {
+            id: 'productType',
+            labelName: 'Product Type',
+            inputType: 'hidden',
+            defaultValue: 'track',
+            additionalProps: {},
+            validations: {},
+            fullRow: false
+        },
+        {
+            id: 'artistName',
+            labelName: 'Artist Name',
+            inputType: 'text',
+            defaultValue: 'ReasonEVE',
+            additionalProps: {},
+            validations: {},
+            fullRow: false
+        },
+        {
+            id: 'additionalArtistNames',
+            labelName: 'Additional Artist Name',
+            inputType: 'text',
+            defaultValue: '',
+            additionalProps: {},
+            validations: {},
+            fullRow: false
+        },
+        {
+            id: 'description',
+            labelName: 'Description',
+            inputType: 'textarea',
+            defaultValue: '',
+            additionalProps: {},
+            validations: {},
+            fullRow: true
+        },
+        {
+            id: 'preview',
+            labelName: 'Preview',
             inputType: 'upload',
             defaultValue: [],
             additionalProps: {},
             validations: {
-                fileTypes: ['audio/mpeg', 'audio/wav'],
+                fileTypes: ['audio/mpeg'],
                 maxFiles: 1
-            }
+            },
+            fullRow: false
         },
         {
             id: 'coverArt',
@@ -23,47 +69,32 @@ const addTrackForm = {
             validations: {
                 fileTypes: ['image/png', 'image/jpeg'],
                 maxFiles: 1
-            }
+            },
+            fullRow: false
         },
         {
-            id: 'productName',
-            labelName: 'Track Name',
-            inputType: 'text',
-            defaultValue: '',
+            id: 'mp3',
+            labelName: 'MP3',
+            inputType: 'upload',
+            defaultValue: [],
             additionalProps: {},
-            validations: {}
+            validations: {
+                fileTypes: ['audio/mpeg'],
+                maxFiles: 1
+            },
+            fullRow: false
         },
         {
-            id: 'productType',
-            labelName: 'Product Type',
-            inputType: 'hidden',
-            defaultValue: 'track',
+            id: 'lease',
+            labelName: 'Lease',
+            inputType: 'upload',
+            defaultValue: [],
             additionalProps: {},
-            validations: {}
-        },
-        {
-            id: 'artistName',
-            labelName: 'Artist Name',
-            inputType: 'text',
-            defaultValue: 'ReasonEVE',
-            additionalProps: {},
-            validations: {}
-        },
-        {
-            id: 'additionalArtistNames',
-            labelName: 'Additional Artist Name',
-            inputType: 'text',
-            defaultValue: '',
-            additionalProps: {},
-            validations: {}
-        },
-        {
-            id: 'description',
-            labelName: 'Description',
-            inputType: 'textarea',
-            defaultValue: '',
-            additionalProps: {},
-            validations: {}
+            validations: {
+                fileTypes: ['audio/wav'],
+                maxFiles: 1
+            },
+            fullRow: false
         },
         {
             id: 'mp3Price',
@@ -71,7 +102,8 @@ const addTrackForm = {
             inputType: 'text',
             defaultValue: '5.00',
             additionalProps: {},
-            validations: {}
+            validations: {},
+            fullRow: false
         },
         {
             id: 'leasePrice',
@@ -79,7 +111,20 @@ const addTrackForm = {
             inputType: 'text',
             defaultValue: '20.00',
             additionalProps: {},
-            validations: {}
+            validations: {},
+            fullRow: false
+        },
+        {
+            id: 'exclusive',
+            labelName: 'Exclusive',
+            inputType: 'upload',
+            defaultValue: [],
+            additionalProps: {},
+            validations: {
+                fileTypes: ['application/zip'],
+                maxFiles: 1
+            },
+            fullRow: true
         },
         {
             id: 'exclusivePrice',
@@ -87,7 +132,8 @@ const addTrackForm = {
             inputType: 'text',
             defaultValue: '300.00',
             additionalProps: {},
-            validations: {}
+            validations: {},
+            fullRow: true
         }
     ]
 };

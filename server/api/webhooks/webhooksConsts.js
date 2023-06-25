@@ -1,5 +1,11 @@
-const successfulPayment = 'payment_intent.succeeded';
+const successfulCheckout = 'checkout.session.completed';
+
+const stripeSignatureHeader = 'stripe-signature';
+
+const stripeCheckoutContentType = 'application/json';
 
 module.exports = {
-    successfulPayment
+    successfulCheckout,
+    stripeSignatureHeader,
+    stripeCheckoutContentType
 };
