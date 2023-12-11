@@ -69,9 +69,19 @@ const errorMessages = {
 
 const production = 'production';
 
+const services = {
+    stripe: 'stripe',
+    sequelize: 'sequelize',
+    AWSS3: 'AWSS3',
+    AWSSES: 'AWSSES',
+    fs: 'fs',
+    express: 'express',
+};
+
 module.exports = {
     storageConfigs,
     sessionModes,
     errorMessages,
-    production
+    production,
+    services
 };

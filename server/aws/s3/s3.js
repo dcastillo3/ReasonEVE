@@ -2,6 +2,8 @@ const { S3Client, GetObjectCommand, PutObjectCommand } = require('@aws-sdk/clien
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const { clientParams } = require('../awsConsts');
 const { signedUrlParams } = require('./s3Consts');
+const { serviceLog } = require('../../utils/utils');
+const { services } = require('../../utils/consts');
 
 const s3Client = new S3Client(clientParams);
 
@@ -14,10 +16,7 @@ const uploadS3Product = async (key, file, fileName) => {
     const s3Command = new PutObjectCommand(s3CommandParams);
     const response = await s3Client.send(s3Command);
 
-    console.log(`
-        Successfully uploaded ${fileName} to AWS S3. 
-        ETag: ${response.ETag}
-    `);
+    serviceLog(services.AWSS3, `Uploaded ${fileName}`);
 
     return response;
 };
@@ -30,10 +29,7 @@ const buildSignedUrl = async (key, productName, purchaseType) => {
     const s3Command = new GetObjectCommand(s3CommandParams);
     const signedUrl = await getSignedUrl(s3Client, s3Command, signedUrlParams);
 
-    console.log(`
-            Successfully fetched AWS S3 signed url for ${productName} | ${purchaseType}. 
-            signedUrl: ${signedUrl}
-        `);
+    serviceLog(services.s3, `Fetched signed url for ${productName} | ${purchaseType}`);
 
     return signedUrl;
 };

@@ -2,11 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 const { createStripeProduct } = require('../stripe/stripe');
-const { storageConfigs, sessionModes, errorMessages } = require('./consts');
+const { storageConfigs, sessionModes, errorMessages, services } = require('./consts');
 const { getTrackProductParams, buildTrackProductPricing, getInitialTrackData } = require('../api/tracks/tracksUtils');
-const { getFormattedDate, getUniqueId } = require('./utils');
+const { getFormattedDate, getUniqueId, serviceLog } = require('./utils');
 const { track } = require('../api/tracks/tracksConsts');
 const { uploadS3Product } = require('../aws/s3/s3');
+const { ProductType, Artist, Track, Product, MediaFile, PurchaseType, S3Key, ProductPricing } = require('../sequelize/models');
+const sequelize = require('../sequelize/config');
+const { product } = require('../aws/ses/emails/productDelivery/productDeliveryConsts');
 
 const getProductParams = (productData, productLinks) => {
     switch (productData.productType) {
@@ -75,10 +78,7 @@ const saveLocalProductFiles = ({ productName, productType }, { local: localProdu
             //Save file locally
             fs.writeFileSync(filePath, buffer);
 
-            console.log(`
-                Successfully uploaded ${fileName} locally. 
-                Link: ${linkPath}
-            `);
+            serviceLog(services.fs, `Saved ${fileName} file`);
 
             //Save product link
             productLinks[field] = linkPath;
@@ -166,10 +166,7 @@ const updateProductIndexData = (productName, productType) => {
     //write product index data
     fs.writeFileSync(indexFilePath, fileData);
 
-    console.log(`
-        Successfully added ${productName} to ${productType} index data. 
-        indexPath: ${indexFilePath}
-    `);
+    serviceLog(services.fs, `Added ${productName} to ${productType} index`);
 };
 
 const writeProductData = productData => {
@@ -180,10 +177,7 @@ const writeProductData = productData => {
     //write product data
     fs.writeFileSync(filePath, fileData);
 
-    console.log(`
-        Successfully wrote ${productName} data file locally. 
-        filePath: ${filePath}
-    `);
+    serviceLog(services.fs, `Wrote ${productName} file`);
 
     return productData;
 };
@@ -368,6 +362,197 @@ const formatUploadFieldsForMulter = uploadFields => Object.keys(uploadFields).ma
     return formattedUploadField;
 });
 
+const saveProductData = async productData => {
+    const { 
+        productName,
+        productType,
+        artistName,
+        additionalArtistNames,
+        description,
+        preview,
+        coverArt,
+        s3Keys,
+        productPricing
+    } = productData;
+
+    // Use a transaction to ensure atomicity
+    const createdTrack = await sequelize.transaction(async transaction => {
+        // Create track
+        const trackQuery = {
+            name: productName,
+            description
+        };
+        const trackInstance = await Track.create(trackQuery, { transaction });
+
+        serviceLog(services.sequelize, `Created track ${productName}`);
+
+        // Create or find product type
+        const productTypeOptions = {
+            where: {
+                product_type: productType
+            },
+            transaction
+        };
+        const [productTypeInstance] = await ProductType.findOrCreate(productTypeOptions);
+
+        serviceLog(services.sequelize, `Created/found product type ${productType}`);
+
+        // Create or find artist
+        const artistOptions = {
+            where: {
+                name: artistName
+            },
+            transaction
+        };
+        const [artistInstance] = await Artist.findOrCreate(artistOptions);
+
+        serviceLog(services.sequelize, `Created/found artist ${artistName}`);
+
+        // Create or find additional artists
+        const additionalArtists = additionalArtistNames.split(', ');
+        const additionalArtistInstances = await Promise.all(
+            additionalArtists.map(async additionalArtistName => {
+                const additionalArtistOptions = {
+                    where: {
+                        name: additionalArtistName
+                    },
+                    transaction
+                };
+                const [additionalArtistInstance] = await Artist.findOrCreate(additionalArtistOptions);
+
+                return additionalArtistInstance;
+            })
+        );
+
+        serviceLog(services.sequelize, `Created/found additional artists ${additionalArtistNames}`);
+        
+        // Create product
+        const productQuery = {
+            active: true,
+            media_file: {
+                preview,
+                cover_art: coverArt,
+            }
+        };
+        const productQueryOptions = {
+            include: [
+                { model: ProductType },
+                { model: Artist },
+                { model: MediaFile },
+            ],
+            transaction
+        };
+        const productInstance = await Product.create(productQuery, productQueryOptions);
+
+        serviceLog(services.sequelize, `Created product ${productName}`);
+
+        // Create s3 keys
+        const s3KeyInstances = await Promise.all(
+            Object.keys(s3Keys).map(async purchaseType => {
+                // Create or find purchase type
+                const purchaseTypeOptions = {
+                    where: {
+                        purchase_type: purchaseType
+                    },
+                    transaction
+                };
+                const [purchaseTypeInstance] = await PurchaseType.findOrCreate(purchaseTypeOptions);
+                
+                serviceLog(services.sequelize, `Created/found purchase type ${purchaseType}`);
+                
+                // Create s3 key
+                const s3Key = s3Keys[purchaseType];
+                const s3KeyQuery = {
+                    s3_key: s3Key
+                };
+                const s3KeyInstance = await S3Key.create(s3KeyQuery, { transaction });
+
+                serviceLog(services.sequelize, `Created s3 key ${s3Key}`);
+                
+                // Associate s3 key with purchase type
+                await s3KeyInstance.setPurchase_type(purchaseTypeInstance, { transaction });
+                
+                serviceLog(services.sequelize, `Associated s3 key ${s3Key} with purchase type ${purchaseType}`);
+
+                return s3KeyInstance;
+            })
+        );
+
+        serviceLog(services.sequelize, `Created s3 keys`);
+
+        // Create product pricings
+        const productPricingInstances = await Promise.all(
+            productPricing.map(async ({ id: stripe_id, purchaseType, price }) => {
+                // Create or find purchase type
+                const purchaseTypeOptions = {
+                    where: {
+                        purchase_type: purchaseType
+                    },
+                    transaction
+                };
+                const [purchaseTypeInstance] = await PurchaseType.findOrCreate(purchaseTypeOptions);
+                
+                serviceLog(services.sequelize, `Created/found purchase type ${purchaseType}`);
+                
+                // Create product pricing
+                const numPrice = Number(price).toFixed(2);
+                const productPricingQuery = {
+                    stripe_id,
+                    price: numPrice
+                };
+                const productPricingInstance = await ProductPricing.create(productPricingQuery, { transaction });
+                
+                serviceLog(services.sequelize, `Created product pricing ${stripe_id}`);
+
+                // Associate product pricing with purchase type
+                await productPricingInstance.setPurchase_type(purchaseTypeInstance, { transaction });
+                
+                serviceLog(services.sequelize, `Associated product pricing ${stripe_id} with purchase type ${purchaseType}`);
+
+                return productPricingInstance;
+            })
+        );
+        
+        serviceLog(services.sequelize, `Created product pricings`);
+
+        // Associate the created track and product
+        await trackInstance.setProduct(productInstance, { transaction });
+        
+        serviceLog(services.sequelize, `Associated track ${productName} with product`);
+
+        // Associate the created product and product type
+        await productInstance.setProduct_type(productTypeInstance, { transaction });
+
+        serviceLog(services.sequelize, `Associated product ${productName} with product type ${productType}`);
+
+        // Associate the created product and artist
+        await productInstance.setArtist(artistInstance, { transaction });
+        
+        serviceLog(services.sequelize, `Associated product ${productName} with artist ${artistName}`);
+
+        // Associate the created product and additional artists
+        await productInstance.addArtists(additionalArtistInstances, { transaction });
+        
+        serviceLog(services.sequelize, `Associated product ${productName} with additional artists ${additionalArtistNames}`);
+        
+        // Associate the created product and s3 keys
+        await productInstance.addS3_keys(s3KeyInstances, { transaction });
+        
+        serviceLog(services.sequelize, `Associated product ${productName} with s3 keys`);
+
+        // Associate the created product and product pricings
+        await productInstance.addProduct_pricings(productPricingInstances, { transaction });
+        
+        serviceLog(services.sequelize, `Associated product ${productName} with product pricings`);
+
+        return trackInstance;
+    });
+
+    serviceLog(services.sequelize, `Successfully saved product data for ${productName}`);
+
+    return createdTrack;
+};
+
 module.exports = {
     createProduct,
     formatProductData,
@@ -382,5 +567,6 @@ module.exports = {
     getProductData,
     updatePurchasedProductsData,
     formatCheckoutProducts,
-    formatUploadFieldsForMulter
+    formatUploadFieldsForMulter,
+    saveProductData
 };

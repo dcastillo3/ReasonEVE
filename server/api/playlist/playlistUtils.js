@@ -1,8 +1,9 @@
 const fs = require('fs');
 const { getProductDataPath } = require('../../utils/productUtils');
-const { getFormattedDate } = require('../../utils/utils');
+const { getFormattedDate, serviceLog } = require('../../utils/utils');
 const { indexFilePath } = require('./playlistConsts');
 const playlistIndex = require('../../db/playlist/playlist.json');
+const { services } = require('../../utils/consts');
 
 const getPlaylist = () => {
     const {
@@ -53,11 +54,7 @@ const updatePlaylistIndex = (productName, productType, playlistIndexType) => {
     //write product index data
     fs.writeFileSync(indexFilePath, fileData);
 
-    console.log(`
-        Successfully added ${productName} to playlist index data. 
-        indexPath: ${indexFilePath}
-    `);
-
+    serviceLog(services.fs, `Added ${productName} to playlist index`);
 };
 
 module.exports = {

@@ -1,5 +1,6 @@
 const stripe = require('stripe');
-const { production } = require('../utils/consts');
+const { production, services } = require('../utils/consts');
+const { serviceLog } = require('../utils/utils');
 
 // Connect key to stripe
 const stripeKey = process.env.NODE_ENV !== production ? process.env.STRIPE_TEST_KEY : process.env.STRIPE_KEY;
@@ -17,10 +18,7 @@ const createStripeProduct = async ({ name, description, price, images }) => {
         expand: ['default_price']
     });
 
-    console.log(`
-        Successfully created ${name} Stripe product. 
-        Id: ${stripeProduct.default_price.id}
-    `);
+    serviceLog(services.stripe, `Created ${name} product`);
 
     return stripeProduct;
 };

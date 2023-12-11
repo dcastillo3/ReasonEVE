@@ -1,17 +1,37 @@
-const express = require('express');
-const morgan = require('morgan');
-
 //Import environment variables
 require('dotenv').config();
 
-const server = express();
-const port = 8000;
+const express = require('express');
+const morgan = require('morgan');
+const sequelize = require('./sequelize');
+const { serviceLog } = require('./utils/utils');
+const { services } = require('./utils/consts');
 
-//Logging middleware
-server.use(morgan('dev'));
+const connectToDatabase = async () => {
+    try {
+        await sequelize.sync({ force: false });
 
-server.use('/api', require('./api'));
+        serviceLog(services.sequelize, 'Database synchronized');
+    } catch (err) {
+        console.error('Error synchronizing database:', err);
+    };
+};
 
-server.listen(port, function () {
-    console.log(`Server is running on port: ${port}`);
-});
+const bootApp = async () => {
+    //Connect to database
+    await connectToDatabase();
+    
+    const server = express();
+    const port = process.env.EXPRESS_PORT;
+    
+    //Logging middleware
+    server.use(morgan('dev'));
+    
+    server.use('/api', require('./api'));
+    
+    server.listen(port, () => {
+        serviceLog(services.express, `Server is running on port: ${port}`);
+    });
+};
+
+bootApp();
