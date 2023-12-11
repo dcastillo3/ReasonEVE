@@ -3,6 +3,8 @@ const deliveryEmail = require('./emails/productDelivery/productDelivery');
 const { clientParams } = require('../awsConsts');
 const { sourceEmail, productText } = require('./sesConsts');
 const { buildSignedUrl } = require('../s3/s3');
+const { serviceLog } = require('../../utils/utils');
+const { services } = require('../../utils/consts');
 
 const sesClient = new SESClient(clientParams);
 
@@ -52,10 +54,7 @@ const sendProductDeliveryEmail = async (customer_details, products) => {
     const sesCommand = new SendEmailCommand(productDeliveryEmailParams);
     const response = await sesClient.send(sesCommand);
 
-    console.log(`
-        Successfully sent product delivery email to ${customer_details.email} with AWS SES. 
-        MessageId: ${response.MessageId}
-    `);
+    serviceLog(services.AWSSES, `Sent product delivery email to ${customer_details.email}`);
 
     return response;
 };

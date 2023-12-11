@@ -17,6 +17,10 @@ const formatResponseData = (data, err) => {
     return responseData;
 };
 
+const serviceLog = (serviceName, data) => {
+    console.log(`[${serviceName}] ${data}`);
+};
+
 const getFormattedDate = () => new Date().toISOString();
 
 const getUniqueId = () => Date.now() + Math.floor(Math.random() * 1000);
@@ -24,5 +28,6 @@ const getUniqueId = () => Date.now() + Math.floor(Math.random() * 1000);
 module.exports = {
     formatResponseData,
     getFormattedDate,
-    getUniqueId
+    getUniqueId,
+    serviceLog
 };
