@@ -15,22 +15,16 @@ Track.hasOne(Product);
 Product.belongsTo(ProductType);
 Product.belongsTo(Track);
 Product.belongsTo(Artist);
-Product.belongsToMany(Artist, { through: AdditionalArtist });
+Product.hasMany(AdditionalArtist);
 Product.hasOne(MediaFile);
 Product.hasMany(S3Key);
 Product.hasMany(ProductPricing);
 
-//ProductType associations
+// ProductType associations
 ProductType.hasMany(Product);
-
-// Artist associations
-Artist.hasMany(Product);
 
 // MediaFile associations
 MediaFile.belongsTo(Product);
-
-// AdditionalArtists associations
-AdditionalArtist.belongsTo(Artist);
 
 // S3Key associations
 S3Key.belongsTo(Product);
@@ -43,6 +37,10 @@ PurchaseType.hasMany(ProductPricing);
 // ProductPricing associations
 ProductPricing.belongsTo(Product);
 ProductPricing.belongsTo(PurchaseType);
+
+// AdditionalArtist associations
+AdditionalArtist.belongsTo(Artist);
+AdditionalArtist.belongsTo(Product);
 
 module.exports = {
     Track,

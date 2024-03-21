@@ -18,7 +18,9 @@ const formatResponseData = (data, err) => {
 };
 
 const serviceLog = (serviceName, data) => {
-    console.log(`[${serviceName}] ${data}`);
+    const log = `[${serviceName}] ${data}`;
+
+    console.log(log);
 };
 
 const getFormattedDate = () => new Date().toISOString();

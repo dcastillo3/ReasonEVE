@@ -29,7 +29,7 @@ const buildSignedUrl = async (key, productName, purchaseType) => {
     const s3Command = new GetObjectCommand(s3CommandParams);
     const signedUrl = await getSignedUrl(s3Client, s3Command, signedUrlParams);
 
-    serviceLog(services.s3, `Fetched signed url for ${productName} | ${purchaseType}`);
+    serviceLog(services.AWSS3, `Fetched signed url for ${productName} | ${purchaseType}`);
 
     return signedUrl;
 };

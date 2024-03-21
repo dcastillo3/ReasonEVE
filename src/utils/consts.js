@@ -1,7 +1,7 @@
 const apiDirectory = '/api';
 
 const apis = {
-    tracks: `${apiDirectory}/tracks`,
+    tracks: `${apiDirectory}/tracks/v2`,
     packs: `${apiDirectory}/packs`,
     checkout: `${apiDirectory}/checkout`,
     playlist: `${apiDirectory}/playlist`

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const storageClient = require('../../multer/multer');
 const {
-    createProduct,
+    createProducts,
     writeProductData,
     formatProductData,
     updateProductIndexData,
@@ -9,20 +9,45 @@ const {
     saveLocalProductFiles,
     formatFilesByDestination,
     getAllProductsData,
-    saveProductData
+    saveProductData,
+    getAllProductsDataV2,
+    formatProductsData,
+    addCoverArtToProducts
 } = require('../../utils/productUtils');
 const { formatResponseData } = require('../../utils/utils');
 const { track } = require('./tracksConsts');
 const { updatePlaylistIndex } = require('../playlist/playlistUtils');
 const { indexTypes: {recentlyAdded} } = require('../playlist/playlistConsts');
 const bodyParser = require('body-parser');
+const { tracksMockData } = require('../../sequelize/mockData');
+const _ = require('lodash');
 
 
-// Get tracks from index
+// Get tracks locally
 router.get('/', (req, res) => {
     try {
         const tracks = getAllProductsData(track);
         const responseData = formatResponseData(tracks);
+
+        res.send(responseData);
+    } catch (err) {
+        const responseData = formatResponseData(null, err);
+
+        res.status(500).send(responseData);
+
+        console.error(err);
+    };
+});
+
+// Get tracks from database
+router.get('/v2', async (req, res) => {
+    try {
+        const tracks = await getAllProductsDataV2(track);
+        // TODO: Get product links from CloudFront
+        const localTracks = getAllProductsData(track);
+        const formattedTracks = formatProductsData(tracks);
+        const formattedTracksWithCoverArt = addCoverArtToProducts(formattedTracks, localTracks);
+        const responseData = formatResponseData(formattedTracksWithCoverArt);
 
         res.send(responseData);
     } catch (err) {
@@ -40,7 +65,7 @@ router.use(bodyParser.json());
 //Enable if url encoding needs parsing
 // router.use(bodyParser.urlencoded({ extended: true }));
 
-// Add to tracks directory
+// Create track and save data locally
 router.post('/', storageClient(track), async (req, res) => {
     try {
         const { body: productData, files: filesData } = req;
@@ -53,7 +78,7 @@ router.post('/', storageClient(track), async (req, res) => {
         const s3Keys = await uploadS3Products(productData, filesByDestination);
 
         //create stripe products
-        const stripeProducts = await createProduct(productData, productLinks);
+        const stripeProducts = await createProducts(productData, productLinks);
         const formattedTrackData = formatProductData(productData, productLinks, s3Keys, stripeProducts);
         //write track data locally
         const writtenData = await writeProductData(formattedTrackData);
@@ -75,13 +100,42 @@ router.post('/', storageClient(track), async (req, res) => {
     };
 });
 
-// Create track in database
+// TEST ENDPOINT: Save track data to database
+router.post('/v2Test', async ({ body }, res) => {
+    try {
+        let savedData = [];
+
+        //Use data from body or mock data
+        if (!_.isEmpty(body)) savedData = await saveProductData(body);
+        else {
+            for(const trackMockData of tracksMockData) {
+                const currSavedData = await saveProductData(trackMockData);
+
+                savedData = [...savedData, currSavedData];
+            };
+        };
+        
+        const responseData = formatResponseData(savedData, null);
+
+        res.send(responseData);
+    } catch (err) {
+        const responseData = formatResponseData(null, err);
+
+        res.status(500).send(responseData);
+
+        console.error(err);
+    };
+});
+
+// Create track and save data to database and locally
 router.post('/v2', storageClient(track), async (req, res) => {
     try {
         const { body: productData, files: filesData } = req;
-        const { productType } = productData;
+        // TODO: save local product files to S3
+        const { productName, productType } = productData;
         
         //save local product files
+        //TODO: save local product files to S3
         const filesByDestination = formatFilesByDestination(filesData, productType);
         const productLinks = saveLocalProductFiles(productData, filesByDestination);
 
@@ -89,17 +143,21 @@ router.post('/v2', storageClient(track), async (req, res) => {
         const s3Keys = await uploadS3Products(productData, filesByDestination);
 
         //create stripe products
-        const stripeProducts = await createProduct(productData, productLinks);
-        
-        //save track data to postgres
+        const stripeProducts = await createProducts(productData, productLinks);
         const formattedTrackData = formatProductData(productData, productLinks, s3Keys, stripeProducts);
+        //save track data to postgres
         const savedData = await saveProductData(formattedTrackData);
+        //write track data locally
+        // TODO: save local product files to S3
+        const writtenData = await writeProductData(formattedTrackData);
 
         //write track index data locally
-        // updateProductIndexData(productName, productType);
+        // TODO: save local product files to S3
+        updateProductIndexData(productName, productType);
 
         //write playlist index data locally
-        // updatePlaylistIndex(productName, productType, recentlyAdded);
+        // TODO: save playlist index data to postgres
+        updatePlaylistIndex(productName, productType, recentlyAdded);
 
         const responseData = formatResponseData(savedData, null);
 

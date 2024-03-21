@@ -3,7 +3,7 @@ const { trackPurchaseTypes } = require("./tracksConsts");
 const buildTrackName = ({productName, artistName, additionalArtistNames}, type) =>
     `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`} - ${productName} | ${type}`;
 
-const getTrackProductParams = (productData, { coverArt }) => {
+const buildTrackProductsParams = (productData, { coverArt }) => {
     const {
         mp3Price,
         leasePrice,
@@ -11,7 +11,7 @@ const getTrackProductParams = (productData, { coverArt }) => {
         description
     } = productData;
     const coverArtUrls = [ coverArt ];
-    let trackProductData = [
+    let trackProductsParams = [
         {
             name: buildTrackName(productData, trackPurchaseTypes.mp3),
             description,
@@ -32,7 +32,7 @@ const getTrackProductParams = (productData, { coverArt }) => {
         }
     ];
 
-    return trackProductData;
+    return trackProductsParams;
 };
 
 const getTrackProductIds = stripeProducts => stripeProducts.reduce((prevValue, {name, default_price}) => {
@@ -72,7 +72,7 @@ const buildTrackProductPricing = (stripeProducts, {mp3Price, leasePrice, exclusi
 const getInitialTrackData = ({mp3Price, leasePrice, exclusivePrice, ...InitialTrackData}) => InitialTrackData;
 
 module.exports = {
-    getTrackProductParams,
+    buildTrackProductsParams,
     buildTrackProductPricing,
     getInitialTrackData
 };

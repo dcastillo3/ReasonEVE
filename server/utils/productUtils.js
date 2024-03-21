@@ -3,36 +3,38 @@ const path = require('path');
 const _ = require('lodash');
 const { createStripeProduct } = require('../stripe/stripe');
 const { storageConfigs, sessionModes, errorMessages, services } = require('./consts');
-const { getTrackProductParams, buildTrackProductPricing, getInitialTrackData } = require('../api/tracks/tracksUtils');
+const { buildTrackProductsParams, buildTrackProductPricing, getInitialTrackData } = require('../api/tracks/tracksUtils');
 const { getFormattedDate, getUniqueId, serviceLog } = require('./utils');
 const { track } = require('../api/tracks/tracksConsts');
 const { uploadS3Product } = require('../aws/s3/s3');
-const { ProductType, Artist, Track, Product, MediaFile, PurchaseType, S3Key, ProductPricing } = require('../sequelize/models');
+const { ProductType, Artist, Track, Product, MediaFile, PurchaseType, S3Key, ProductPricing, AdditionalArtist } = require('../sequelize/models');
 const sequelize = require('../sequelize/config');
-const { product } = require('../aws/ses/emails/productDelivery/productDeliveryConsts');
+const { Op } = require("sequelize");
 
-const getProductParams = (productData, productLinks) => {
+const buildProductsParams = (productData, productLinks) => {
     switch (productData.productType) {
         case track: {
-            let trackProductParams = getTrackProductParams(productData, productLinks);
+            let trackProductsParams = buildTrackProductsParams(productData, productLinks);
 
-            return trackProductParams;
+            return trackProductsParams;
         };
     };
 };
 
-const createProduct = async (productData, productLinks) => {
-    let productParams = getProductParams(productData, productLinks);
-    const products = [];
+const createProducts = async (productData, productLinks) => {
+    // Build params for each stripe product. Currently mp3, lease, and exclusive
+    let productsParams = buildProductsParams(productData, productLinks);
+    const stripeProducts = [];
 
-    for(let i = 0; i < productParams.length; i++) {
-        let stripeProduct = productParams[i];
-        const product = await createStripeProduct(stripeProduct);
+    // Create each stripe product
+    for(let i = 0; i < productsParams.length; i++) {
+        let productParams = productsParams[i];
+        const stripeProduct = await createStripeProduct(productParams);
 
-        products.push(product);
+        stripeProducts.push(stripeProduct);
     };
 
-    return products;
+    return stripeProducts;
 };
 
 const formatFilesByDestination = (filesData, productType) => {
@@ -212,6 +214,7 @@ const getProductData = (productName, productType) => {
     return productData;
 };
 
+// Get all products data locally
 const getAllProductsData = productType => {
     const indexPath = getProductIndexPath(productType);
     const { indexData } = require(indexPath);
@@ -224,6 +227,134 @@ const getAllProductsData = productType => {
     });
 
     return productData;
+};
+
+// Get all products data from database
+const getAllProductsDataV2 = async productType => {
+    const productOptions = {
+        attributes: [
+            'id', 
+            'active'
+        ],
+        include: [
+            {
+                model: ProductType,
+                attributes: ['product_type']
+            },
+            { 
+                model: Artist,
+                attributes: ['name'],
+            },
+            { 
+                model: AdditionalArtist,
+                attributes: ['id'],
+                include: [
+                    {
+                        model: Artist,
+                        attributes: ['name']
+                    }
+                ] 
+            },
+            { 
+                model: ProductPricing,
+                attributes: [
+                    'stripe_id',
+                    'price'
+                ],
+                include: [
+                    {
+                        model: PurchaseType,
+                        attributes: ['purchase_type']
+                    }
+                ]
+            }
+        ]
+    };
+
+    // If product type is track, include track details
+    if (productType === track) {
+        const trackQuery = { [Op.not]: [{ track_id: null }] };
+        const trackInclude = [
+            { 
+                model: Track,
+                attributes: { 
+                    exclude: [
+                        'id',
+                        'createdAt', 
+                        'updatedAt'
+                    ] 
+                }
+            }
+        ];
+
+        productOptions.where = {...trackQuery, ...productOptions.where}
+        productOptions.include = [...trackInclude, ...productOptions.include];
+    };
+
+    const productDetails = await Product.findAll(productOptions);
+
+    serviceLog(services.sequelize, `Retrieved all products data for ${productType}`);
+
+    return productDetails;
+};
+
+const formatProductsData = (productDetails) => {
+    const formattedProductDetails = productDetails.map(productDetail => {
+        const {
+            id,
+            active,
+            product_type: { product_type: productType },
+            artist: { name: artistName },
+            additional_artists,
+            product_pricings,
+        } = productDetail.dataValues;
+        const formattedAdditionalArtists = additional_artists.map(({ artist: { name } }) => name).join(', ');
+        const formattedProductPricings = product_pricings.map(({
+                purchase_type: { purchase_type },
+                price,
+                stripe_id
+            }) => ({
+                id: stripe_id,
+                purchaseType: purchase_type,
+                price
+            })
+        );
+        let formattedProductDetails = {
+            id,
+            active,
+            productType,
+            artistName,
+            additionalArtistNames: formattedAdditionalArtists,
+            productPricing: formattedProductPricings,
+        };
+
+        if(productDetail.track) {
+            const { name, description } = productDetail.track;
+
+            formattedProductDetails.productName = name;
+            formattedProductDetails.description = description;
+        };
+
+        return formattedProductDetails;
+    });
+
+    return formattedProductDetails;
+};
+
+// TODO: Get local product links from CloudFront
+const addCoverArtToProducts = (formattedProducts, localProducts) => {
+    const formattedProductsWithLocalLinks = formattedProducts.map(product => {
+        const { productName, productType } = product;
+        const { coverArt } = localProducts.find(localProduct => localProduct.productName === productName && localProduct.productType === productType);
+        const formattedProduct = {
+            ...product,
+            coverArt
+        };
+
+        return formattedProduct;
+    });
+
+    return formattedProductsWithLocalLinks;
 };
 
 // Customers can checkout 1 of each product per cart, at this time
@@ -407,24 +538,6 @@ const saveProductData = async productData => {
         const [artistInstance] = await Artist.findOrCreate(artistOptions);
 
         serviceLog(services.sequelize, `Created/found artist ${artistName}`);
-
-        // Create or find additional artists
-        const additionalArtists = additionalArtistNames.split(', ');
-        const additionalArtistInstances = await Promise.all(
-            additionalArtists.map(async additionalArtistName => {
-                const additionalArtistOptions = {
-                    where: {
-                        name: additionalArtistName
-                    },
-                    transaction
-                };
-                const [additionalArtistInstance] = await Artist.findOrCreate(additionalArtistOptions);
-
-                return additionalArtistInstance;
-            })
-        );
-
-        serviceLog(services.sequelize, `Created/found additional artists ${additionalArtistNames}`);
         
         // Create product
         const productQuery = {
@@ -437,7 +550,7 @@ const saveProductData = async productData => {
         const productQueryOptions = {
             include: [
                 { model: ProductType },
-                { model: Artist },
+                { model: Artist},
                 { model: MediaFile },
             ],
             transaction
@@ -445,6 +558,32 @@ const saveProductData = async productData => {
         const productInstance = await Product.create(productQuery, productQueryOptions);
 
         serviceLog(services.sequelize, `Created product ${productName}`);
+
+        // Create or find additional artists
+        const additionalArtistNamesArray = additionalArtistNames ? additionalArtistNames.split(', ') : [];
+        const additionalArtistInstances = await Promise.all(
+            additionalArtistNamesArray.map(async additionalArtistName => {
+                const additionalArtistOptions = {
+                    where: {
+                        name: additionalArtistName
+                    },
+                    transaction
+                };
+                
+                const [associatedArtistInstance] = await Artist.findOrCreate(additionalArtistOptions);
+                
+                const additionalArtistQuery = { 
+                    artist_id: associatedArtistInstance.artist_id, 
+                    product_id: productInstance.track_id 
+                };
+
+                const additionalArtistInstance = await AdditionalArtist.create(additionalArtistQuery, { transaction });
+
+                return [associatedArtistInstance, additionalArtistInstance];
+            })
+        );
+
+        serviceLog(services.sequelize, `Created/found additional artists ${additionalArtistNames}`);
 
         // Create s3 keys
         const s3KeyInstances = await Promise.all(
@@ -531,7 +670,14 @@ const saveProductData = async productData => {
         serviceLog(services.sequelize, `Associated product ${productName} with artist ${artistName}`);
 
         // Associate the created product and additional artists
-        await productInstance.addArtists(additionalArtistInstances, { transaction });
+        if (!_.isEmpty(additionalArtistInstances)) {
+            additionalArtistInstances.forEach(async ([associatedArtistInstance, additionalArtistInstance]) => {
+                // Associate the additional artist with the artist
+                await additionalArtistInstance.setArtist(associatedArtistInstance, { transaction });
+                // Associate the created product and additional artist
+                await productInstance.addAdditional_artists(additionalArtistInstance, { transaction });
+            });
+        }  
         
         serviceLog(services.sequelize, `Associated product ${productName} with additional artists ${additionalArtistNames}`);
         
@@ -554,7 +700,7 @@ const saveProductData = async productData => {
 };
 
 module.exports = {
-    createProduct,
+    createProducts,
     formatProductData,
     writeProductData,
     updateProductIndexData,
@@ -568,5 +714,8 @@ module.exports = {
     updatePurchasedProductsData,
     formatCheckoutProducts,
     formatUploadFieldsForMulter,
-    saveProductData
+    saveProductData,
+    getAllProductsDataV2,
+    formatProductsData,
+    addCoverArtToProducts
 };
