@@ -16,7 +16,7 @@ function Dashboard() {
     const handleAddTrack = async trackData => {
         try {
             const formData = formatFormData(trackData);
-            let res = await axios.post(apis.tracks, formData);
+            const res = await axios.post(apis.tracks, formData);
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;

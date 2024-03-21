@@ -7,7 +7,7 @@ function useTracks() {
 
     const fetchTracks = async () => {
         try {
-            let res = await axios.get(apis.tracks);
+            const res = await axios.get(apis.tracks);
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;

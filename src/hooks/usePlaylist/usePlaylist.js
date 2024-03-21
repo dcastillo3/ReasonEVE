@@ -13,7 +13,7 @@ function usePlaylist() {
 
     const fetchPlaylist = async () => {
         try {
-            let res = await axios.get(apis.playlist);
+            const res = await axios.get(apis.playlist);
 
             if (!res?.data?.success) {
                 const { err = {} } = res.data;
@@ -47,10 +47,12 @@ function usePlaylist() {
     };
 
     const addTrackToPlaylist = track => {
+        //Find track in playlist
+        const trackInPlaylist = playlist.find(({ productName }) => productName === track.productName);
         //If track is in playlist, remove it.
         const filteredPlaylist = playlist.filter(({ productName }) => productName !== track.productName);
         //Add new track to top of queue
-        const newPlaylist = [track, ...filteredPlaylist];
+        const newPlaylist = [trackInPlaylist, ...filteredPlaylist];
 
         playMusicPlayer(newPlaylist);
 
