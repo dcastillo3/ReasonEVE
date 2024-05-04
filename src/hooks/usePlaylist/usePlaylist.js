@@ -1,17 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { apis, initialStates } from "../../utils/consts";
 import axios from "axios";
-import { initializeMusicPlayer, playMusicPlayer, pauseMusicPlayer, setMutationObserver } from "./usePlaylistUtils";
-
-//Can reorder playlist from music player
+import { initializeMusicPlayer, playMusicPlayer, pauseMusicPlayer, buildPlaylistTracks, subscribeToMusicPlayer } from "./usePlaylistUtils";
+import { mediaStates } from "./usePlaylistConsts";
 
 function usePlaylist() {
     const [playlist, setPlaylist] = useState(initialStates.playlist);
-    const [currTrack, setCurrTrack] = useState({});
-    const [trackPlaying, setTrackPlaying] = useState(false);
+    const [currTrack, setCurrTrack] = useState(initialStates.currTrack);
+    const [trackPlaying, setTrackPlaying] = useState(initialStates.trackPlaying);
     const playlistRef = useRef(playlist);
+    const trackPlayingRef = useRef(trackPlaying);
+    const currTrackRef = useRef(currTrack);
 
-    const fetchPlaylist = async () => {
+    // Keep a reference to the latest states for music player subscription callback
+    useEffect(() => {
+        playlistRef.current = playlist;
+
+        trackPlayingRef.current = trackPlaying;
+
+        currTrackRef.current = currTrack;
+    }, [playlist, trackPlaying, currTrack]);
+
+    const fetchPlaylist = async products => {
         try {
             const res = await axios.get(apis.playlist);
 
@@ -20,17 +30,15 @@ function usePlaylist() {
 
                 console.error(err);
             } else if (res?.data?.success) {
-                const { data = [] } = res.data
-                const [ newCurrTrack = {} ] = data;
+                const { data = [] } = res.data;
+                const playlistTracks = buildPlaylistTracks(data, products);
+                const firstTrack = playlistTracks[0];
                 
-                //Initialize audio player
-                initializeMusicPlayer(data);
+                initializeMusicPlayer(playlistTracks);
 
-                //Keep playlist in local state. 
-                //Not ideal for sync, but audio player state is private
-                setPlaylist(data);
+                setPlaylist(playlistTracks);
 
-                setCurrTrack(newCurrTrack);
+                setCurrTrack(firstTrack);
             };
         } catch (err) {
             const errorMessage = err?.reponse ? err.response : err;
@@ -40,62 +48,46 @@ function usePlaylist() {
     };
 
     const togglePlay = track => {
-        if (track.productName === currTrack.productName) {
+        if (track.id === currTrack.id) {
             if (trackPlaying) pauseMusicPlayer();
             else playMusicPlayer();
         } else addTrackToPlaylist(track);
     };
 
     const addTrackToPlaylist = track => {
-        //Find track in playlist
-        const trackInPlaylist = playlist.find(({ productName }) => productName === track.productName);
+        //Find track in playlist or use incoming track
+        const newTrack = playlist.find(({ id }) => id === track.id) || track;
         //If track is in playlist, remove it.
-        const filteredPlaylist = playlist.filter(({ productName }) => productName !== track.productName);
+        const filteredPlaylist = playlist.filter(({ id }) => id !== track.id);
         //Add new track to top of queue
-        const newPlaylist = [trackInPlaylist, ...filteredPlaylist];
+        const newPlaylist = [newTrack, ...filteredPlaylist];
 
         playMusicPlayer(newPlaylist);
-
-        setPlaylist(newPlaylist);
     };
 
-    const syncCurrentTrack = ([mutation]) => {
-        const newTrackName = mutation.target.data;
-        const newTrack = playlistRef.current.find(({productName}) => newTrackName === productName);
+    const updatePlaylistState = musicPlayerState => {
+        const musicPlayerTrack = musicPlayerState.playlist[musicPlayerState.currentTrack];
+        const newCurrTrack = playlistRef.current.find(({ id }) => id === musicPlayerTrack?.ID);
+        const newTrackPlaying = musicPlayerState.mediaState === mediaStates.playing;
 
-        setCurrTrack(newTrack);
+        if(currTrackRef.current?.id !== newCurrTrack?.id) {
+            setCurrTrack(newCurrTrack);
+        };
+
+        if(trackPlayingRef.current !== newTrackPlaying) {
+            setTrackPlaying(newTrackPlaying);
+        };
     };
 
-    const syncPlayingStatus = ([mutation]) => {
-        const iconNode = mutation.target.querySelector('svg');
-        // Not ideal. but data-testid is the only identifiable attribute to sync playing status
-        const muiIcon = iconNode.getAttribute('data-testid');
-        const newPlayingStatus = muiIcon === 'PlayArrowRoundedIcon' ? false : true;
-        
-        setTrackPlaying(newPlayingStatus);
-    };
-
-    //Cache copy of current state with useRef for MutationObserver callback access
+    // Subscribe to music player state
     useEffect(() => {
-        playlistRef.current = playlist;
-    }, [playlist]);
-
-    //Observe music player track title for changes and sync with local state
-    //Observe music player play button for changes and sync with local state
-    useEffect(() => {
-        const musicPlayerTrackTitleNode = document.querySelector('#music-player > div > div > div > div');
-        const musicPlayerTrackTitleConfig = { characterData: true, subtree: true };
-        const musicPlayerPlayIconNode = document.querySelector('#music-player > div > div > div.MuiBox-root.css-1vjixiu > button:nth-child(2)');
-        const musicPlayerPlayIconNodeConfig = { childList: true };
-        
-        setMutationObserver(musicPlayerTrackTitleNode, syncCurrentTrack, musicPlayerTrackTitleConfig);
-        setMutationObserver(musicPlayerPlayIconNode, syncPlayingStatus, musicPlayerPlayIconNodeConfig);
+        subscribeToMusicPlayer(updatePlaylistState);
     }, []);
 
     return {
         playlist,
-        currTrack,
         trackPlaying,
+        currTrack,
         fetchPlaylist,
         togglePlay
     };

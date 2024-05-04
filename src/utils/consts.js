@@ -4,7 +4,7 @@ const apis = {
     tracks: `${apiDirectory}/tracks/v2`,
     packs: `${apiDirectory}/packs`,
     checkout: `${apiDirectory}/checkout`,
-    playlist: `${apiDirectory}/playlist`
+    playlist: `${apiDirectory}/playlist/v2`
 };
 
 const localStorageKeys = {
@@ -12,9 +12,11 @@ const localStorageKeys = {
 };
 
 const initialStates = {
+    currTrack: {},
     cart: [],
     tracks: [],
-    playlist: []
+    playlist: [],
+    trackPlaying: false
 }
 
 const productCardButtonStatus = {

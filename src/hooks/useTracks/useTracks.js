@@ -17,6 +17,9 @@ function useTracks() {
                 const { data = {} } = res.data;
 
                 setTracks(data);
+
+                // Return data for use in dependent calls
+                return data;
             };
         } catch (err) {
             const errorMessage = err?.reponse ? err.response : err;

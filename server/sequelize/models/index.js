@@ -7,6 +7,7 @@ const ProductType = require('./productType');
 const S3Key = require('./s3Key');
 const PurchaseType = require('./purchaseType');
 const ProductPricing = require('./productPricing');
+const Playlist = require('./playlist');
 
 // Track associations
 Track.hasOne(Product);
@@ -19,6 +20,7 @@ Product.hasMany(AdditionalArtist);
 Product.hasOne(MediaFile);
 Product.hasMany(S3Key);
 Product.hasMany(ProductPricing);
+Product.hasOne(Playlist);
 
 // ProductType associations
 ProductType.hasMany(Product);
@@ -42,6 +44,9 @@ ProductPricing.belongsTo(PurchaseType);
 AdditionalArtist.belongsTo(Artist);
 AdditionalArtist.belongsTo(Product);
 
+// Playlist associations
+Playlist.belongsTo(Product);
+
 module.exports = {
     Track,
     Artist,
@@ -51,5 +56,6 @@ module.exports = {
     ProductType,
     S3Key,
     PurchaseType,
-    ProductPricing
+    ProductPricing,
+    Playlist
 };

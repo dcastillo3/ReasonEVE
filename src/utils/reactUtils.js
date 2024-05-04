@@ -10,10 +10,10 @@ const formatArtistNames = (artistName, additionalArtistNames) =>
     `${artistName}${additionalArtistNames && `, ${additionalArtistNames}`}`;
 
 const getPlayButtonIcon = (product, currTrack, trackPlaying) => 
-    trackPlaying && (product.productName === currTrack.productName) ? PauseCircleIcon : PlayCircleIcon;
+    trackPlaying && (product.id === currTrack.id) ? PauseCircleIcon : PlayCircleIcon;
 
 const getCartButtonVariant = (product, cart) => {
-    const productInCart = cart.some(({ productName }) => productName === product.productName);
+    const productInCart = cart.some(({ id }) => id === product.id);
     const cartButtonVariant = productInCart ? buttonProps.variant.background : buttonProps.variant.primary;
 
     return cartButtonVariant;
@@ -24,7 +24,7 @@ const getCartButtonText = (product, cart) => {
 
     //Product is active
     if (active) {     
-        const productInCart = cart.some(({ productName }) => productName === product.productName);
+        const productInCart = cart.some(({ id }) => id === product.id);
         const productCardButtonText = productInCart
             ? productCardButtonStatus.incart
             : productCardButtonStatus.available;
