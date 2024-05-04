@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import { Track, PlayerInterface } from 'react-material-music-player';
+import { productTypes } from './usePlaylistConsts';
 
 const formatPlaylistForMusicPlayer = tracks => tracks.map(track => new Track(
-    track.dateCreated,
+    track.id,
     track.coverArt,
     track.productName,
     track.artistName,
@@ -27,16 +28,36 @@ const setMusicPlayer = playlist => {
 
 const initializeMusicPlayer = playlist => {
     PlayerInterface.setVolume(100);
+
     setMusicPlayer(playlist);
 };
 
-//Not ideal, but temporary solution for syncing audio player and local state until react-material-music-player exposes state
-const setMutationObserver = (node, callback, config) => {
-    if (node) {
-        const observer = new MutationObserver(callback);
+const subscribeToMusicPlayer = (callback) => PlayerInterface.subscribe(callback);
 
-        observer.observe(node, config);
-    };
+const buildPlaylistTracks = (playlistData, [tracks]) => {
+    const playlistTracks = playlistData.map(playlistDataItem => {
+        const {
+            id: playlistId,
+            productId, 
+            productType
+        } = playlistDataItem;
+        let playlistTrack = {
+            ...playlistDataItem,
+        };
+        
+        if(productType === productTypes.track) {
+            const track = tracks.find(({ id }) => id === productId);
+
+            playlistTrack = {
+                playlistId,
+                ...track
+            };
+        };
+
+        return playlistTrack;
+    });
+
+    return playlistTracks;
 };
 
 export {
@@ -44,5 +65,6 @@ export {
     pauseMusicPlayer,
     setMusicPlayer,
     initializeMusicPlayer,
-    setMutationObserver
+    buildPlaylistTracks,
+    subscribeToMusicPlayer
 };

@@ -11,8 +11,7 @@ const {
     getAllProductsData,
     saveProductData,
     getAllProductsDataV2,
-    formatProductsData,
-    addCoverArtToProducts
+    formatProductsData
 } = require('../../utils/productUtils');
 const { formatResponseData } = require('../../utils/utils');
 const { track } = require('./tracksConsts');
@@ -43,11 +42,8 @@ router.get('/', (req, res) => {
 router.get('/v2', async (req, res) => {
     try {
         const tracks = await getAllProductsDataV2(track);
-        // TODO: Get product links from CloudFront
-        const localTracks = getAllProductsData(track);
         const formattedTracks = formatProductsData(tracks);
-        const formattedTracksWithCoverArt = addCoverArtToProducts(formattedTracks, localTracks);
-        const responseData = formatResponseData(formattedTracksWithCoverArt);
+        const responseData = formatResponseData(formattedTracks);
 
         res.send(responseData);
     } catch (err) {

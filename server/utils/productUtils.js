@@ -7,7 +7,7 @@ const { buildTrackProductsParams, buildTrackProductPricing, getInitialTrackData 
 const { getFormattedDate, getUniqueId, serviceLog } = require('./utils');
 const { track } = require('../api/tracks/tracksConsts');
 const { uploadS3Product } = require('../aws/s3/s3');
-const { ProductType, Artist, Track, Product, MediaFile, PurchaseType, S3Key, ProductPricing, AdditionalArtist } = require('../sequelize/models');
+const { ProductType, Artist, Track, Product, MediaFile, PurchaseType, S3Key, ProductPricing, AdditionalArtist, Playlist } = require('../sequelize/models');
 const sequelize = require('../sequelize/config');
 const { Op } = require("sequelize");
 
@@ -267,13 +267,20 @@ const getAllProductsDataV2 = async productType => {
                         attributes: ['purchase_type']
                     }
                 ]
+            },
+            { 
+                model: MediaFile,
+                attributes: [
+                    'cover_art',
+                    'preview'
+                ]
             }
         ]
     };
 
     // If product type is track, include track details
     if (productType === track) {
-        const trackQuery = { [Op.not]: [{ track_id: null }] };
+        const trackWhere = { [Op.not]: [{ track_id: null }] };
         const trackInclude = [
             { 
                 model: Track,
@@ -287,7 +294,7 @@ const getAllProductsDataV2 = async productType => {
             }
         ];
 
-        productOptions.where = {...trackQuery, ...productOptions.where}
+        productOptions.where = {...trackWhere, ...productOptions.where}
         productOptions.include = [...trackInclude, ...productOptions.include];
     };
 
@@ -307,6 +314,7 @@ const formatProductsData = (productDetails) => {
             artist: { name: artistName },
             additional_artists,
             product_pricings,
+            media_file: { preview, cover_art: coverArt }
         } = productDetail.dataValues;
         const formattedAdditionalArtists = additional_artists.map(({ artist: { name } }) => name).join(', ');
         const formattedProductPricings = product_pricings.map(({
@@ -326,6 +334,8 @@ const formatProductsData = (productDetails) => {
             artistName,
             additionalArtistNames: formattedAdditionalArtists,
             productPricing: formattedProductPricings,
+            preview,
+            coverArt
         };
 
         if(productDetail.track) {
@@ -339,22 +349,6 @@ const formatProductsData = (productDetails) => {
     });
 
     return formattedProductDetails;
-};
-
-// TODO: Get local product links from CloudFront
-const addCoverArtToProducts = (formattedProducts, localProducts) => {
-    const formattedProductsWithLocalLinks = formattedProducts.map(product => {
-        const { productName, productType } = product;
-        const { coverArt } = localProducts.find(localProduct => localProduct.productName === productName && localProduct.productType === productType);
-        const formattedProduct = {
-            ...product,
-            coverArt
-        };
-
-        return formattedProduct;
-    });
-
-    return formattedProductsWithLocalLinks;
 };
 
 // Customers can checkout 1 of each product per cart, at this time
@@ -507,15 +501,42 @@ const saveProductData = async productData => {
     } = productData;
 
     // Use a transaction to ensure atomicity
-    const createdTrack = await sequelize.transaction(async transaction => {
-        // Create track
-        const trackQuery = {
-            name: productName,
-            description
+    const createProduct = await sequelize.transaction(async transaction => {
+        // Create product
+        let productValues = {
+            active: true,
+            media_file: {
+                preview,
+                cover_art: coverArt,
+            },
+            playlist: {}
         };
-        const trackInstance = await Track.create(trackQuery, { transaction });
+        const productOptions = {
+            include: [
+                { model: MediaFile },
+                { model: Playlist }
+            ],
+            transaction
+        };
+        
+        if(productType === track) {
+            const trackValues = {
+                track: {
+                    name: productName,
+                    description
+                }
+            };
+            const trackInclude = [
+                { model: Track }
+            ];
 
-        serviceLog(services.sequelize, `Created track ${productName}`);
+            productValues = { ...trackValues, ...productValues};
+            productOptions.include = [ ...trackInclude, ...productOptions.include ];
+        };
+        
+        const productInstance = await Product.create(productValues, productOptions);
+
+        serviceLog(services.sequelize, `Created product ${productName} with media files, playlist entry and ${productType}`);
 
         // Create or find product type
         const productTypeOptions = {
@@ -538,26 +559,6 @@ const saveProductData = async productData => {
         const [artistInstance] = await Artist.findOrCreate(artistOptions);
 
         serviceLog(services.sequelize, `Created/found artist ${artistName}`);
-        
-        // Create product
-        const productQuery = {
-            active: true,
-            media_file: {
-                preview,
-                cover_art: coverArt,
-            }
-        };
-        const productQueryOptions = {
-            include: [
-                { model: ProductType },
-                { model: Artist},
-                { model: MediaFile },
-            ],
-            transaction
-        };
-        const productInstance = await Product.create(productQuery, productQueryOptions);
-
-        serviceLog(services.sequelize, `Created product ${productName}`);
 
         // Create or find additional artists
         const additionalArtistNamesArray = additionalArtistNames ? additionalArtistNames.split(', ') : [];
@@ -601,10 +602,10 @@ const saveProductData = async productData => {
                 
                 // Create s3 key
                 const s3Key = s3Keys[purchaseType];
-                const s3KeyQuery = {
+                const s3KeyValues = {
                     s3_key: s3Key
                 };
-                const s3KeyInstance = await S3Key.create(s3KeyQuery, { transaction });
+                const s3KeyInstance = await S3Key.create(s3KeyValues, { transaction });
 
                 serviceLog(services.sequelize, `Created s3 key ${s3Key}`);
                 
@@ -635,11 +636,11 @@ const saveProductData = async productData => {
                 
                 // Create product pricing
                 const numPrice = Number(price).toFixed(2);
-                const productPricingQuery = {
+                const productPricingValues = {
                     stripe_id,
                     price: numPrice
                 };
-                const productPricingInstance = await ProductPricing.create(productPricingQuery, { transaction });
+                const productPricingInstance = await ProductPricing.create(productPricingValues, { transaction });
                 
                 serviceLog(services.sequelize, `Created product pricing ${stripe_id}`);
 
@@ -653,11 +654,6 @@ const saveProductData = async productData => {
         );
         
         serviceLog(services.sequelize, `Created product pricings`);
-
-        // Associate the created track and product
-        await trackInstance.setProduct(productInstance, { transaction });
-        
-        serviceLog(services.sequelize, `Associated track ${productName} with product`);
 
         // Associate the created product and product type
         await productInstance.setProduct_type(productTypeInstance, { transaction });
@@ -691,12 +687,12 @@ const saveProductData = async productData => {
         
         serviceLog(services.sequelize, `Associated product ${productName} with product pricings`);
 
-        return trackInstance;
+        return productInstance;
     });
 
     serviceLog(services.sequelize, `Successfully saved product data for ${productName}`);
 
-    return createdTrack;
+    return createProduct;
 };
 
 module.exports = {
@@ -716,6 +712,5 @@ module.exports = {
     formatUploadFieldsForMulter,
     saveProductData,
     getAllProductsDataV2,
-    formatProductsData,
-    addCoverArtToProducts
+    formatProductsData
 };

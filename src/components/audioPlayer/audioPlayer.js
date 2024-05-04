@@ -1,5 +1,5 @@
 import React from 'react';
-import MusicPlayer from 'react-material-music-player';
+import Player from 'react-material-music-player';
 import { ThemeProvider } from "@mui/material/styles";
 import { useTheme } from 'styled-components';
 import AudioPlayerCartButton from './components/audioPlayerCartButton';
@@ -16,7 +16,7 @@ function AudioPlayer() {
             <AudioPlayerCartButton />
             
             <ThemeProvider theme={theme}>
-                <MusicPlayer sx={{overflow: 'initial', height: musicPlayerHeight}} disableDrawer={true} />
+                <Player sx={{overflow: 'initial', height: musicPlayerHeight}} disableDrawer={true} />
             </ThemeProvider>
         </AudioPlayerContainer>
     );
